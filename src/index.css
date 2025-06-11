@@ -26,6 +26,7 @@
   color-scheme: light dark;
 
   --bg-primary: #d7d7d9;
+  --bg-secondary: #ffffff;
   --text-primary: #0e0e0e;
 }
 
@@ -42,6 +43,9 @@
 html {
   font-family: "Pally", sans-serif;
   line-height: 1.5;
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 body {
