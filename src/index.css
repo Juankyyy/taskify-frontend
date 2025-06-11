@@ -24,4 +24,26 @@
 
 :root {
   color-scheme: light dark;
+
+  --bg-primary: #d7d7d9;
+  --text-primary: #0e0e0e;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0e0e0e
+  --text-primary: #d7d7d9;
+}
+
+[data-theme="light"] {
+  --bg-primary: #d7d7d9;
+  --text-primary: #0e0e0e
+}
+
+html {
+  font-family: "Pally", sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 10px;
 }
