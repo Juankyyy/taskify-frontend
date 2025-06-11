@@ -3,21 +3,21 @@
 /* Fonts */
 @font-face {
   font-family: "Pally";
-  src: url("/public/fonts/Pally-Regular.woff2") format("woff2");
+  src: url("/fonts/Pally-Regular.woff2") format("woff2");
   font-weight: 400; /* Regular */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pally";
-  src: url("/public/fonts/Pally-Medium.woff2") format("woff2");
+  src: url("/fonts/Pally-Medium.woff2") format("woff2");
   font-weight: 500; /* Medium */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Pally";
-  src: url("/public/fonts/Pally-Bold.woff2") format("woff2");
+  src: url("/fonts/Pally-Bold.woff2") format("woff2");
   font-weight: 700; /* Bold */
   font-display: swap;
 }
