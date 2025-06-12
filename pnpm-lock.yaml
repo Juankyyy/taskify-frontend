@@ -11,9 +11,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.10
         version: 4.1.10(vite@6.3.5(jiti@2.4.2)(lightningcss@1.30.1))
-      lucide:
+      lucide-react:
         specifier: ^0.514.0
-        version: 0.514.0
+        version: 0.514.0(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -900,8 +900,10 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  lucide@0.514.0:
-    resolution: {integrity: sha512-GQ3Rzj1qFANBvTmhe8RM3vR491RGnSjHsivA5wSuEj5taLwH1Sv4N7n6ae3ENGsYRzdrkVXZo4ieUbD1WOXmoA==}
+  lucide-react@0.514.0:
+    resolution: {integrity: sha512-HXD0OAMd+JM2xCjlwG1EGW9Nuab64dhjO3+MvdyD+pSUeOTBaVAPhQblKIYmmX4RyBYbdzW0VWnJpjJmxWGr6w==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -1790,7 +1792,9 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lucide@0.514.0: {}
+  lucide-react@0.514.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   magic-string@0.30.17:
     dependencies:
