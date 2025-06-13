@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { MainLayout } from "./Layouts/MainLayout";
 import { AuthLayout } from "./Layouts/AuthLayout";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -10,23 +9,9 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <MainLayout>
-              <Home />
-            </MainLayout>
-          }
-        />
+        <Route path="/" element={<Home />} />
 
-        <Route
-          path="/login"
-          element={
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
-          }
-        />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
