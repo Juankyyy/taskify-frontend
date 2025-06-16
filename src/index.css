@@ -2,24 +2,28 @@
 @plugin "daisyui";
 @plugin "@midudev/tailwind-animations";
 
+@theme {
+  --spacing-icon: 20px;
+}
+
 /* Fonts */
 @font-face {
-  font-family: "Pally";
-  src: url("/fonts/Pally-Regular.woff2") format("woff2");
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-Regular.woff2") format("woff2");
   font-weight: 400; /* Regular */
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Pally";
-  src: url("/fonts/Pally-Medium.woff2") format("woff2");
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-Medium.woff2") format("woff2");
   font-weight: 500; /* Medium */
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Pally";
-  src: url("/fonts/Pally-Bold.woff2") format("woff2");
+  font-family: "Outfit";
+  src: url("/fonts/Outfit-Bold.woff2") format("woff2");
   font-weight: 700; /* Bold */
   font-display: swap;
 }
@@ -43,7 +47,7 @@
 }
 
 html {
-  font-family: "Pally", sans-serif;
+  font-family: "Outfit", sans-serif;
   line-height: 1.5;
 
   background: var(--bg-primary);
