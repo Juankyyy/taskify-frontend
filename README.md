@@ -1,6 +1,6 @@
-# Taskify Frontend &middot; ![GitHub last commit](https://img.shields.io/github/last-commit/Juankyyy/taskify-frontend)
+# Taskify Frontend ✅ &middot; [![GitHub last commit](https://img.shields.io/github/last-commit/Juankyyy/taskify-frontend?label=Last%20Commit&color=FFFF00)](https://github.com/Juankyyy/taskify-frontend/commits/main/)
 
-**Taskify** es una plataforma web en la que los usuarios pueden crear y gestionar tareas, las tareas que se han completado y su progreso.
+**Taskify** es una plataforma web To-Do en la que los usuarios pueden crear y gestionar tareas, las tareas que se han completado y su progreso.
 
 <!-- Puedes visitar el sitio web de Taskify [aquí](taskify.vercel.app). -->
 
