@@ -1,7 +1,11 @@
 import { LogOut } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import { Languages } from "lucide-react";
-import { ChevronDown } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
+import { Dropdown } from "../Dropdown";
+
+import en from "../../assets/en-flag.svg";
+import es from "../../assets/es-flag.svg";
 
 export const Account = () => {
   // 🧠 Logic
@@ -20,29 +24,46 @@ export const Account = () => {
         </div>
       </div>
 
-      <div className="dropdown dropdown-top">
-        <div tabIndex={0} role="button">
-          <ChevronDown className="cursor-pointer" />
-        </div>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu bg-base-content rounded-box z-1 w-52 p-2 shadow-sm"
-        >
-          <li>
-            <div className="hover:bg-slate-200">
-              <Languages className="w-icon h-icon" />
-              <a>Idioma</a>
-              <ChevronRight className="w-icon h-icon" />
-            </div>
-          </li>
-          <li>
-            <div className="hover:bg-slate-200">
-              <LogOut className="w-icon h-icon" />
-              <a>Cerrar Sesión</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <Dropdown
+        direction={"top"}
+        icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}
+      >
+        <li className="hover:bg-slate-200 rounded-[4px]">
+          <Dropdown
+            direction="right"
+            icon={
+              <div className="flex justify-between items-center ">
+                <div className="flex gap-[7.7px]">
+                  <Languages className="w-icon h-icon" />
+                  <a>Idioma</a>
+                </div>
+
+                <ChevronRight className="w-icon h-icon" />
+              </div>
+            }
+          >
+            <li>
+              <div className="hover:bg-slate-200">
+                <img className="w-icon h-icon" src={es} alt="Spanish" />
+                <p>Español</p>
+              </div>
+            </li>
+            <li>
+              <div className="hover:bg-slate-200">
+                <img className="w-icon h-icon" src={en} alt="English" />
+                <p>Inglés</p>
+              </div>
+            </li>
+          </Dropdown>
+        </li>
+
+        <li>
+          <div className="hover:bg-slate-200">
+            <LogOut className="w-icon h-icon" />
+            <a>Cerrar Sesión</a>
+          </div>
+        </li>
+      </Dropdown>
     </div>
   );
 };
