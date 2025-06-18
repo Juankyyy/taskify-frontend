@@ -1,6 +1,7 @@
 import { Logo } from "./Logo.jsx";
 import { Folders } from "./Folders.jsx";
 import { Account } from "./Account.jsx";
+import { Theme } from "./Theme.jsx";
 
 export const Sidebar = () => {
   // 🧠 Logic
@@ -11,8 +12,11 @@ export const Sidebar = () => {
         <Logo />
         <Folders />
       </div>
-      
-      <Account />
+
+      <div className="flex flex-col gap-2">
+        <Theme />
+        <Account />
+      </div>
     </nav>
   );
 };
