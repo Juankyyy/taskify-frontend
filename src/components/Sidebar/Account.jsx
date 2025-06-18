@@ -20,8 +20,29 @@ export const Account = () => {
         </div>
       </div>
 
-      <ChevronDown className="cursor-pointer" />
-      
+      <div className="dropdown dropdown-top">
+        <div tabIndex={0} role="button">
+          <ChevronDown className="cursor-pointer" />
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-base-content rounded-box z-1 w-52 p-2 shadow-sm"
+        >
+          <li>
+            <div className="hover:bg-slate-200">
+              <Languages className="w-icon h-icon" />
+              <a>Idioma</a>
+              <ChevronRight className="w-icon h-icon" />
+            </div>
+          </li>
+          <li>
+            <div className="hover:bg-slate-200">
+              <LogOut className="w-icon h-icon" />
+              <a>Cerrar Sesión</a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
