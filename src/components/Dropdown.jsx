@@ -1,6 +1,6 @@
-export const Dropdown = ({ icon, direction, children }) => {
+export const Dropdown = ({ icon, children }) => {
   return (
-    <div className={`dropdown dropdown-${direction}`}>
+    <div className="dropdown dropdown-top">
       <div tabIndex={0} role="button">
         {icon}
       </div>

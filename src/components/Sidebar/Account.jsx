@@ -25,12 +25,10 @@ export const Account = () => {
       </div>
 
       <Dropdown
-        direction={"top"}
         icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}
       >
         <li className="hover:bg-slate-200 rounded-[4px]">
           <Dropdown
-            direction="right"
             icon={
               <div className="flex justify-between items-center ">
                 <div className="flex gap-[7.7px]">
