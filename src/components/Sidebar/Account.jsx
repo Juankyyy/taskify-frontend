@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Languages } from "lucide-react";
 import { EllipsisVertical } from "lucide-react";
 import { Dropdown } from "../Dropdown";
+import { Link } from "react-router-dom";
 
 import en from "../../assets/en-flag.svg";
 import es from "../../assets/es-flag.svg";
@@ -56,10 +57,10 @@ export const Account = () => {
         </li>
 
         <li>
-          <div className="hover:bg-slate-200">
+          <Link to={"/login"} className="hover:bg-slate-200">
             <LogOut className="w-icon h-icon" />
-            <a>Cerrar Sesión</a>
-          </div>
+            <p>Cerrar Sesión</p>
+          </Link>
         </li>
       </Dropdown>
     </div>
