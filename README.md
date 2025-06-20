@@ -51,3 +51,17 @@ pnpm run dev
 ```
 
 2. Abrir el navegador y navegar a `http://localhost:5173`
+
+## 👨‍💻 Autores
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Juankyyy">
+        <img src="https://avatars.githubusercontent.com/u/103221572?v=4" width="100px;" alt="Juankyyy"/>
+        <br />
+        <sub><b>Juankyyy</b></sub>
+      </a>
+    </td>   
+  </tr>
+</table>
