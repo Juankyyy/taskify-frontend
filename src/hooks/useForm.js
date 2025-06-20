@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useAuth } from "./useAuth";
 
 export const useForm = (initialForm) => {
   const [formState, setFormState] = useState(initialForm);
+
+  const { Login } = useAuth();
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -10,7 +13,7 @@ export const useForm = (initialForm) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
+    Login(formState.email, formState.password);
   };
 
   return {

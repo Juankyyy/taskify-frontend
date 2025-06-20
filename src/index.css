@@ -10,21 +10,24 @@
 @font-face {
   font-family: "Outfit";
   src: url("/fonts/Outfit-Regular.woff2") format("woff2");
-  font-weight: 400; /* Regular */
+  font-weight: 400;
+  /* Regular */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Outfit";
   src: url("/fonts/Outfit-Medium.woff2") format("woff2");
-  font-weight: 500; /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Outfit";
   src: url("/fonts/Outfit-Bold.woff2") format("woff2");
-  font-weight: 700; /* Bold */
+  font-weight: 700;
+  /* Bold */
   font-display: swap;
 }
 
