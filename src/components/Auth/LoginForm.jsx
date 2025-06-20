@@ -1,6 +1,6 @@
 import { EmailInput } from "./FormInputs/EmailInput";
 import { PasswordInput } from "./FormInputs/PasswordInput";
-import { useForm } from "../hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 import { ButtonForm } from "./FormInputs/ButtonForm";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";

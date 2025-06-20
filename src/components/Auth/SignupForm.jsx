@@ -4,7 +4,11 @@ import { PasswordInput } from "./FormInputs/PasswordInput";
 import { ButtonForm } from "./FormInputs/ButtonForm";
 
 export const SignupForm = () => {
-  // 🧠 Logic
+  const initialForm = {
+    username: "",
+    email: "",
+    password: "",
+  };
 
   return (
     <form className="flex flex-col gap-4 justify-center items-center">
