@@ -23,8 +23,10 @@ export const useForm = (initialForm) => {
   useEffect(() => {
     if (error == "Contraseña incorrecta") {
       notify("Contraseña incorrecta");
+      setFormState({ ...formState, password: "" });
     } else if (error == "Usuario no encontrado") {
       notify("Usuario no encontrado");
+      setFormState({ ...formState, password: "" });
     }
   }, [error]);
 
