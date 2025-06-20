@@ -1,6 +1,7 @@
-import { EmailInput } from "./EmailInput";
-import { PasswordInput } from "./PasswordInput";
+import { EmailInput } from "../FormInputs/EmailInput";
+import { PasswordInput } from "../FormInputs/PasswordInput";
 import { useForm } from "../../hooks/useForm";
+import { ButtonForm } from "../FormInputs/ButtonForm";
 
 export const LoginForm = () => {
   const initialForm = {
@@ -16,14 +17,14 @@ export const LoginForm = () => {
       <EmailInput value={email} onInputChange={onInputChange} />
       <PasswordInput value={password} onInputChange={onInputChange} />
 
-      <button type="submit" className="btn btn-wide btn-success rounded-full">
+      <ButtonForm>
         {isLoading ? (
           <span className="loading loading-spinner loading-md"></span>
         ) : (
           "Login"
         )}
-      </button>
-      {error && (<p>{error}</p>)}
+      </ButtonForm>
+      {error && <p>{error}</p>}
     </form>
   );
 };
