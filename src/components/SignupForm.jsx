@@ -1,7 +1,7 @@
-import { UsernameInput } from "../FormInputs/UsernameInput";
-import { EmailInput } from "../FormInputs/EmailInput";
-import { PasswordInput } from "../FormInputs/PasswordInput";
-import { ButtonForm } from "../FormInputs/ButtonForm";
+import { UsernameInput } from "./FormInputs/UsernameInput";
+import { EmailInput } from "./FormInputs/EmailInput";
+import { PasswordInput } from "./FormInputs/PasswordInput";
+import { ButtonForm } from "./FormInputs/ButtonForm";
 
 export const SignupForm = () => {
   // 🧠 Logic

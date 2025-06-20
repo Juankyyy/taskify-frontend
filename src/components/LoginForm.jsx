@@ -1,7 +1,7 @@
-import { EmailInput } from "../FormInputs/EmailInput";
-import { PasswordInput } from "../FormInputs/PasswordInput";
-import { useForm } from "../../hooks/useForm";
-import { ButtonForm } from "../FormInputs/ButtonForm";
+import { EmailInput } from "./FormInputs/EmailInput";
+import { PasswordInput } from "./FormInputs/PasswordInput";
+import { useForm } from "../hooks/useForm";
+import { ButtonForm } from "./FormInputs/ButtonForm";
 
 export const LoginForm = () => {
   const initialForm = {
