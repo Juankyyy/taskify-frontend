@@ -4,7 +4,7 @@ import { useAuth } from "./useAuth";
 export const useForm = (initialForm) => {
   const [formState, setFormState] = useState(initialForm);
 
-  const { Login } = useAuth();
+  const { Login, isLoading, error } = useAuth();
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +17,11 @@ export const useForm = (initialForm) => {
   };
 
   return {
+    ...formState,
     formState,
     onSubmit,
     onInputChange,
+    isLoading,
+    error,
   };
 };

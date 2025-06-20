@@ -13,8 +13,12 @@ export const auth = async (email, password) => {
       }),
     });
     const data = await response.json();
-    
-    return data.token;
+
+    if (!response.ok) {
+      return { ok: false, message: data.message };
+    } else {
+      return { ok: true, token: data.token };
+    }
   } catch (error) {
     console.error(error);
   }

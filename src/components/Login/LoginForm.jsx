@@ -8,7 +8,8 @@ export const LoginForm = () => {
     password: "",
   };
 
-  const { email, password, onSubmit, onInputChange } = useForm(initialForm);
+  const { email, password, onSubmit, onInputChange, isLoading, error } =
+    useForm(initialForm);
 
   return (
     <form onSubmit={onSubmit}>
@@ -16,8 +17,13 @@ export const LoginForm = () => {
       <PasswordInput value={password} onInputChange={onInputChange} />
 
       <button type="submit" className="btn btn-wide btn-success rounded-full">
-        Login
+        {isLoading ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          "Login"
+        )}
       </button>
+      {error && (<p>{error}</p>)}
     </form>
   );
 };
