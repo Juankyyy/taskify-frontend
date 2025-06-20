@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { auth } from "../services/user";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -15,6 +17,7 @@ export const useAuth = () => {
         setError(res.message);
       } else {
         localStorage.setItem("token", res.token);
+        navigate("/");
       }
     } catch (err) {
       throw new Error(err);
