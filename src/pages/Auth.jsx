@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Layouts/AuthLayout";
-import { LoginForm } from "../components/LoginForm";
+import { LoginForm } from "../components/Auth/LoginForm";
 import { Logo } from "../components/Sidebar/Logo";
 import { useState } from "react";
-import { SignupForm } from "../components/SignupForm";
+import { SignupForm } from "../components/Auth/SignupForm";
 
 export const Auth = () => {
   const [formState, setFormState] = useState("Login");
