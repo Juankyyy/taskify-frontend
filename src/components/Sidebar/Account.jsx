@@ -1,15 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import { Languages } from "lucide-react";
 import { EllipsisVertical } from "lucide-react";
 import { Dropdown } from "../Dropdown";
-import { Link } from "react-router-dom";
 
 import en from "../../assets/en-flag.svg";
 import es from "../../assets/es-flag.svg";
 
 export const Account = () => {
-  // 🧠 Logic
+  const navigate = useNavigate();
+  const Logout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth");
+  }
 
   return (
     <div className="flex justify-between items-center p-2 border-transparent hover:border-slate-300 border rounded-lg transition-colors">
@@ -57,10 +61,10 @@ export const Account = () => {
         </li>
 
         <li>
-          <Link to={"/auth"} className="hover:bg-slate-200">
+          <button onClick={Logout} className="hover:bg-slate-200">
             <LogOut className="w-icon h-icon" />
             <p>Cerrar Sesión</p>
-          </Link>
+          </button>
         </li>
       </Dropdown>
     </div>
