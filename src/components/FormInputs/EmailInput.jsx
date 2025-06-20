@@ -14,7 +14,7 @@ export const EmailInput = ({ value, onInputChange, error }) => {
           placeholder="mail@example.com"
           className={`input input-md border-0 pl-9 ${error ? "outline-2 outline-input-error outline-offset-2 z-[1] focus:outline-red-500" : "input-primary"}`}
         />
-        <Mail className="absolute left-2 w-input-icon h-input-icon z-10 stroke-slate-600" />
+        <Mail className="absolute left-3 w-input-icon h-input-icon z-10 stroke-slate-600" />
       </label>
     </>
   );
