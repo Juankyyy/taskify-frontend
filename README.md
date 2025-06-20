@@ -62,6 +62,13 @@ pnpm run dev
         <br />
         <sub><b>Juankyyy</b></sub>
       </a>
-    </td>   
+    </td>
+    <td align="center">
+      <a href="https://github.com/kemtch19">
+        <img src="https://avatars.githubusercontent.com/u/92267985?v=4" width="100px;" alt="kemtch19"/>
+        <br />
+        <sub><b>kemtch19</b></sub>
+      </a>
+    </td>
   </tr>
 </table>
