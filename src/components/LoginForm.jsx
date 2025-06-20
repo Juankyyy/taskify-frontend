@@ -13,7 +13,7 @@ export const LoginForm = () => {
     useForm(initialForm);
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 justify-center items-center">
       <EmailInput value={email} onInputChange={onInputChange} />
       <PasswordInput value={password} onInputChange={onInputChange} />
 

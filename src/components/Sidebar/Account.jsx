@@ -57,7 +57,7 @@ export const Account = () => {
         </li>
 
         <li>
-          <Link to={"/login"} className="hover:bg-slate-200">
+          <Link to={"/auth"} className="hover:bg-slate-200">
             <LogOut className="w-icon h-icon" />
             <p>Cerrar Sesión</p>
           </Link>

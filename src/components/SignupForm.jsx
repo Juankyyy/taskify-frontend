@@ -7,8 +7,8 @@ export const SignupForm = () => {
   // 🧠 Logic
 
   return (
-    <>
-      <h1>Signup</h1>
+    <form className="flex flex-col gap-4 justify-center items-center">
+      <h1 className="font-medium text-2xl">Create new account</h1>
       <UsernameInput />
       <EmailInput />
       <PasswordInput />
@@ -16,6 +16,6 @@ export const SignupForm = () => {
       <ButtonForm>
         Registrarse
       </ButtonForm>
-    </>
+    </form>
   );
 };
