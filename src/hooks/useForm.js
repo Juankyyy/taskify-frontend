@@ -21,12 +21,14 @@ export const useForm = (initialForm) => {
   };
 
   useEffect(() => {
-    if (error == "Contraseña incorrecta") {
-      notify("Contraseña incorrecta");
-      setFormState({ ...formState, password: "" });
-    } else if (error == "Correo electronico no encontrado") {
-      notify("Correo electrónico no encontrado");
-      setFormState({ ...formState, password: "" });
+    if (error) {
+      notify(error);
+
+      if (error.includes("Correo")) {
+        setFormState(initialForm);
+      } else {
+        setFormState({ ...formState, password: "" });
+      }
     }
   }, [error]);
 
