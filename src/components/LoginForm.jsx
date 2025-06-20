@@ -24,7 +24,7 @@ export const LoginForm = () => {
     setPasswordError(null);
 
     // Asigna el error al campo correspondiente
-    if (error === "Usuario no encontrado") {
+    if (error === "Correo electronico no encontrado") {
       setEmailError(error);
     } else if (error === "Contraseña incorrecta") {
       setPasswordError(error);

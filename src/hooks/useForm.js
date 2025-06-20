@@ -24,8 +24,8 @@ export const useForm = (initialForm) => {
     if (error == "Contraseña incorrecta") {
       notify("Contraseña incorrecta");
       setFormState({ ...formState, password: "" });
-    } else if (error == "Usuario no encontrado") {
-      notify("Usuario no encontrado");
+    } else if (error == "Correo electronico no encontrado") {
+      notify("Correo electrónico no encontrado");
       setFormState({ ...formState, password: "" });
     }
   }, [error]);
