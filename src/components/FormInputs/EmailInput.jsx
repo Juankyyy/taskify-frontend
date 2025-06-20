@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 
-export const EmailInput = ({ value, onInputChange }) => {
+export const EmailInput = ({ value, onInputChange, error }) => {
   return (
     <>
       <label className="floating-label validator w-2xs flex items-center">
@@ -12,7 +12,7 @@ export const EmailInput = ({ value, onInputChange }) => {
           onChange={onInputChange}
           required
           placeholder="mail@example.com"
-          className="input input-md border-0 input-primary pl-9"
+          className={`input input-md border-0 pl-9 ${error ? "outline-2 outline-input-error outline-offset-2 z-[1] focus:outline-red-500" : "input-primary"}`}
         />
         <Mail className="absolute left-2 w-input-icon h-input-icon z-10 stroke-slate-600" />
       </label>

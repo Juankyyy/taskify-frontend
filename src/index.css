@@ -4,6 +4,7 @@
 
 @theme {
   --spacing-icon: 20px;
+  --color-input-error: oklch(71% 0.194 13.428);
 }
 
 /* Fonts */
