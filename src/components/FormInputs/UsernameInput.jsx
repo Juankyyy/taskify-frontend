@@ -5,6 +5,7 @@ export const UsernameInput = ({ value, onInputChange }) => {
   return (
     <>
       <label className="floating-label validator w-2xs flex items-center">
+
         <span>Username</span>
         <input
           type="text"
@@ -19,6 +20,7 @@ export const UsernameInput = ({ value, onInputChange }) => {
           title="Solo letras, números o guiones"
           className="input input-md border-0 input-primary pl-8"
         />
+        <User className="absolute left-2 w-input-icon h-input-icon z-10 stroke-slate-600" />
       </label>
     </>
   );

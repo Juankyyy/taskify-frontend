@@ -17,6 +17,7 @@ export const PasswordInput = ({ value, onInputChange }) => {
           title="Minimo 6 caracteres, incluyendo un número y una letra minúscula"
           className="input input-md border-0 input-primary pl-9"
         />
+        <KeyRound className="absolute left-2 w-input-icon h-input-icon z-10 stroke-slate-600" />
       </label>
     </>
   );
