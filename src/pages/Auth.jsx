@@ -5,7 +5,7 @@ import { Logo } from "../components/Sidebar/Logo";
 import { useState } from "react";
 import { SignupForm } from "../components/SignupForm";
 
-export const Login = () => {
+export const Auth = () => {
   const [formState, setFormState] = useState("Login");
 
   const changeForm = () => {
@@ -19,7 +19,7 @@ export const Login = () => {
       </Link>
 
       {formState === "Login" ? <LoginForm /> : <SignupForm />}
-      <button className="link" onClick={changeForm}>{formState === "Login" ? "Signup" : "Login"}</button>
+      <p className="link" onClick={changeForm}>{formState === "Login" ? "Signup" : "Login"}</p>
     </AuthLayout>
   );
 };
