@@ -2,7 +2,6 @@ import { EmailInput } from "./FormInputs/EmailInput";
 import { PasswordInput } from "./FormInputs/PasswordInput";
 import { useForm } from "../../hooks/useForm";
 import { ButtonForm } from "./FormInputs/ButtonForm";
-import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -13,11 +12,12 @@ export const LoginForm = () => {
   };
 
   const { email, password, onSubmit, onInputChange, isLoading, error } =
-    useForm(initialForm);
+    useForm(initialForm, "login");
 
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
 
+  // Para los colores de los inputs
   useEffect(() => {
     // Limpia los errores anteriores
     setEmailError(null);
@@ -54,7 +54,6 @@ export const LoginForm = () => {
           "Login"
         )}
       </ButtonForm>
-      <Toaster />
     </form>
   );
 };

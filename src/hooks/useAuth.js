@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth } from "../services/user";
+import { auth, signup } from "../services/user";
 import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
@@ -26,8 +26,27 @@ export const useAuth = () => {
     }
   };
 
+  const Signup = async (name, email, password) => {
+    try {
+      setIsLoading(true)
+      setError(null)
+
+      const res = await signup(name, email, password)
+      if (!res.ok) {
+        setError(res.message)
+      } else {
+        console.log(res)
+      }
+    } catch (err) {
+      throw new Error(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return {
     Login,
+    Signup,
     isLoading,
     error,
   };

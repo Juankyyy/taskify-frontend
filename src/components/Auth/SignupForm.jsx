@@ -2,24 +2,33 @@ import { UsernameInput } from "./FormInputs/UsernameInput";
 import { EmailInput } from "./FormInputs/EmailInput";
 import { PasswordInput } from "./FormInputs/PasswordInput";
 import { ButtonForm } from "./FormInputs/ButtonForm";
+import { useForm } from "../../hooks/useForm";
 
 export const SignupForm = () => {
   const initialForm = {
-    username: "",
+    name: "",
     email: "",
     password: "",
   };
 
-  return (
-    <form className="flex flex-col gap-4 justify-center items-center">
-      <h1 className="font-medium text-2xl">Create new account</h1>
-      <UsernameInput />
-      <EmailInput />
-      <PasswordInput />
+  const {
+    name,
+    email,
+    password,
+    onSubmit,
+    onInputChange,
+    isLoading,
+    error,
+  } = useForm(initialForm, "signup");
 
-      <ButtonForm>
-        Registrarse
-      </ButtonForm>
+  return (
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 justify-center items-center">
+      <h1 className="font-medium text-2xl mb-2">Create new account</h1>
+      <UsernameInput value={name} onInputChange={onInputChange} error={error} />
+      <EmailInput value={email} onInputChange={onInputChange} error={error} />
+      <PasswordInput value={password} onInputChange={onInputChange} error={error} />
+
+      <ButtonForm>Registrarse</ButtonForm>
     </form>
   );
 };

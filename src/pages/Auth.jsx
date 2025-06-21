@@ -4,12 +4,13 @@ import { LoginForm } from "../components/Auth/LoginForm";
 import { Logo } from "../components/Sidebar/Logo";
 import { useState } from "react";
 import { SignupForm } from "../components/Auth/SignupForm";
+import { Toaster } from "react-hot-toast";
 
 export const Auth = () => {
-  const [formState, setFormState] = useState("Login");
+  const [formType, setformType] = useState("Signup");
 
   const changeForm = () => {
-    setFormState(formState === "Login" ? "Signup" : "Login");
+    setformType(formType === "Login" ? "Signup" : "Login");
   };
 
   return (
@@ -18,8 +19,12 @@ export const Auth = () => {
         <Logo />
       </Link>
 
-      {formState === "Login" ? <LoginForm /> : <SignupForm />}
-      <p className="link" onClick={changeForm}>{formState === "Login" ? "Signup" : "Login"}</p>
+      {formType === "Login" ? <LoginForm /> : <SignupForm />}
+
+      <p className="link" onClick={changeForm}>
+        {formType === "Login" ? "Signup" : "Login"}
+      </p>
+      <Toaster />
     </AuthLayout>
   );
 };

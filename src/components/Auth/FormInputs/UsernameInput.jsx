@@ -9,7 +9,7 @@ export const UsernameInput = ({ value, onInputChange, error }) => {
         <span>Username</span>
         <input
           type="text"
-          name="username"
+          name="name"
           value={value}
           onChange={onInputChange}
           required
