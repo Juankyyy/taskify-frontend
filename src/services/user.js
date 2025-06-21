@@ -1,4 +1,6 @@
-const AUTH_URL = "http://localhost:5000/api/users/login";
+const PREFIX_API = "http://localhost:5000/api";
+const AUTH_URL = `${PREFIX_API}/users/login`;
+const SIGNUP_URL = `${PREFIX_API}/users/register`;
 
 export const auth = async (email, password) => {
   try {
@@ -24,6 +26,33 @@ export const auth = async (email, password) => {
   }
 };
 
+export const signup = async (name, email, password) => {
+  try {
+    const response = await fetch(SIGNUP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
+    const data = await response.json();
+    console.log("data", data)
+
+    if (!response.ok) {
+      return { ok: false, message: data.message };
+    } else {
+      return { ok: true, token: data.token };
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const user = {
   auth,
+  signup,
 };
