@@ -5,19 +5,24 @@ import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
 
   const Login = async (email, password) => {
     try {
       setIsLoading(true);
       setError(null);
+      setMessage("");
 
       const res = await auth(email, password);
       if (!res.ok) {
         setError(res.message);
       } else {
+        setMessage(res.message);
         localStorage.setItem("token", res.token);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     } catch (err) {
       throw new Error(err);
@@ -28,26 +33,31 @@ export const useAuth = () => {
 
   const Signup = async (name, email, password) => {
     try {
-      setIsLoading(true)
-      setError(null)
+      setIsLoading(true);
+      setError(null);
+      setMessage("");
 
-      const res = await signup(name, email, password)
+      const res = await signup(name, email, password);
       if (!res.ok) {
-        setError(res.message)
+        setError(res.message);
       } else {
-        console.log(res)
+        setMessage(res.data);
+        setTimeout(() => {
+          Login(email, password);
+        }, 500);
       }
     } catch (err) {
-      throw new Error(err)
+      throw new Error(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return {
     Login,
     Signup,
     isLoading,
     error,
+    message,
   };
 };

@@ -6,9 +6,10 @@ import toast from "react-hot-toast";
 export const useForm = (initialForm, formType) => {
   const [formState, setFormState] = useState(initialForm);
 
-  const { Login, Signup, isLoading, error } = useAuth();
+  const { Login, Signup, isLoading, error, message } = useAuth();
 
-  const notify = (message) => toast.error(message);
+  const notifyError = (message) => toast.error(message);
+  const notifySuccess = (message) => toast.success(message);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +22,6 @@ export const useForm = (initialForm, formType) => {
     if (formType === "login") {
       Login(formState.email, formState.password);
     } else if (formType === "signup") {
-      console.log(formState)
       Signup(formState.name, formState.email, formState.password);
     }
   };
@@ -29,7 +29,7 @@ export const useForm = (initialForm, formType) => {
   useEffect(() => {
     if (formType === "login") {
       if (error) {
-        notify(error);
+        notifyError(error);
 
         if (error.includes("Correo")) {
           setFormState(initialForm);
@@ -37,12 +37,17 @@ export const useForm = (initialForm, formType) => {
           setFormState({ ...formState, password: "" });
         }
       }
+      if (message) {
+        notifySuccess(message);
+      }
     } else if (formType === "signup") {
       if (error) {
-        notify(error);
+        notifyError(error);
+      } else if (message) {
+        notifySuccess(message);
       }
     }
-  }, [error]);
+  }, [error, message]);
 
   return {
     ...formState,

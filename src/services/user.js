@@ -19,7 +19,7 @@ export const auth = async (email, password) => {
     if (!response.ok) {
       return { ok: false, message: data.message };
     } else {
-      return { ok: true, token: data.token };
+      return { ok: true, message: data.message, token: data.token };
     }
   } catch (error) {
     console.error(error);
@@ -40,12 +40,11 @@ export const signup = async (name, email, password) => {
       }),
     });
     const data = await response.json();
-    console.log("data", data)
 
     if (!response.ok) {
       return { ok: false, message: data.message };
     } else {
-      return { ok: true, token: data.token };
+      return { ok: true, data: data.message };
     }
   } catch (err) {
     console.error(err);
