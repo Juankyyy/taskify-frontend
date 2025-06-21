@@ -7,7 +7,7 @@ import { SignupForm } from "../components/Auth/SignupForm";
 import { Toaster } from "react-hot-toast";
 
 export const Auth = () => {
-  const [formType, setformType] = useState("Signup");
+  const [formType, setformType] = useState("Login");
 
   const changeForm = () => {
     setformType(formType === "Login" ? "Signup" : "Login");
