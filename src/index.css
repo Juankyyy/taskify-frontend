@@ -33,20 +33,6 @@
   font-display: swap;
 }
 
-:root {
-  color-scheme: light dark;
-
-  --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf);
-  --text-primary: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #252b30;
-    --text-primary: #ffffff;
-  }
-}
-
 [data-theme="dark"] {
   --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b);
   --text-primary: #ffffff;
@@ -63,6 +49,8 @@ html {
 
   background: var(--bg-primary);
   color: var(--text-primary);
+
+  transition: color 0.3s ease-in-out;
 }
 
 body {
