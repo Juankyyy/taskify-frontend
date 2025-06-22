@@ -34,12 +34,15 @@
 }
 
 [data-theme="dark"] {
-  --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b);
+  /* --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b); */
+  --bg-primary: linear-gradient(to top right, #2C5364, #203A43, #0F2027);
+  
   --text-primary: #ffffff;
 }
 
 [data-theme="light"] {
-  --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf);
+  /* --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf); */
+  --bg-primary: linear-gradient(to top left, #c4cdd7, #eef2f3);
   --text-primary: #000000;
 }
 
