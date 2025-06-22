@@ -33,14 +33,6 @@
   font-display: swap;
 }
 
-:root {
-  color-scheme: light dark;
-
-  --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf);
-  --bg-secondary: #ffffff;
-  --text-primary: #000000;
-}
-
 [data-theme="dark"] {
   --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b);
   --text-primary: #ffffff;
@@ -48,7 +40,7 @@
 
 [data-theme="light"] {
   --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf);
-  --text-primary: #000000
+  --text-primary: #000000;
 }
 
 html {
@@ -57,8 +49,10 @@ html {
 
   background: var(--bg-primary);
   color: var(--text-primary);
+
+  transition: color 0.3s ease-in-out;
 }
 
-body {
-  margin: 10px;
+.transition-border-color {
+  transition: border-color 0.3s ease-in-out;
 }

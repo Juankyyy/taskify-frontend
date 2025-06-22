@@ -5,6 +5,7 @@ import { Logo } from "../components/Sidebar/Logo";
 import { useState } from "react";
 import { SignupForm } from "../components/Auth/SignupForm";
 import { Toaster } from "react-hot-toast";
+import { Theme } from "../components/Sidebar/Theme";
 
 export const Auth = () => {
   const [formType, setformType] = useState("Login");
@@ -21,10 +22,18 @@ export const Auth = () => {
 
       {formType === "Login" ? <LoginForm /> : <SignupForm />}
 
-      <p className="link" onClick={changeForm}>
-        {formType === "Login" ? "Signup" : "Login"}
-      </p>
+      <div className="flex items-center gap-2 my-2">
+        <p>
+          {formType === "Login"
+            ? "¿No tienes una cuenta?"
+            : "¿Ya tienes una cuenta?"}
+        </p>
+        <p className="link" onClick={changeForm}>
+          {formType === "Login" ? "Signup" : "Login"}
+        </p>
+      </div>
       <Toaster />
+      <Theme />
     </AuthLayout>
   );
 };

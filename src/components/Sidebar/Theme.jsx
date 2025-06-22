@@ -1,18 +1,20 @@
 import { Moon } from "lucide-react";
 import { Sun } from "lucide-react";
+import { useTheme } from "../../hooks/useTheme";
 
 export const Theme = () => {
-  // 🧠 Logic
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <label className="flex justify-center item cursor-pointer gap-2">
-      <Sun />
+    <label className="flex justify-center items-center cursor-pointer gap-2 w-min">
+      <Sun className="stroke-slate-400" />
       <input
         type="checkbox"
-        value="dark"
-        className="toggle theme-controller bg-slate-300"
+        checked={theme === "dark"}
+        onChange={toggleTheme}
+        className="toggle theme-controller"
       />
-      <Moon />
+      <Moon className="stroke-slate-400" />
     </label>
   );
 };
