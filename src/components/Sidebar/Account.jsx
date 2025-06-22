@@ -16,7 +16,7 @@ export const Account = () => {
   }
 
   return (
-    <div className="flex justify-between items-center p-2 border-transparent hover:border-slate-300 border rounded-lg transition-colors">
+    <div className="flex justify-between items-center bg-base-100 p-2 border-transparent hover:border-slate-500 border rounded-lg transition-border-color">
       <div className="flex gap-3">
         <div className="avatar">
           <div className="w-10 rounded-full">
@@ -32,7 +32,7 @@ export const Account = () => {
       <Dropdown
         icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}
       >
-        <li className="hover:bg-slate-200 rounded-[4px]">
+        <li className="rounded-[4px]">
           <Dropdown
             icon={
               <div className="flex justify-between items-center ">
@@ -46,13 +46,13 @@ export const Account = () => {
             }
           >
             <li>
-              <div className="hover:bg-slate-200">
+              <div>
                 <img className="w-icon h-icon" src={es} alt="Spanish" />
                 <p>Español</p>
               </div>
             </li>
             <li>
-              <div className="hover:bg-slate-200">
+              <div>
                 <img className="w-icon h-icon" src={en} alt="English" />
                 <p>Inglés</p>
               </div>
@@ -61,7 +61,7 @@ export const Account = () => {
         </li>
 
         <li>
-          <button onClick={Logout} className="hover:bg-slate-200">
+          <button onClick={Logout}>
             <LogOut className="w-icon h-icon" />
             <p>Cerrar Sesión</p>
           </button>

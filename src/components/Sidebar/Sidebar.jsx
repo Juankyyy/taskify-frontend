@@ -7,14 +7,16 @@ export const Sidebar = () => {
   // 🧠 Logic
 
   return (
-    <nav className="bg-white flex flex-col justify-between p-3 rounded-xl w-2xs h-[calc(100dvh-20px)]">
+    <nav className="bg-base-200 flex flex-col justify-between p-3 rounded-xl w-2xs h-[calc(100dvh-20px)]">
       <div>
         <Logo />
         <Folders />
       </div>
 
       <div className="flex flex-col gap-2">
-        <Theme />
+        <div className="flex justify-center items-center">
+          <Theme />
+        </div>
         <Account />
       </div>
     </nav>

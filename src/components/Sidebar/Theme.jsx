@@ -6,13 +6,13 @@ export const Theme = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <label className="flex justify-center item cursor-pointer gap-2">
+    <label className="flex justify-center items-center cursor-pointer gap-2 w-min">
       <Sun />
       <input
         type="checkbox"
         checked={theme === "dark"}
         onChange={toggleTheme}
-        className="toggle theme-controller bg-slate-300"
+        className="toggle theme-controller"
       />
       <Moon />
     </label>

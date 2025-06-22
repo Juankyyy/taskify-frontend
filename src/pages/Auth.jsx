@@ -5,6 +5,7 @@ import { Logo } from "../components/Sidebar/Logo";
 import { useState } from "react";
 import { SignupForm } from "../components/Auth/SignupForm";
 import { Toaster } from "react-hot-toast";
+import { Theme } from "../components/Sidebar/Theme";
 
 export const Auth = () => {
   const [formType, setformType] = useState("Login");
@@ -32,6 +33,7 @@ export const Auth = () => {
         </p>
       </div>
       <Toaster />
+      <Theme />
     </AuthLayout>
   );
 };
