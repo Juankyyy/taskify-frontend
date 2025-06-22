@@ -23,7 +23,9 @@ export const Auth = () => {
 
       <div className="flex items-center gap-2 my-2">
         <p>
-          {formType === "Login" ? "¿No tienes una cuenta?" : "¿Ya tienes una cuenta?"}
+          {formType === "Login"
+            ? "¿No tienes una cuenta?"
+            : "¿Ya tienes una cuenta?"}
         </p>
         <p className="link" onClick={changeForm}>
           {formType === "Login" ? "Signup" : "Login"}
