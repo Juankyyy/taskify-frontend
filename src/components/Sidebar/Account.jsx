@@ -9,6 +9,8 @@ import en from "../../assets/en-flag.svg";
 import es from "../../assets/es-flag.svg";
 
 export const Account = () => {
+  const username = localStorage.getItem("username");
+
   const navigate = useNavigate();
   const Logout = () => {
     localStorage.removeItem("token");
@@ -17,16 +19,13 @@ export const Account = () => {
 
   return (
     <div className="flex justify-between items-center bg-base-100 p-2 border-transparent hover:border-slate-500 border rounded-lg transition-border-color">
-      <div className="flex gap-3">
+      <div className="flex items-center justify-center gap-3">
         <div className="avatar">
           <div className="w-10 rounded-full">
             <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
           </div>
         </div>
-        <div>
-          <h1 className="font-bold">Username</h1>
-          <p className="text-sm text-slate-400">Username#12345</p>
-        </div>
+          <p className="font-bold">{username}</p>
       </div>
 
       <Dropdown
