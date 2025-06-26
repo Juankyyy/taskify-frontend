@@ -1,11 +1,42 @@
+import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
-import { Trash } from "lucide-react";
-
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 
+// Importamos los hooks personalizados
+// import { getUser } from "../../hooks/getUser";
+import { getFolders } from "../../hooks/getFolders";
+import { getListsByFolder } from "../../hooks/getListsByFolder";
+
 export const Folders = () => {
-  // 🧠 Logic
+  const [folders, setFolders] = useState([]);
+  const [lists, setLists] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFoldersAndLists = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Token no encontrado");
+
+        // eslint-disable-next-line no-unused-vars
+        // const user = await getUser(token);
+        const foldersData = await getFolders(token);
+        const allLists = await getListsByFolder(foldersData, token);
+        
+        setFolders(foldersData);
+        setLists(allLists);
+      } catch (err) {
+        console.error("Error al cargar las carpetas:", err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoldersAndLists();
+  }, []);
+
+  if (loading) return <p>Cargando carpetas...</p>;
 
   return (
     <div className="flex flex-col">
@@ -16,12 +47,19 @@ export const Folders = () => {
         </Tooltip>
       </div>
 
-      <Collapse title={"Carpeta 1"}>
-        <h1>Lista 1</h1>
-        <h1>Lista 2</h1>
-        <h1>Lista 3</h1>
-        <h1>Lista 4</h1>
-      </Collapse>
+      {folders.map((folder) => {
+        const listsInFolder = lists.filter((list) => list.folder === folder._id);
+
+        return (
+          <Collapse key={folder._id} title={folder.name}>
+            {listsInFolder.length > 0 ? (
+              listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
+            ) : (
+              <p className="text-sm text-gray-500">No hay Listas</p>
+            )}
+          </Collapse>
+        );
+      })}
     </div>
   );
 };
