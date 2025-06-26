@@ -35,7 +35,7 @@
 
 [data-theme="dark"] {
   /* --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b); */
-  --bg-primary: linear-gradient(to top right, #2C5364, #203A43, #0F2027);
+  --bg-primary: linear-gradient(to bottom right, #2C5364, #203A43, #0F2027);
   
   --text-primary: #ffffff;
 }
