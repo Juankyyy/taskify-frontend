@@ -47,7 +47,7 @@ export const useForm = (initialForm, formType) => {
         notifySuccess(message);
       }
     }
-  }, [error, formState, formType, initialForm, message]);
+  }, [error, message]);
 
   return {
     ...formState,

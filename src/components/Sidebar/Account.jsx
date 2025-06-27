@@ -10,6 +10,7 @@ import es from "../../assets/es-flag.svg";
 
 export const Account = () => {
   const navigate = useNavigate();
+  
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/auth");

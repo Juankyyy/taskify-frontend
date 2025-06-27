@@ -1,42 +1,13 @@
-import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
-
-// Importamos los hooks personalizados
-// import { getUser } from "../../hooks/getUser";
-import { getFolders } from "../../hooks/getFolders";
-import { getListsByFolder } from "../../hooks/getListsByFolder";
+import { useFolders } from "../../hooks/useFolders";
 
 export const Folders = () => {
-  const [folders, setFolders] = useState([]);
-  const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { folders, lists, isLoading,  } = useFolders();
+  
 
-  useEffect(() => {
-    const fetchFoldersAndLists = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("Token no encontrado");
-
-        // eslint-disable-next-line no-unused-vars
-        // const user = await getUser(token);
-        const foldersData = await getFolders(token);
-        const allLists = await getListsByFolder(foldersData, token);
-        
-        setFolders(foldersData);
-        setLists(allLists);
-      } catch (err) {
-        console.error("Error al cargar las carpetas:", err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFoldersAndLists();
-  }, []);
-
-  if (loading) return <p>Cargando carpetas...</p>;
+  if (isLoading) return <p>Cargando carpetas...</p>;
 
   return (
     <div className="flex flex-col">
@@ -48,7 +19,9 @@ export const Folders = () => {
       </div>
 
       {folders.map((folder) => {
-        const listsInFolder = lists.filter((list) => list.folder === folder._id);
+        const listsInFolder = lists.filter(
+          (list) => list.folder === folder._id
+        );
 
         return (
           <Collapse key={folder._id} title={folder.name}>
