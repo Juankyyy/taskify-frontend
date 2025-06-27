@@ -18,7 +18,7 @@ export const Account = () => {
   }
 
   return (
-    <div className="flex justify-between items-center bg-base-100 p-2 border-transparent hover:border-slate-500 border rounded-lg transition-border-color">
+    <div className="flex justify-between items-center bg-base-100 [html[data-theme=light]_&]:border-slate-300 p-2 border-transparent hover:border-slate-500! border rounded-lg transition-border-color">
       <div className="flex items-center justify-center gap-3">
         <div className="avatar">
           <div className="w-10 rounded-full">

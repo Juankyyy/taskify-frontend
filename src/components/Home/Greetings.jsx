@@ -6,7 +6,7 @@ export const Greetings = () => {
   const { dateName } = TimeGreeting();
 
   return (
-    <section className="bg-base-200 p-4 rounded-xl w-full">
+    <section className="bg-base-200 p-5 rounded-xl w-full">
       <h1 className="font-bold text-3xl">
         {dateName}, {username ? username : "Unknown User"}!
       </h1>
