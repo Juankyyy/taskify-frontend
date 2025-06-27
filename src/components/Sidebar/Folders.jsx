@@ -4,8 +4,7 @@ import { Collapse } from "../Collapse";
 import { useFolders } from "../../hooks/useFolders";
 
 export const Folders = () => {
-  const { folders, lists, isLoading,  } = useFolders();
-  
+  const { folders, lists, refetchFolders, isLoading } = useFolders();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -24,7 +23,12 @@ export const Folders = () => {
         );
 
         return (
-          <Collapse key={folder._id} title={folder.name}>
+          <Collapse
+            key={folder._id}
+            title={folder.name}
+            folderId={folder._id}
+            onDeleteSuccess={refetchFolders} // Callback para recargar carpetas al eliminar una carpeta
+          >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
             ) : (

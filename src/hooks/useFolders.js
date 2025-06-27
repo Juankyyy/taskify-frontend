@@ -12,6 +12,28 @@ export const useFolders = () => {
 
   const navigate = useNavigate();
 
+  // Función para recargar las carpetas y listas
+  // Si se recarga, se borran los estados de las carpetas y listas
+  const refetchFolders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      const foldersData = await getFolders(token);
+      const allLists = await getLists(foldersData.data, token);
+
+      setFolders(foldersData.data);
+      setLists(allLists);
+    } catch (err) {
+      console.error("Error al recargar las carpetas:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchFoldersAndLists = async () => {
       try {
@@ -40,6 +62,7 @@ export const useFolders = () => {
   return {
     folders,
     lists,
+    refetchFolders,
     isLoading,
     error,
   };
