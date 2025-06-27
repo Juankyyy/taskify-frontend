@@ -4,26 +4,44 @@ import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 
 // Importamos los hooks personalizados
-// import { getUser } from "../../hooks/getUser";
-import { getFolders } from "../../hooks/getFolders";
+import { getFolders } from "../../hooks/getFolders"; 
 import { getListsByFolder } from "../../hooks/getListsByFolder";
 
 export const Folders = () => {
+  
+  //estados para manejar las carpetas y listas
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Función para recargar las carpetas y listas
+  // Si se recarga, se borran los estados de las carpetas y listas
+  const refetchFolders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Token no encontrado");
+
+      const foldersData = await getFolders(token);
+      const allLists = await getListsByFolder(foldersData, token);
+
+      setFolders(foldersData);
+      setLists(allLists);
+    } catch (err) {
+      console.error("Error al recargar las carpetas:", err.message);
+    }
+  };
+
+  // Efecto para cargar las carpetas y listas al montar el componente
+  // y se ejecuta una vez cuando se monta el componente se monta
   useEffect(() => {
     const fetchFoldersAndLists = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("Token no encontrado");
 
-        // eslint-disable-next-line no-unused-vars
-        // const user = await getUser(token);
         const foldersData = await getFolders(token);
         const allLists = await getListsByFolder(foldersData, token);
-        
+
         setFolders(foldersData);
         setLists(allLists);
       } catch (err) {
@@ -36,8 +54,10 @@ export const Folders = () => {
     fetchFoldersAndLists();
   }, []);
 
+  // Si está cargando, mostramos un mensaje de carga mientras esperamos
   if (loading) return <p>Cargando carpetas...</p>;
 
+  // renderizamos el componente
   return (
     <div className="flex flex-col">
       <div className="flex w-full items-center justify-between mb-5">
@@ -48,10 +68,17 @@ export const Folders = () => {
       </div>
 
       {folders.map((folder) => {
-        const listsInFolder = lists.filter((list) => list.folder === folder._id);
+        const listsInFolder = lists.filter(
+          (list) => list.folder === folder._id
+        );
 
         return (
-          <Collapse key={folder._id} title={folder.name}>
+          <Collapse
+            key={folder._id}
+            title={folder.name}
+            folderId={folder._id}
+            onDeleteSuccess={refetchFolders} // Callback para recargar carpetas al eliminar una carpeta
+          >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
             ) : (
