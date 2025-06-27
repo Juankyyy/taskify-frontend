@@ -7,13 +7,9 @@ export const Task = () => {
   return (
     <>
       <div className="flex items-center justify-between gap-3 p-3">
-        <div className="flex items-center gap-3 justify-center">
-          <input
-            type="checkbox"
-            defaultChecked
-            className="checkbox checkbox-info"
-          />
-          <h1>Task</h1>
+        <div className="flex items-center gap-3 justify-center group">
+          <input type="checkbox" className="checkbox checkbox-info" />
+          <h1 className="group-has-[:checked]:line-through">Task 1</h1>
         </div>
         <div className="flex gap-4 items-center">
           <div className="badge badge-soft badge-outline badge-info">
