@@ -26,7 +26,7 @@ export const Task = () => {
       </div>
 
       <div className="flex justify-center py-2">
-        <div className="w-[95%] border-b border-gray-400 border-dashed"></div>
+        <div className="w-[95%] border-b border-gray-300 [html[data-theme=dark]_&]:border-gray-700 border-dashed"></div>
       </div>
     </>
   );
