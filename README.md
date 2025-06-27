@@ -14,11 +14,16 @@ El proyecto está diseñado para ser fácil de usar y personalizar para diferent
 
 Este proyecto utiliza las siguientes tecnologías:
 
-- React: Una biblioteca de JavaScript para construir interfaces de usuario.
-- Tailwind CSS: Una biblioteca de CSS para estilizar la interfaz de usuario.
-- DaisyUI: Una biblioteca de CSS para estilizar la interfaz de usuario.
-- Vite: Un entorno de desarrollo de JavaScript rápido y flexible.
-- ESLint: Un linter de JavaScript para detectar errores y mejorar la calidad del código.
+- ⚛️ **React**: Biblioteca JavaScript para interfaces de usuario interactivas.
+- 🎨 **Tailwind CSS**: Framework CSS utilitario para diseños personalizados.
+- 🧩 **DaisyUI**: Componentes para Tailwind CSS que simplifican el desarrollo UI.
+- ⚡ **Vite**: Entorno de desarrollo rápido y herramienta de compilación.
+- 🔍 **ESLint**: Analizador de código para detectar errores y mejorar calidad.
+- 🔣 **Lucide Icons**: Conjunto de iconos SVG simples y consistentes.
+- 🧭 **React Router**: Manejo de navegación y rutas en aplicaciones React.
+- 📦 **PNPM**: Gestor de paquetes rápido y eficiente en espacio.
+- 🚀 **Vercel**: Plataforma para despliegue web con integración continua.
+- ✨ **@midudev/tailwind-animations**: Animaciones personalizadas para Tailwind.
 
 ## 📦 Instalación
 

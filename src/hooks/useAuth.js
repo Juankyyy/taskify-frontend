@@ -20,6 +20,7 @@ export const useAuth = () => {
       } else {
         setMessage(res.message);
         localStorage.setItem("token", res.token);
+        localStorage.setItem("username", res.name);
         setTimeout(() => {
           navigate("/");
         }, 1000);
