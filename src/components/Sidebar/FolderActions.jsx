@@ -12,7 +12,7 @@ export const FolderActions = () => {
       </Tooltip>
 
       <Tooltip title={"Eliminar lista"}>
-        <Trash className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600 transition-all" />
+        <Trash className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600" />
       </Tooltip>
     </div>
   );
