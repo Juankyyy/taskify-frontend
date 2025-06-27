@@ -1,11 +1,13 @@
 import { Plus } from "lucide-react";
-import { Trash } from "lucide-react";
-
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
+import { useFolders } from "../../hooks/useFolders";
 
 export const Folders = () => {
-  // 🧠 Logic
+  const { folders, lists, isLoading,  } = useFolders();
+  
+
+  if (isLoading) return <p>Cargando carpetas...</p>;
 
   return (
     <div className="flex flex-col">
@@ -16,12 +18,21 @@ export const Folders = () => {
         </Tooltip>
       </div>
 
-      <Collapse title={"Carpeta 1"}>
-        <h1>Lista 1</h1>
-        <h1>Lista 2</h1>
-        <h1>Lista 3</h1>
-        <h1>Lista 4</h1>
-      </Collapse>
+      {folders.map((folder) => {
+        const listsInFolder = lists.filter(
+          (list) => list.folder === folder._id
+        );
+
+        return (
+          <Collapse key={folder._id} title={folder.name}>
+            {listsInFolder.length > 0 ? (
+              listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
+            ) : (
+              <p className="text-sm text-gray-500">No hay Listas</p>
+            )}
+          </Collapse>
+        );
+      })}
     </div>
   );
 };

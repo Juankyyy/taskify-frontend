@@ -12,6 +12,7 @@ export const Account = () => {
   const username = localStorage.getItem("username");
 
   const navigate = useNavigate();
+  
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/auth");
