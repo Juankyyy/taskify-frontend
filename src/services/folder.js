@@ -1,10 +1,10 @@
 const PREFIX_API = "http://localhost:5000/api";
-const FOLDERS_URL = `${PREFIX_API}/folders/get`;
-const LISTS_URL = `${PREFIX_API}/lists/get`;
+const FOLDERS_URL = `${PREFIX_API}/folders`;
+const LISTS_URL = `${PREFIX_API}/lists`;
 
 export const getFolders = async (token) => {
   try {
-    const response = await fetch(FOLDERS_URL, {
+    const response = await fetch(`${FOLDERS_URL}/get`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -15,17 +15,18 @@ export const getFolders = async (token) => {
     if (!response.ok) {
       return { ok: false, message: "Error al obtener carpetas" };
     } else {
-      return { ok: true, data: data };
+      return data;
     }
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
 
 export const getLists = async (folders, token) => {
   const listsPerFolder = await Promise.all(
     folders.map(async (folder) => {
-      const response = await fetch(`${LISTS_URL}/${folder._id}`, {
+      const response = await fetch(`${LISTS_URL}/get/${folder._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +47,30 @@ export const getLists = async (folders, token) => {
   return listsPerFolder.flat();
 };
 
+export const deleteFolder = async (folderId, token) => {
+  try {
+    const response = await fetch(`${FOLDERS_URL}/delete/${folderId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { ok: false, message: "Error al eliminar la carpeta" };
+    } else {
+      return { ok: true, data: data };
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const folder = {
   getFolders,
   getLists,
+  deleteFolder,
 };
