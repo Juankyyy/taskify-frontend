@@ -2,8 +2,10 @@ import { Trash } from "lucide-react";
 import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 
-export const FolderActions = () => {
-  // 🧠 Logic
+export const FolderActions = ({ title, folderId, onDeleteClick }) => {
+  const handleDeleteClick = () => {
+    onDeleteClick(title, folderId);
+  };
 
   return (
     <div className="flex justify-center items-center gap-2 z-20 overflow-visible">
@@ -12,7 +14,10 @@ export const FolderActions = () => {
       </Tooltip>
 
       <Tooltip title={"Eliminar lista"}>
-        <Trash className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600" />
+        <Trash
+          onClick={handleDeleteClick}
+          className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600"
+        />
       </Tooltip>
     </div>
   );

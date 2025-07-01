@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
 
-export const Collapse = ({ title, children }) => {
+export const Collapse = ({ title, folderId, children, onDeleteClick }) => {
   return (
     <div className="flex items-baseline justify-between">
       <div className="collapse group w-3/4!">
@@ -15,7 +15,7 @@ export const Collapse = ({ title, children }) => {
         <div className="collapse-content">{children}</div>
       </div>
 
-      <FolderActions />
+      <FolderActions title={title} folderId={folderId} onDeleteClick={onDeleteClick} />
     </div>
   );
 };

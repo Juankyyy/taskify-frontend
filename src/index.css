@@ -59,3 +59,7 @@ html {
 .transition-border-color {
   transition: border-color 0.3s ease-in-out;
 }
+
+.scrollbar-modal {
+  scrollbar-gutter: unset !important;
+}

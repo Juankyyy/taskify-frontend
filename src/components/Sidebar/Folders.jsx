@@ -2,10 +2,10 @@ import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 import { useFolders } from "../../hooks/useFolders";
+import { DeleteFolder } from "../Modals/DeleteFolder";
 
 export const Folders = () => {
-  const { folders, lists, isLoading,  } = useFolders();
-  
+  const { folders, lists, selectedFolder, onDeleteClick, handleDeleteFolder, isLoading } = useFolders();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -24,7 +24,12 @@ export const Folders = () => {
         );
 
         return (
-          <Collapse key={folder._id} title={folder.name}>
+          <Collapse
+            key={folder._id}
+            title={folder.name}
+            folderId={folder._id}
+            onDeleteClick={onDeleteClick}
+          >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
             ) : (
@@ -33,6 +38,12 @@ export const Folders = () => {
           </Collapse>
         );
       })}
+
+      <DeleteFolder
+        title={selectedFolder.title}
+        folderId={selectedFolder.folderId}
+        handleDeleteFolder={handleDeleteFolder}
+      />
     </div>
   );
 };
