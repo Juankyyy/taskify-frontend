@@ -1,7 +1,7 @@
 export const DeleteFolder = ({ title, handleDeleteFolder }) => {
   return (
     <dialog id="delete-folder-modal" className="modal scrollbar-modal">
-      <div className="modal-box min-w-[550px] max-w-2xl">
+      <div className="modal-box md:min-w-[550px] md:max-w-2xl">
         <h3 className="font-bold text-lg">
           ¿Eliminar carpeta{" "}
           <span className="text-error animate-pulse truncate inline-block align-bottom max-w-[200px]">

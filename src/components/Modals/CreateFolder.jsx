@@ -13,7 +13,7 @@ export const CreateFolder = ({ handleCreateFolder, isLoading }) => {
 
   return (
     <dialog id="create-folder-modal" className="modal">
-      <div className="modal-box w-96">
+      <div className="modal-box md:w-96">
         <h3 className="font-bold text-lg">Nueva carpeta</h3>
         <form className="mt-4" onSubmit={onSubmit}>
           <label className="input w-full">
