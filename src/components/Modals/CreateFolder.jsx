@@ -23,8 +23,8 @@ export const CreateFolder = ({ handleCreateFolder, isLoading }) => {
               value={folderName}
               required
               minLength="3"
-              maxLength="15"
-              title="Mínimo 3 caracteres, máximo 15"
+              maxLength="30"
+              title="Mínimo 3 caracteres, máximo 30"
               type="text"
               className="grow"
               placeholder="Nombre de la carpeta"

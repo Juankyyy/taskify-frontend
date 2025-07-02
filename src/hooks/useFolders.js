@@ -14,8 +14,6 @@ export const useFolders = () => {
   const [lists, setLists] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState("");
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) => toast.success(message);
@@ -33,13 +31,14 @@ export const useFolders = () => {
       }
 
       setIsLoading(true);
+
       const foldersData = await getFolders(token);
       const allLists = await getLists(foldersData, token);
 
       setFolders(foldersData);
       setLists(allLists);
     } catch (err) {
-      setError(err.message);
+      notifyError(err.message);
       console.error("Error al cargar las carpetas:", err.message);
     } finally {
       setIsLoading(false);
@@ -62,13 +61,13 @@ export const useFolders = () => {
 
       const response = await deleteFolder(selectedFolder.folderId, token);
       if (response.ok) {
-        setMessage(response.message);
+        notifySuccess(`Carpeta ${selectedFolder.title} eliminada`);
         await getFoldersAndLists();
       } else {
-        setError(response.message);
+        notifyError(response.message);
       }
     } catch (err) {
-      setError(err.message);
+      notifyError(err.message);
       console.error("Error al eliminar la carpeta:", err.message);
     } finally {
       setIsLoading(false);
@@ -85,14 +84,15 @@ export const useFolders = () => {
       setIsLoading(true);
 
       const response = await createFolder(folderName, token);
-      if (response.ok) {
-        setMessage(response.message);
+      if (!response.error) {
+        // Replicar esto en los otros
+        notifySuccess(`Carpeta ${folderName} creada`);
         await getFoldersAndLists();
       } else {
-        setError(response.message);
+        notifyError(response.message);
       }
     } catch (err) {
-      setError(err.message);
+      notifyError(err.message);
       console.error("Error al crear la carpeta:", err.message);
     } finally {
       setIsLoading(false);
@@ -103,15 +103,6 @@ export const useFolders = () => {
     getFoldersAndLists();
   }, []);
 
-  useEffect(() => {
-    if (error) {
-      notifyError(error);
-    }
-    if (message) {
-      notifySuccess(message);
-    }
-  }, [error, message]);
-
   return {
     folders,
     lists,
@@ -120,6 +111,5 @@ export const useFolders = () => {
     handleDeleteFolder,
     handleCreateFolder,
     isLoading,
-    error,
   };
 };
