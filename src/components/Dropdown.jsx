@@ -1,6 +1,6 @@
 export const Dropdown = ({ icon, children }) => {
   return (
-    <div className="dropdown dropdown-top">
+    <div className="dropdown sm:dropdown-top dropdown-left dropdown-end">
       <div tabIndex={0} role="button">
         {icon}
       </div>
