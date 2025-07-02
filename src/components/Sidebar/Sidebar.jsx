@@ -7,7 +7,7 @@ export const Sidebar = () => {
   // 🧠 Logic
 
   return (
-    <nav className="bg-base-200 flex flex-col justify-between p-4 rounded-xl sm:max-w-80 sm:min-w-72 sm:h-[calc(100dvh-20px)]">
+    <nav className="bg-base-200 flex flex-col justify-between p-4 rounded-xl h-full sm:max-w-80 sm:min-w-72 sm:h-[calc(100dvh-20px)]">
       <div>
         <Logo />
         <Folders />
