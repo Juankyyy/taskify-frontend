@@ -85,10 +85,10 @@ export const createFolder = async (folderName, token) => {
     const data = await response.json();
 
     if (!response.ok) {
-      return { ok: false, message: "Error al eliminar la carpeta" };
-    } else {
-      return { ok: true, data: data };
+      return { error: true, message: data.message };
     }
+
+    return data;
   } catch (err) {
     console.error(err);
     throw err;

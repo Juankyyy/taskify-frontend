@@ -1,6 +1,7 @@
 import { MainLayout } from "../Layouts/MainLayout";
 import { Greetings } from "../components/Home/Greetings";
 import { Tasks } from "../components/Home/Tasks/Tasks";
+import { Toaster } from "react-hot-toast";
 
 export const Home = () => {
   // 🧠 Logic
@@ -11,6 +12,7 @@ export const Home = () => {
         <Greetings />
         <Tasks />
       </main>
+      <Toaster />
     </MainLayout>
   );
 };
