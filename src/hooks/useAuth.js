@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
 
   const Login = async (email, password) => {
     try {
@@ -37,7 +37,7 @@ export const useAuth = () => {
       setIsLoading(true);
       setError(null);
       setMessage("");
-
+      
       const res = await signup(name, email, password);
       if (!res.ok) {
         setError(res.message);
