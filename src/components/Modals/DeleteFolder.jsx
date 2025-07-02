@@ -18,19 +18,19 @@ export const DeleteFolder = ({ title, handleDeleteFolder }) => {
           <br />
           Esta acción no se puede deshacer.
         </p>
-        <div className="modal-action">
-          <form method="dialog" className="flex gap-4">
-            <button className="btn">Cerrar</button>
-            <button
-              onClick={handleDeleteFolder}
-              type="button"
-              className="btn btn-error"
-            >
-              Eliminar
-            </button>
-          </form>
+        <div className="flex justify-end">
+          <button
+            onClick={handleDeleteFolder}
+            type="button"
+            className="btn btn-error"
+          >
+            Eliminar
+          </button>
         </div>
       </div>
+      <form method="dialog" className="modal-backdrop">
+        <button>Cerrar</button>
+      </form>
     </dialog>
   );
 };

@@ -3,9 +3,18 @@ import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 import { useFolders } from "../../hooks/useFolders";
 import { DeleteFolder } from "../Modals/DeleteFolder";
+import { CreateFolder } from "../Modals/CreateFolder";
 
 export const Folders = () => {
-  const { folders, lists, selectedFolder, onDeleteClick, handleDeleteFolder, isLoading } = useFolders();
+  const {
+    folders,
+    lists,
+    selectedFolder,
+    onDeleteClick,
+    handleDeleteFolder,
+    handleCreateFolder,
+    isLoading,
+  } = useFolders();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -14,7 +23,12 @@ export const Folders = () => {
       <div className="flex w-full items-center justify-between mb-5">
         <h1 className="text-lg font-bold">Carpetas</h1>
         <Tooltip title={"Nueva carpeta"}>
-          <Plus className="w-7 h-7 p-1 bg-sky-400 rounded-full stroke-3 stroke-white cursor-pointer hover:animate-squeeze hover:animate-duration-500" />
+          <Plus
+            onClick={() =>
+              document.getElementById("create-folder-modal").showModal()
+            }
+            className="w-7 h-7 p-1 bg-sky-400 rounded-full stroke-3 stroke-white cursor-pointer hover:animate-squeeze hover:animate-duration-500"
+          />
         </Tooltip>
       </div>
 
@@ -44,6 +58,8 @@ export const Folders = () => {
         folderId={selectedFolder.folderId}
         handleDeleteFolder={handleDeleteFolder}
       />
+
+      <CreateFolder handleCreateFolder={handleCreateFolder} isLoading={isLoading} />
     </div>
   );
 };

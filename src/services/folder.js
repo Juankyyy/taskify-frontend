@@ -69,8 +69,35 @@ export const deleteFolder = async (folderId, token) => {
   }
 };
 
+export const createFolder = async (folderName, token) => {
+  try {
+    const response = await fetch(`${FOLDERS_URL}/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: folderName,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { ok: false, message: "Error al eliminar la carpeta" };
+    } else {
+      return { ok: true, data: data };
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const folder = {
   getFolders,
   getLists,
   deleteFolder,
+  createFolder,
 };
