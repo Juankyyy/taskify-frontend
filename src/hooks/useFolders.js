@@ -38,7 +38,6 @@ export const useFolders = () => {
       setFolders(foldersData);
       setLists(allLists);
     } catch (err) {
-      notifyError(err.message);
       console.error("Error al cargar las carpetas:", err.message);
     } finally {
       setIsLoading(false);
@@ -61,13 +60,12 @@ export const useFolders = () => {
 
       const response = await deleteFolder(selectedFolder.folderId, token);
       if (response.ok) {
-        notifySuccess(`Carpeta ${selectedFolder.title} eliminada`);
+        notifySuccess(`${selectedFolder.title} Carpeta eliminada`);
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      notifyError(err.message);
       console.error("Error al eliminar la carpeta:", err.message);
     } finally {
       setIsLoading(false);
@@ -85,14 +83,12 @@ export const useFolders = () => {
 
       const response = await createFolder(folderName, token);
       if (!response.error) {
-        // Replicar esto en los otros
-        notifySuccess(`Carpeta ${folderName} creada`);
+        notifySuccess(`${folderName} Carpeta creada`);
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      notifyError(err.message);
       console.error("Error al crear la carpeta:", err.message);
     } finally {
       setIsLoading(false);

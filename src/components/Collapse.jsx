@@ -3,7 +3,7 @@ import { FolderActions } from "./Sidebar/FolderActions";
 
 export const Collapse = ({ title, folderId, children, onDeleteClick }) => {
   return (
-    <div className="flex items-baseline justify-between">
+    <div className="flex justify-between mb-1 bg-base-100 px-2 rounded-lg">
       <div className="collapse group w-3/4!">
         <input className="p-0" type="checkbox" />
         <div className="collapse-title flex items-center justify-between p-0">
@@ -12,10 +12,16 @@ export const Collapse = ({ title, folderId, children, onDeleteClick }) => {
             <p className="font-medium">{title}</p>
           </div>
         </div>
-        <div className="collapse-content">{children}</div>
+        <div className="collapse-content pl-[35px] flex flex-col gap-1">
+          {children}
+        </div>
       </div>
 
-      <FolderActions title={title} folderId={folderId} onDeleteClick={onDeleteClick} />
+      <FolderActions
+        title={title}
+        folderId={folderId}
+        onDeleteClick={onDeleteClick}
+      />
     </div>
   );
 };
