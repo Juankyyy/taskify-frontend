@@ -48,11 +48,11 @@ export const Folders = () => {
               listsInFolder.map((list, index) => (
                 <div key={list._id} className="relative">
                   <div
-                    className={`absolute -left-2 top-0 bottom-0 w-px bg-gray-400 ${
+                    className={`absolute -left-2 top-0 bottom-0 w-0.5 bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 ${
                       index === listsInFolder.length - 1 ? "h-1" : "h-7"
                     }`}
                   ></div>
-                  <div className="absolute -left-2 top-0.5 w-2 h-3 border-l border-b border-gray-400 rounded-bl-md"></div>
+                  <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
                   <p className="px-2 w-min cursor-pointer">{list.title}</p>
                 </div>
