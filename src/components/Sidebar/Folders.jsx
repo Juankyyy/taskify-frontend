@@ -45,9 +45,20 @@ export const Folders = () => {
             onDeleteClick={onDeleteClick}
           >
             {listsInFolder.length > 0 ? (
-              listsInFolder.map((list) => <h1 key={list._id}>{list.title}</h1>)
+              listsInFolder.map((list, index) => (
+                <div key={list._id} className="relative">
+                  <div
+                    className={`absolute -left-2 top-0 bottom-0 w-px bg-gray-400 ${
+                      index === listsInFolder.length - 1 ? "h-1" : "h-7"
+                    }`}
+                  ></div>
+                  <div className="absolute -left-2 top-0.5 w-2 h-3 border-l border-b border-gray-400 rounded-bl-md"></div>
+
+                  <p className="px-2 w-min cursor-pointer">{list.title}</p>
+                </div>
+              ))
             ) : (
-              <p className="text-sm text-gray-500">No hay Listas</p>
+              <p className="text-gray-500 px-2 -ml-4">No hay Listas</p>
             )}
           </Collapse>
         );
@@ -59,7 +70,10 @@ export const Folders = () => {
         handleDeleteFolder={handleDeleteFolder}
       />
 
-      <CreateFolder handleCreateFolder={handleCreateFolder} isLoading={isLoading} />
+      <CreateFolder
+        handleCreateFolder={handleCreateFolder}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

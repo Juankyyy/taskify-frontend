@@ -2,7 +2,6 @@ import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
 
 export const Collapse = ({ title, folderId, children, onDeleteClick }) => {
-
   return (
     <div className="flex justify-between mb-1 bg-base-100 px-2 rounded-lg">
       <div className="collapse group w-3/4!">
@@ -13,7 +12,9 @@ export const Collapse = ({ title, folderId, children, onDeleteClick }) => {
             <p className="font-medium">{title}</p>
           </div>
         </div>
-        <div className="collapse-content pl-[35px]">{children}</div>
+        <div className="collapse-content pl-[35px] flex flex-col gap-1">
+          {children}
+        </div>
       </div>
 
       <FolderActions
