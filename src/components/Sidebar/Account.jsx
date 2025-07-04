@@ -15,6 +15,7 @@ export const Account = () => {
   
   const Logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     navigate("/auth");
   }
 

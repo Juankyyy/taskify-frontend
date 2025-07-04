@@ -10,11 +10,16 @@ export const Folders = () => {
     folders,
     lists,
     selectedFolder,
-    onDeleteClick,
+    selectFolder,
     handleDeleteFolder,
     handleCreateFolder,
+    handleCreateList,
     isLoading,
   } = useFolders();
+
+  const initialForm = {
+    folderName: "",
+  };
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -42,7 +47,8 @@ export const Folders = () => {
             key={folder._id}
             title={folder.name}
             folderId={folder._id}
-            onDeleteClick={onDeleteClick}
+            selectFolder={selectFolder}
+            handleCreateList={handleCreateList}
           >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list, index) => (
@@ -71,8 +77,9 @@ export const Folders = () => {
       />
 
       <CreateFolder
-        handleCreateFolder={handleCreateFolder}
+        handleCreate={handleCreateFolder}
         isLoading={isLoading}
+        initialForm={initialForm}
       />
     </div>
   );

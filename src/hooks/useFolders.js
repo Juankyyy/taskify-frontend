@@ -5,6 +5,7 @@ import {
   getLists,
   deleteFolder,
   createFolder,
+  createList,
 } from "../services/folder";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -44,9 +45,8 @@ export const useFolders = () => {
     }
   };
 
-  const onDeleteClick = (title, folderId) => {
+  const selectFolder = (title = null, folderId) => {
     setSelectedFolder({ title, folderId });
-    document.getElementById("delete-folder-modal").showModal();
   };
 
   const handleDeleteFolder = async () => {
@@ -95,6 +95,29 @@ export const useFolders = () => {
     }
   };
 
+  const handleCreateList = async (listName, folderId) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await createList(listName, selectedFolder.folderId, token);
+      if (!response.error) {
+        notifySuccess(`${listName} Lista creada`);
+        await getFoldersAndLists();
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      console.error("Error al crear la lista:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getFoldersAndLists();
   }, []);
@@ -103,9 +126,10 @@ export const useFolders = () => {
     folders,
     lists,
     selectedFolder,
-    onDeleteClick,
+    selectFolder,
     handleDeleteFolder,
     handleCreateFolder,
+    handleCreateList,
     isLoading,
   };
 };

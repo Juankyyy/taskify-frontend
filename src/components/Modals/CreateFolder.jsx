@@ -1,33 +1,50 @@
 import { Folder } from "lucide-react";
 import { useModalCreate } from "../../hooks/useModalCreate";
+import { ClipboardList } from "lucide-react";
 
-export const CreateFolder = ({ handleCreateFolder, isLoading }) => {
-  const initialForm = {
-    folderName: "",
-  };
-
-  const { folderName, onInputChange, onSubmit } = useModalCreate(
+export const CreateFolder = ({
+  handleCreate,
+  isLoading,
+  initialForm,
+  type = "folder",
+}) => {
+  const { formState, onInputChange, onSubmit } = useModalCreate(
     initialForm,
-    handleCreateFolder
+    handleCreate,
+    type
   );
 
+  const isFolder = type === "folder";
+
+  const Icon = isFolder ? (
+    <Folder className="w-icon h-icon" />
+  ) : (
+    <ClipboardList className="w-icon h-icon" />
+  );
+  
+  const modalId = isFolder ? "create-folder-modal" : "create-list-modal";
+  const title = isFolder ? "Nueva carpeta" : "Nueva lista";
+  const inputName = isFolder ? "folderName" : "title";
+  const value = isFolder ? formState.folderName : formState.title;
+  const placeholder = isFolder ? "Nombre de la carpeta" : "Nombre de la lista";
+
   return (
-    <dialog id="create-folder-modal" className="modal">
+    <dialog id={modalId} className="modal">
       <div className="modal-box md:w-96">
-        <h3 className="font-bold text-lg">Nueva carpeta</h3>
+        <h3 className="font-bold text-lg">{title}</h3>
         <form className="mt-4" onSubmit={onSubmit}>
           <label className="input w-full">
-            <Folder className="w-icon h-icon" />
+            {Icon}
             <input
-              name="folderName"
-              value={folderName}
+              name={inputName}
+              value={value}
               required
               minLength="3"
               maxLength="30"
               title="Mínimo 3 caracteres, máximo 30"
               type="text"
               className="grow"
-              placeholder="Nombre de la carpeta"
+              placeholder={placeholder}
               onChange={onInputChange}
             />
           </label>
