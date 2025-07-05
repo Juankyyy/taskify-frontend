@@ -7,6 +7,7 @@ export const CreateFolder = ({
   isLoading,
   initialForm,
   type = "folder",
+  selectedFolderTitle = null,
 }) => {
   const { formState, onInputChange, onSubmit } = useModalCreate(
     initialForm,
@@ -16,12 +17,12 @@ export const CreateFolder = ({
 
   const isFolder = type === "folder";
 
-  const Icon = isFolder ? (
-    <Folder className="w-icon h-icon" />
+  const icon = isFolder ? (
+    <Folder className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
   ) : (
-    <ClipboardList className="w-icon h-icon" />
+    <ClipboardList className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
   );
-  
+
   const modalId = isFolder ? "create-folder-modal" : "create-list-modal";
   const title = isFolder ? "Nueva carpeta" : "Nueva lista";
   const inputName = isFolder ? "folderName" : "title";
@@ -31,10 +32,18 @@ export const CreateFolder = ({
   return (
     <dialog id={modalId} className="modal">
       <div className="modal-box md:w-96">
+        <div className="flex gap-2 items-center">
+          {!isFolder && (
+            <Folder className="w-4 h-4 stroke-gray-500 [html[data-theme=dark]_&]:stroke-gray-400" />
+          )}
+          <p className="text-sm text-gray-500 [html[data-theme=dark]_&]:text-gray-400">
+            {!isFolder && selectedFolderTitle}
+          </p>
+        </div>
         <h3 className="font-bold text-lg">{title}</h3>
         <form className="mt-4" onSubmit={onSubmit}>
           <label className="input w-full">
-            {Icon}
+            {icon}
             <input
               name={inputName}
               value={value}

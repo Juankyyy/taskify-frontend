@@ -7,6 +7,7 @@ export const FolderActions = ({
   title,
   folderId,
   selectFolder,
+  selectedFolderTitle,
   handleCreateList,
 }) => {
   const initialForm = {
@@ -27,7 +28,10 @@ export const FolderActions = ({
   return (
     <div className="flex justify-center items-center gap-2 z-20 overflow-visible h-min mt-[2px]">
       <Tooltip title={"Nueva lista"}>
-        <Plus onClick={handleCreateClick} className="w-7 h-7 p-1 stroke-3 stroke-slate-400 cursor-pointer rounded-full transition-colors hover:bg-green-600 hover:stroke-white hover:animate-pop hover:animate-duration-500" />
+        <Plus
+          onClick={handleCreateClick}
+          className="w-7 h-7 p-1 stroke-3 stroke-slate-400 cursor-pointer rounded-full transition-colors hover:bg-green-600 hover:stroke-white hover:animate-pop hover:animate-duration-500"
+        />
       </Tooltip>
 
       <Tooltip title={"Eliminar lista"}>
@@ -38,6 +42,7 @@ export const FolderActions = ({
       </Tooltip>
 
       <CreateFolder
+        selectedFolderTitle={selectedFolderTitle}
         type="list"
         handleCreate={handleCreateList}
         initialForm={initialForm}

@@ -95,7 +95,7 @@ export const useFolders = () => {
     }
   };
 
-  const handleCreateList = async (listName, folderId) => {
+  const handleCreateList = async (listName) => {
     try {
       if (!token) {
         console.error("Token no encontrado");

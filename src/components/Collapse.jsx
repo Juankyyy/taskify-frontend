@@ -1,9 +1,16 @@
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
 
-export const Collapse = ({ title, folderId, children, selectFolder, handleCreateList }) => {
+export const Collapse = ({
+  title,
+  folderId,
+  children,
+  selectFolder,
+  selectedFolderTitle,
+  handleCreateList,
+}) => {
   return (
-    <div className="flex justify-between mb-1 bg-base-100 px-2 rounded-lg">
+    <div className="flex justify-between mb-1 bg-base-100 px-2 rounded-lg, selectedFolderTitle">
       <div className="collapse group w-3/4!">
         <input className="p-0" type="checkbox" />
         <div className="collapse-title flex items-center justify-between p-0">
@@ -22,6 +29,7 @@ export const Collapse = ({ title, folderId, children, selectFolder, handleCreate
         folderId={folderId}
         selectFolder={selectFolder}
         handleCreateList={handleCreateList}
+        selectedFolderTitle={selectedFolderTitle}
       />
     </div>
   );

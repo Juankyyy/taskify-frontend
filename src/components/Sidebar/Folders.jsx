@@ -49,6 +49,7 @@ export const Folders = () => {
             folderId={folder._id}
             selectFolder={selectFolder}
             handleCreateList={handleCreateList}
+            selectedFolderTitle={selectedFolder.title}
           >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list, index) => (
