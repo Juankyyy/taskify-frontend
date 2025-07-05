@@ -9,6 +9,7 @@ import {
 } from "../services/folder";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { Folder } from "lucide-react";
 
 export const useFolders = () => {
   const [folders, setFolders] = useState([]);
@@ -17,7 +18,11 @@ export const useFolders = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const notifyError = (message) => toast.error(message);
-  const notifySuccess = (message) => toast.success(message);
+  const notifySuccess = (message) =>
+    toast.success(message, {
+      duration: 3000,
+      style: { width: "fit-content", maxWidth: "800px" },
+    });
 
   const [selectedFolder, setSelectedFolder] = useState({});
 
@@ -60,7 +65,11 @@ export const useFolders = () => {
 
       const response = await deleteFolder(selectedFolder.folderId, token);
       if (response.ok) {
-        notifySuccess(`${selectedFolder.title} Carpeta eliminada`);
+        notifySuccess(
+          <span>
+            Carpeta<strong> {selectedFolder.title} </strong>eliminada
+          </span>
+        );
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
@@ -83,7 +92,11 @@ export const useFolders = () => {
 
       const response = await createFolder(folderName, token);
       if (!response.error) {
-        notifySuccess(`${folderName} Carpeta creada`);
+        notifySuccess(
+          <span>
+            Carpeta<strong> {folderName} </strong>creada
+          </span>
+        );
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
@@ -104,9 +117,21 @@ export const useFolders = () => {
 
       setIsLoading(true);
 
-      const response = await createList(listName, selectedFolder.folderId, token);
+      const response = await createList(
+        listName,
+        selectedFolder.folderId,
+        token
+      );
       if (!response.error) {
-        notifySuccess(`${listName} lista creada en ${selectedFolder.title}`);
+        notifySuccess(
+          <span className="flex gap-2 items-center">
+            Lista<strong> {listName} </strong>creada en
+            <div className="flex gap-1 items-center">
+              <Folder className="w-4 h-4 stroke-gray-600" />
+              <strong>{selectedFolder.title}</strong>
+            </div>
+          </span>
+        );
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
