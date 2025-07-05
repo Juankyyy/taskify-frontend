@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useModalCreate = (initialForm, createFunction = null) => {
+export const useModalCreate = (initialForm, createFunction, type = "folder") => {
   const [formState, setFormState] = useState(initialForm);
 
   const onInputChange = (e) => {
@@ -10,8 +10,8 @@ export const useModalCreate = (initialForm, createFunction = null) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    await createFunction(formState.folderName);
+    console.log(formState)
+    {type === "folder" ? await createFunction(formState.folderName) : await createFunction(formState.title, formState.folderId)}
   };
 
   return {

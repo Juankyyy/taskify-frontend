@@ -95,6 +95,33 @@ export const createFolder = async (folderName, token) => {
   }
 };
 
+export const createList = async (listName, folderId, token) => {
+  try {
+    const response = await fetch(`${LISTS_URL}/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: listName,
+        folderId: folderId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    }
+
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const folder = {
   getFolders,
   getLists,
