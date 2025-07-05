@@ -106,7 +106,7 @@ export const useFolders = () => {
 
       const response = await createList(listName, selectedFolder.folderId, token);
       if (!response.error) {
-        notifySuccess(`${listName} Lista creada`);
+        notifySuccess(`${listName} lista creada en ${selectedFolder.title}`);
         await getFoldersAndLists();
       } else {
         notifyError(response.message);
