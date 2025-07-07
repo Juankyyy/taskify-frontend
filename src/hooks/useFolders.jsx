@@ -143,6 +143,10 @@ export const useFolders = () => {
     }
   };
 
+  const selectedList= (listId) =>{
+    localStorage.setItem("selectedList", listId);
+  }
+
   useEffect(() => {
     getFoldersAndLists();
   }, []);

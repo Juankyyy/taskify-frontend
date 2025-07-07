@@ -21,6 +21,8 @@ export const Folders = () => {
     folderName: "",
   };
 
+  
+
   if (isLoading) return <p>Cargando carpetas...</p>;
 
   return (
@@ -61,7 +63,7 @@ export const Folders = () => {
                   ></div>
                   <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
-                  <p className="px-2 w-min cursor-pointer">{list.title}</p>
+                  <p className="px-2 w-min cursor-pointer" onClick={() => selectedList(list._id)}>{list.title}</p>
                 </div>
               ))
             ) : (
