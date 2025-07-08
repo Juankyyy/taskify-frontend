@@ -35,6 +35,7 @@ export const Task = () => {
       {tasks.length === 0 && (
         <p className="text-center text-gray-500 py-2">No hay tareas</p>
       )}
+      <CreateTaskButton />
     </div>
   );
 };
