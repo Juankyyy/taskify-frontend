@@ -1,4 +1,4 @@
-const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
+const PREFIX_API = "https://localhost:5000/api";
 const FOLDERS_URL = `${PREFIX_API}/folders`;
 const LISTS_URL = `${PREFIX_API}/lists`;
 
