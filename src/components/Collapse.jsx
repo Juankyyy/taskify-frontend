@@ -16,7 +16,7 @@ export const Collapse = ({
         <div className="collapse-title flex items-center justify-between p-0">
           <div className="flex items-center">
             <ChevronDown className="w-icon h-icon stroke-3 mr-1 transform duration-300 group-has-[:checked]:rotate-180 " />
-            <p className="font-medium">{title}</p>
+            <p className="font-medium truncate max-w-[153px]">{title}</p>
           </div>
         </div>
         <div className="collapse-content pl-[35px] flex flex-col gap-1">

@@ -65,8 +65,9 @@ export const Folders = () => {
                   <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
                   <p
-                    className="px-2 w-min cursor-pointer"
-                    onClick={() => updateSelectedList(list._id)}
+                    title={list.title}
+                    className="px-2 w-min cursor-pointer truncate max-w-[153px]"
+                    onClick={() => updateSelectedList(list)}
                   >
                     {list.title}
                   </p>

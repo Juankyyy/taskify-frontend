@@ -10,8 +10,8 @@ export const TasksProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [selectListId, setSelectListId] = useState(
-    localStorage.getItem("selectedList")
+  const [selectedList, setSelectedList] = useState(
+    JSON.parse(sessionStorage.getItem("selectedList"))
   );
 
   const getTasksByList = async () => {
@@ -23,9 +23,7 @@ export const TasksProvider = ({ children }) => {
 
       setIsLoading(true);
 
-      console.log(selectListId);
-      const taskData = await getTasks(selectListId, token);
-      console.log(selectListId);
+      const taskData = await getTasks(selectedList._id, token);
       setTasks(taskData);
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
@@ -34,22 +32,25 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const updateSelectedList = (listId) => {
-    setSelectListId(listId);
-    console.log(listId)
-    localStorage.setItem("selectedList", listId);
+  const updateSelectedList = (list) => {
+    setSelectedList(list);
+    sessionStorage.setItem("selectedList", JSON.stringify(list));
   };
 
   useEffect(() => {
-    getTasksByList();
-  }, [selectListId]);
+    if (selectedList) {
+      getTasksByList();
+    }
+  }, [selectedList]);
 
   const value = {
     tasks,
     isLoading,
-    selectListId,
+    selectedList,
     updateSelectedList,
   };
 
-  return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
+  return (
+    <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
+  );
 };

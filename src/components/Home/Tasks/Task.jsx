@@ -3,11 +3,11 @@ import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 
 export const Task = () => {
-  const { tasks, selectListId } = useTasks();
+  const { tasks, selectedList } = useTasks();
 
   return (
     <>
-      {selectListId &&
+      {selectedList &&
         tasks.map((task) => (
           <div key={task._id}>
             <div className="flex items-center justify-between gap-3 p-3">
