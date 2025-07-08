@@ -19,8 +19,8 @@ export const Task = () => {
                 </h1>
               </div>
               <div className="flex gap-4 items-center">
-                <div className="badge badge-soft badge-outline badge-info">
-                  <span className="indicator-item status status-info"></span>
+                <div className={`badge badge-soft badge-outline ${task.priority == "low" && "badge-info"} ${task.priority == "medium" && "badge-warning"} ${task.priority == "high" && "badge-error"}`}>
+                  <span className={`indicator-item status ${task.priority == "low" && "status-info"} ${task.priority == "medium" && "status-warning"} ${task.priority == "high" && "status-error"}`}></span>
                   {task.priority}
                 </div>
                 <ChevronDown className="w-icon h-icon" />

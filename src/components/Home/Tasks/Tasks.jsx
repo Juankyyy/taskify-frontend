@@ -2,7 +2,6 @@ import { Folder } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { Task } from "./Task";
 import { ClipboardList } from "lucide-react";
-import { Plus } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
 
