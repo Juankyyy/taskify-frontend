@@ -1,4 +1,4 @@
-const PREFIX_API = " http://localhost:5000/api";
+const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 const TASKS_URL = `${PREFIX_API}/tasks`;
 
 export const getTasks = async (listId, token) => {
