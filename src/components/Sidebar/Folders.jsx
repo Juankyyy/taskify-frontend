@@ -4,6 +4,7 @@ import { Collapse } from "../Collapse";
 import { useFolders } from "../../hooks/useFolders";
 import { DeleteFolder } from "../Modals/DeleteFolder";
 import { CreateFolder } from "../Modals/CreateFolder";
+import { useTasks } from "../../hooks/useTasks";
 
 export const Folders = () => {
   const {
@@ -20,6 +21,8 @@ export const Folders = () => {
   const initialForm = {
     folderName: "",
   };
+
+  const { updateSelectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -61,7 +64,12 @@ export const Folders = () => {
                   ></div>
                   <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
-                  <p className="px-2 w-min cursor-pointer">{list.title}</p>
+                  <p
+                    className="px-2 w-min cursor-pointer"
+                    onClick={() => updateSelectedList(list._id)}
+                  >
+                    {list.title}
+                  </p>
                 </div>
               ))
             ) : (
