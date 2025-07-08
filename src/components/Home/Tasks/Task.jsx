@@ -1,12 +1,13 @@
 import { ChevronDown } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
+import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
   const { tasks, selectedList } = useTasks();
 
   return (
-    <>
+    <div className="flex flex-col gap-3">
       {selectedList &&
         tasks.map((task) => (
           <div key={task._id}>
@@ -27,13 +28,13 @@ export const Task = () => {
               </div>
             </div>
             <div className="flex justify-center py-2">
-              <div className="w-[95%] border-b border-gray-300 [html[data-theme=dark]_&]:border-gray-700 border-dashed"></div>
+              <div className="w-[95%] border-b border-gray-300 [html[data-theme=dark]_&]:border-gray-700"></div>
             </div>
           </div>
         ))}
       {tasks.length === 0 && (
         <p className="text-center text-gray-500 py-2">No hay tareas</p>
       )}
-    </>
+    </div>
   );
 };
