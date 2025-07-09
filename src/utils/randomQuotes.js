@@ -6,7 +6,7 @@ export const randomQuotes = () => {
     "Un paso a la vez… ¿cuál es el primero? 👣",
     "¿Qué tarea hará tu día más ligero? 🌤️",
     "¿Qué tarea te gustaría hacer primero? 📝",
-    "Hoy es un buen día para avanzar 🚀",
+    "Hoy es un buen día para avanzar. 🚀",
     "¡Hoy es un gran día para ser productivo! 💪",
     "¡Hora de organizar tu día! 🗂️",
     "¡Tú puedes con todo lo que viene! 🔥",
