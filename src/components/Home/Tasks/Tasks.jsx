@@ -15,14 +15,14 @@ export const Tasks = () => {
       {selectedList && (
         <section className="bg-base-200 p-5 rounded-xl w-full h-full">
           <div className="flex justify-between items-center">
-            <div className="breadcrumbs text-sm text-gray-500">
+            <div className="breadcrumbs text-sm text-gray-400">
               <ul>
                 <li className="gap-1">
-                  <Folder className="w-icon h-icon stroke-gray-500 cursor-default!" />
+                  <Folder className="w-icon h-icon stroke-gray-400 cursor-default!" />
                   Carpeta
                 </li>
                 <li className="gap-1 before:opacity-100!">
-                  <ClipboardList className="w-icon h-icon stroke-gray-500 cursor-default!" />
+                  <ClipboardList className="w-icon h-icon stroke-gray-400 cursor-default!" />
                   {selectedList.title}
                 </li>
               </ul>
