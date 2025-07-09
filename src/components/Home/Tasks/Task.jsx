@@ -1,29 +1,46 @@
-import { ChevronDown } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
-  const { tasks, selectedList } = useTasks();
+  const { tasks, selectedList, updateSelectedTask } = useTasks();
 
   return (
     <div className="flex flex-col gap-3">
       {selectedList &&
         tasks.map((task) => (
           <div key={task._id}>
-            <div className="flex items-center justify-between gap-3 p-3">
+            <div
+              onClick={() => updateSelectedTask(task)}
+              className="flex items-center justify-between gap-3 p-3 hover:bg-base-100 rounded-lg cursor-pointer"
+            >
               <div className="flex items-center gap-3 justify-center group">
-                <input type="checkbox" className="checkbox checkbox-info" />
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-info cursor-default"
+                  onClick={(e) => e.stopPropagation()}
+                />
                 <h1 className="group-has-[:checked]:line-through">
                   {task.title}
                 </h1>
               </div>
               <div className="flex gap-4 items-center">
-                <div className={`badge badge-soft badge-outline ${task.priority == "low" && "badge-info"} ${task.priority == "medium" && "badge-warning"} ${task.priority == "high" && "badge-error"}`}>
-                  <span className={`indicator-item status ${task.priority == "low" && "status-info"} ${task.priority == "medium" && "status-warning"} ${task.priority == "high" && "status-error"}`}></span>
+                <div
+                  className={`badge badge-soft badge-outline ${
+                    task.priority == "low" && "badge-info"
+                  } ${task.priority == "medium" && "badge-warning"} ${
+                    task.priority == "high" && "badge-error"
+                  }`}
+                >
+                  <span
+                    className={`indicator-item status ${
+                      task.priority == "low" && "status-info"
+                    } ${task.priority == "medium" && "status-warning"} ${
+                      task.priority == "high" && "status-error"
+                    }`}
+                  ></span>
                   {task.priority}
                 </div>
-                <ChevronDown className="w-icon h-icon" />
                 <Trash2 className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600" />
               </div>
             </div>

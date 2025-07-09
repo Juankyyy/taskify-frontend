@@ -13,6 +13,7 @@ export const TasksProvider = ({ children }) => {
   const [selectedList, setSelectedList] = useState(
     JSON.parse(sessionStorage.getItem("selectedList"))
   );
+  const [selectedTask, setSelectedTask] = useState({});
 
   const getTasksByList = async () => {
     try {
@@ -37,6 +38,11 @@ export const TasksProvider = ({ children }) => {
     sessionStorage.setItem("selectedList", JSON.stringify(list));
   };
 
+  const updateSelectedTask = (task) => {
+    setSelectedTask(task);
+    document.getElementById("task-info-modal").showModal()
+  };
+
   useEffect(() => {
     if (selectedList) {
       getTasksByList();
@@ -47,6 +53,8 @@ export const TasksProvider = ({ children }) => {
     tasks,
     isLoading,
     selectedList,
+    selectedTask,
+    updateSelectedTask,
     updateSelectedList,
   };
 

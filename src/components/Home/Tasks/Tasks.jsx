@@ -4,6 +4,7 @@ import { Task } from "./Task";
 import { ClipboardList } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
+import { TaskInfo } from "../../Modals/TaskInfo";
 
 export const Tasks = () => {
   const { selectedList } = useTasks();
@@ -15,7 +16,7 @@ export const Tasks = () => {
           <ul>
             <li className="gap-1">
               <Folder className="w-icon h-icon stroke-gray-500 cursor-default!" />
-              Home
+              Carpeta
             </li>
             <li className="gap-1 before:opacity-100!">
               <ClipboardList className="w-icon h-icon stroke-gray-500 cursor-default!" />
@@ -33,14 +34,16 @@ export const Tasks = () => {
         </div>
       </div>
 
-      <p className="text-gray-400">{selectedList.description}</p>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col mb-8">
         <h1 className="font-bold text-3xl">Tareas</h1>
+        <p className="text-gray-400">{selectedList.description}</p>
       </div>
 
       <div>
         <Task />
       </div>
+
+      <TaskInfo />
     </section>
   );
 };
