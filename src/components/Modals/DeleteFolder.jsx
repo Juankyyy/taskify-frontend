@@ -4,14 +4,14 @@ export const DeleteFolder = ({ title, handleDeleteFolder }) => {
       <div className="modal-box md:min-w-[550px] md:max-w-2xl">
         <h3 className="font-bold text-lg">
           ¿Eliminar carpeta{" "}
-          <span className="text-error animate-pulse truncate inline-block align-bottom max-w-[200px]">
+          <span className="text-error animate-pulse truncate inline-block align-bottom max-w-[200px]" title={title}>
             {title}
           </span>
           ?
         </h3>
         <p className="py-4">
           ¿Estás seguro de que deseas eliminar la carpeta{" "}
-          <span className="font-bold truncate inline-block align-bottom max-w-[200px]">
+          <span className="font-bold truncate inline-block align-bottom max-w-[200px]" title={title}>
             {title}
           </span>
           ?

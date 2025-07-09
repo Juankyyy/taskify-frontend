@@ -12,7 +12,7 @@ export const getTasks = async (listId, token) => {
     const data = await response.json();
 
     if (!response.ok) {
-      return { ok: false, message: "Error al obtener la tarea" };
+      return { error: true, message: "Error al obtener la tarea" };
     } else {
       return data;
     }
@@ -22,6 +22,29 @@ export const getTasks = async (listId, token) => {
   }
 };
 
+export const completeTask = async (taskId, token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/toggle/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al completar la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const tasks = {
   getTasks,
+  completeTask,
 };

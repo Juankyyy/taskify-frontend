@@ -2,17 +2,23 @@ import { TasksContext } from "./TasksContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getTasks } from "../../services/task";
+import { completeTask, getTasks } from "../../services/task";
+import toast from "react-hot-toast";
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // const notifyError = (message) => toast.error(message);
+  const notifySuccess = (message) => toast.success(message);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [selectListId, setSelectListId] = useState(
-    localStorage.getItem("selectedList")
+  const [selectedList, setSelectedList] = useState(
+    JSON.parse(sessionStorage.getItem("selectedList"))
   );
+
+  const [selectedTask, setSelectedTask] = useState({});
 
   const getTasksByList = async () => {
     try {
@@ -23,10 +29,10 @@ export const TasksProvider = ({ children }) => {
 
       setIsLoading(true);
 
-      console.log(selectListId);
-      const taskData = await getTasks(selectListId, token);
-      console.log(selectListId);
-      setTasks(taskData);
+      const taskData = await getTasks(selectedList._id, token);
+      if (!taskData.error) {
+        setTasks(taskData);
+      }
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
     } finally {
@@ -34,22 +40,54 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const updateSelectedList = (listId) => {
-    setSelectListId(listId);
-    console.log(listId)
-    localStorage.setItem("selectedList", listId);
+  const completeTaskbyId = async (taskId) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const taskData = await completeTask(taskId, token);
+      if (!taskData.error) {
+        notifySuccess(taskData);
+        getTasksByList();
+      }
+    } catch (err) {
+      console.error("Error al completar la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateSelectedList = (list) => {
+    setSelectedList(list);
+    sessionStorage.setItem("selectedList", JSON.stringify(list));
+  };
+
+  const updateSelectedTask = (task) => {
+    setSelectedTask(task);
+    document.getElementById("task-info-modal").showModal();
   };
 
   useEffect(() => {
-    getTasksByList();
-  }, [selectListId]);
+    if (selectedList) {
+      getTasksByList();
+    }
+  }, [selectedList]);
 
   const value = {
     tasks,
     isLoading,
-    selectListId,
+    selectedList,
+    selectedTask,
+    completeTaskbyId,
+    updateSelectedTask,
     updateSelectedList,
   };
 
-  return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
+  return (
+    <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
+  );
 };
