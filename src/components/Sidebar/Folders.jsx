@@ -22,7 +22,7 @@ export const Folders = () => {
     folderName: "",
   };
 
-  const { updateSelectedList } = useTasks();
+  const { updateSelectedList, selectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -45,6 +45,10 @@ export const Folders = () => {
           (list) => list.folder === folder._id
         );
 
+        const isSelectedListInFolder =
+          selectedList &&
+          listsInFolder.some((list) => list._id === selectedList._id);
+
         return (
           <Collapse
             key={folder._id}
@@ -53,6 +57,7 @@ export const Folders = () => {
             selectFolder={selectFolder}
             handleCreateList={handleCreateList}
             selectedFolderTitle={selectedFolder.title}
+            defaultOpen={isSelectedListInFolder}
           >
             {listsInFolder.length > 0 ? (
               listsInFolder.map((list, index) => (
@@ -66,7 +71,11 @@ export const Folders = () => {
 
                   <p
                     title={list.title}
-                    className="px-2 w-min cursor-pointer truncate max-w-[153px]"
+                    className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-all ${
+                      selectedList && selectedList._id === list._id
+                        ? "font-bold bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
+                        : ""
+                    }`}
                     onClick={() => updateSelectedList(list)}
                   >
                     {list.title}
