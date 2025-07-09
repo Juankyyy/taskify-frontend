@@ -71,6 +71,11 @@ export const TasksProvider = ({ children }) => {
     document.getElementById("task-info-modal").showModal();
   };
 
+  const unSelectList = () => {
+    setSelectedList(null);
+    sessionStorage.removeItem("selectedList");
+  };
+
   useEffect(() => {
     if (selectedList) {
       getTasksByList();
@@ -82,6 +87,7 @@ export const TasksProvider = ({ children }) => {
     isLoading,
     selectedList,
     selectedTask,
+    unSelectList,
     completeTaskbyId,
     updateSelectedTask,
     updateSelectedList,
