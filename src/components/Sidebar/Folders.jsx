@@ -22,7 +22,7 @@ export const Folders = () => {
     folderName: "",
   };
 
-  const { updateSelectedList } = useTasks();
+  const { updateSelectedList, selectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -66,7 +66,11 @@ export const Folders = () => {
 
                   <p
                     title={list.title}
-                    className="px-2 w-min cursor-pointer truncate max-w-[153px]"
+                    className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-all ${
+                      selectedList && selectedList._id === list._id
+                        ? "font-bold bg-gray-300 rounded-md"
+                        : ""
+                    }`}
                     onClick={() => updateSelectedList(list)}
                   >
                     {list.title}
