@@ -3,7 +3,14 @@ import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
-  const { tasks, selectedList, updateSelectedTask } = useTasks();
+  const { tasks, selectedList, completeTaskbyId, updateSelectedTask } =
+    useTasks();
+
+  const handleCompleteTask = (e, taskId) => {
+    e.stopPropagation();
+
+    completeTaskbyId(taskId);
+  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -17,8 +24,10 @@ export const Task = () => {
               <div className="flex items-center gap-3 justify-center group">
                 <input
                   type="checkbox"
+                  checked={task.completed}
                   className="checkbox checkbox-info cursor-default"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => handleCompleteTask(e, task._id)}
+                  onChange={() => {}}
                 />
                 <h1 className="group-has-[:checked]:line-through">
                   {task.title}
