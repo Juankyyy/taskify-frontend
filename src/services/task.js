@@ -12,7 +12,7 @@ export const getTasks = async (listId, token) => {
     const data = await response.json();
 
     if (!response.ok) {
-      return { error: true, message: "Error al obtener la tarea" };
+      return { error: true, message: "Error al obtener las tareas" };
     } else {
       return data;
     }

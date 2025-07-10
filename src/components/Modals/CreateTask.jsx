@@ -51,9 +51,9 @@ export const CreateTask = () => {
 
           <select defaultValue="Prioridad" className="select w-full">
             <option disabled={true}>Prioridad</option>
-            <option value="High">Alta</option>
-            <option value="Medium">Media</option>
-            <option value="Low">Baja</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
           </select>
 
           <div className="flex justify-end mt-4">

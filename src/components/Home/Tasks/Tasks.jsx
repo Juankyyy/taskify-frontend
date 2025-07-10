@@ -8,7 +8,7 @@ import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
 
 export const Tasks = () => {
-  const { selectedList } = useTasks();
+  const { selectedList, selectedTask } = useTasks();
 
   return (
     <>
@@ -46,7 +46,7 @@ export const Tasks = () => {
             <Task />
           </div>
 
-          <TaskInfo />
+          {selectedTask && <TaskInfo />}
           <CreateTask />
         </section>
       )}

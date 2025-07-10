@@ -33,6 +33,12 @@ export const TasksProvider = ({ children }) => {
       if (!taskData.error) {
         setTasks(taskData);
       }
+      if (selectedTask) {
+        const TaskUpdated = taskData.find(
+          (task) => task._id == selectedTask._id
+        );
+        return TaskUpdated;
+      }
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
     } finally {
@@ -52,7 +58,13 @@ export const TasksProvider = ({ children }) => {
       const taskData = await completeTask(taskId, token);
       if (!taskData.error) {
         notifySuccess(taskData);
-        getTasksByList();
+
+        if (selectedTask) {
+          const TaskUpdated = await getTasksByList();
+          setSelectedTask(TaskUpdated);
+        } else {
+          await getTasksByList();
+        }
       }
     } catch (err) {
       console.error("Error al completar la tarea:", err.message);
