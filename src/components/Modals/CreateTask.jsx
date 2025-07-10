@@ -17,7 +17,7 @@ export const CreateTask = () => {
         </div>
         <h3 className="font-bold text-lg">Nueva tarea</h3>
         <form className="mt-4 flex flex-col gap-3">
-          <label className="input w-full">
+          <label className="input w-full transition-all focus-within:outline-0 focus-within:border-black [html[data-theme=dark]_&]:focus-within:border-white focus-within:rounded-md">
             <BookCheck className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
             <input
               // name={inputName}
@@ -33,7 +33,7 @@ export const CreateTask = () => {
             />
           </label>
 
-          <label className="input w-full">
+          <label className="input w-full transition-all focus-within:outline-0 focus-within:border-black [html[data-theme=dark]_&]:focus-within:border-white focus-within:rounded-md">
             <Text className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
             <input
               // name={inputName}
@@ -49,7 +49,7 @@ export const CreateTask = () => {
             />
           </label>
 
-          <select defaultValue="Prioridad" className="select w-full">
+          <select defaultValue="Prioridad" className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md">
             <option disabled={true}>Prioridad</option>
             <option value="high">Alta</option>
             <option value="medium">Media</option>

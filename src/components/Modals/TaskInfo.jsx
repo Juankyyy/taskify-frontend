@@ -18,7 +18,7 @@ export const TaskInfo = () => {
             <input
               type="text"
               placeholder="Título de la tarea"
-              className="input input-ghost font-bold text-2xl group-has-[:checked]:line-through"
+              className="input input-ghost rounded-none font-bold text-2xl group-has-[:checked]:line-through p-0 border-b focus:border-b-black [html[data-theme=dark]_&]:focus:border-b-white focus:outline-0"
               value={selectedTask.title}
             />
           </div>
@@ -30,13 +30,13 @@ export const TaskInfo = () => {
             <p>Descripción</p>
           </div>
           <textarea
-            className="textarea"
+            className="textarea transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
             placeholder="Escribe una descripción"
             value={selectedTask.description}
           ></textarea>
         </div>
 
-        <select defaultValue="Prioridad" className="select w-full">
+        <select defaultValue="Prioridad" className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md">
           <option disabled={true}>Prioridad</option>
           <option value="high">Alta</option>
           <option value="medium">Media</option>
