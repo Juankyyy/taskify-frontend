@@ -16,6 +16,7 @@ export const useModalCreate = (initialForm, createFunction, type) => {
     } else if (type === "list") {
       await createFunction(formState.title, formState.folderId);
     } else if (type === "task") {
+      console.log(formState)
       await createFunction(
         formState.title,
         formState.description,
@@ -24,6 +25,8 @@ export const useModalCreate = (initialForm, createFunction, type) => {
         formState.folderId
       );
     }
+    
+    setFormState(initialForm);
   };
 
   return {

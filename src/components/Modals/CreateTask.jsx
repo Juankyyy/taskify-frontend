@@ -3,6 +3,7 @@ import { Text } from "lucide-react";
 import { BookCheck } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { useModalCreate } from "../../hooks/useModalCreate";
+import { useEffect } from "react";
 
 export const CreateTask = () => {
   const { selectedList, selectedFolderId, createTaskbyId, isLoading } =
@@ -12,8 +13,8 @@ export const CreateTask = () => {
     title: "",
     description: "",
     priority: "",
-    listId: selectedList._id,
-    folderId: selectedFolderId,
+    listId: "",
+    folderId: "",
   };
 
   const { formState, onInputChange, onSubmit } = useModalCreate(
@@ -21,6 +22,12 @@ export const CreateTask = () => {
     createTaskbyId,
     "task"
   );
+
+  useEffect(() => {
+    console.log({ listId: selectedList._id, folderId: selectedFolderId });
+    formState.listId = selectedList._id;
+    formState.folderId = selectedFolderId;
+  }, [formState]);
 
   return (
     <dialog id="create-task-modal" className="modal">
@@ -54,7 +61,6 @@ export const CreateTask = () => {
             <input
               name="description"
               value={formState.description}
-              required
               maxLength="99"
               title="Mínimo 3 caracteres, máximo 90"
               type="text"

@@ -1,6 +1,5 @@
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
-import { useTasks } from "../hooks/useTasks";
 import { useState } from "react";
 
 export const Collapse = ({
