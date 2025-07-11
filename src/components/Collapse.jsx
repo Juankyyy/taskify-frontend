@@ -12,13 +12,11 @@ export const Collapse = ({
   handleCreateList,
   defaultOpen = false,
 }) => {
-  const { updateSelectedFolder } = useTasks();
 
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
-  const handleClick = () => {
+  const toggleFolder = () => {
     setIsOpen(!isOpen);
-    updateSelectedFolder(folderId);
   };
 
   return (
@@ -28,7 +26,7 @@ export const Collapse = ({
           className="p-0"
           type="checkbox"
           defaultChecked={defaultOpen}
-          onClick={handleClick}
+          onClick={toggleFolder}
         />
         <div className="collapse-title flex items-center justify-between p-0">
           <div className="flex items-center">

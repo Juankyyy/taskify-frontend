@@ -112,17 +112,10 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const updateSelectedList = (list, folder = null) => {
+  const updateSelectedList = (list, folder) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
 
-    if (folder) {
-      setSelectedFolderId(folder);
-      sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
-    }
-  };
-
-  const updateSelectedFolder = (folder) => {
     setSelectedFolderId(folder);
     sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
   };
@@ -156,7 +149,6 @@ export const TasksProvider = ({ children }) => {
     createTaskbyId,
     updateSelectedTask,
     updateSelectedList,
-    updateSelectedFolder,
   };
 
   return (
