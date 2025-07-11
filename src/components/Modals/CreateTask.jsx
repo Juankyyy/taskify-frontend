@@ -23,11 +23,11 @@ export const CreateTask = () => {
     "task"
   );
 
-  useEffect(() => {
-    console.log({ listId: selectedList._id, folderId: selectedFolderId });
+  console.log(formState);
+  if (formState.listId === "" || formState != selectedList._id) {
     formState.listId = selectedList._id;
     formState.folderId = selectedFolderId;
-  }, [formState]);
+  }
 
   return (
     <dialog id="create-task-modal" className="modal">
