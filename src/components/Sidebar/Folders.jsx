@@ -22,7 +22,7 @@ export const Folders = () => {
     folderName: "",
   };
 
-  const { updateSelectedList, updateSelectedFolder, selectedList } = useTasks();
+  const { updateSelectedList, selectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -40,54 +40,56 @@ export const Folders = () => {
         </Tooltip>
       </div>
 
-      {folders.map((folder) => {
-        const listsInFolder = lists.filter(
-          (list) => list.folder === folder._id
-        );
+      <div className="flex flex-col gap-1.5">
+        {folders.map((folder) => {
+          const listsInFolder = lists.filter(
+            (list) => list.folder === folder._id
+          );
 
-        const isSelectedListInFolder =
-          selectedList &&
-          listsInFolder.some((list) => list._id === selectedList._id);
+          const isSelectedListInFolder =
+            selectedList &&
+            listsInFolder.some((list) => list._id === selectedList._id);
 
-        return (
-          <Collapse
-            key={folder._id}
-            title={folder.name}
-            folderId={folder._id}
-            selectFolder={selectFolder}
-            handleCreateList={handleCreateList}
-            selectedFolderTitle={selectedFolder.title}
-            defaultOpen={isSelectedListInFolder}
-          >
-            {listsInFolder.length > 0 ? (
-              listsInFolder.map((list, index) => (
-                <div key={list._id} className="relative">
-                  <div
-                    className={`absolute -left-2 top-0 bottom-0 w-0.5 bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 ${
-                      index === listsInFolder.length - 1 ? "h-1" : "h-7"
-                    }`}
-                  ></div>
-                  <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
+          return (
+            <Collapse
+              key={folder._id}
+              title={folder.name}
+              folderId={folder._id}
+              selectFolder={selectFolder}
+              handleCreateList={handleCreateList}
+              selectedFolderTitle={selectedFolder.title}
+              defaultOpen={isSelectedListInFolder}
+            >
+              {listsInFolder.length > 0 ? (
+                listsInFolder.map((list, index) => (
+                  <div key={list._id} className="relative">
+                    <div
+                      className={`absolute -left-2 top-0 bottom-0 w-0.5 bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 ${
+                        index === listsInFolder.length - 1 ? "h-1" : "h-7"
+                      }`}
+                    ></div>
+                    <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
-                  <p
-                    title={list.title}
-                    className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-all ${
-                      selectedList && selectedList._id === list._id
-                        ? "font-bold bg-gray-100 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
-                        : ""
-                    }`}
-                    onClick={() => updateSelectedList(list)}
-                  >
-                    {list.title}
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-500 px-2 -ml-4">No hay Listas</p>
-            )}
-          </Collapse>
-        );
-      })}
+                    <p
+                      title={list.title}
+                      className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-all ${
+                        selectedList && selectedList._id === list._id
+                          ? "font-bold bg-gray-100 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
+                          : ""
+                      }`}
+                      onClick={() => updateSelectedList(list)}
+                    >
+                      {list.title}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500 px-2 -ml-4">No hay Listas</p>
+              )}
+            </Collapse>
+          );
+        })}
+      </div>
 
       <DeleteFolder
         title={selectedFolder.title}
