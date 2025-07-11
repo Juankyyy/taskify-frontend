@@ -51,7 +51,12 @@ export const Task = () => {
                     ></span>
                     {task.priority}
                   </div>
-                  <Trash2 className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600" />
+                  <Trash2
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
+                  />
                 </div>
               </div>
               <div className="flex justify-center py-2">

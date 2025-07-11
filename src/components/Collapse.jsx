@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
+import { useState } from "react";
 
 export const Collapse = ({
   title,
@@ -10,10 +11,22 @@ export const Collapse = ({
   handleCreateList,
   defaultOpen = false,
 }) => {
+
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  const toggleFolder = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="flex justify-between mb-1 bg-base-100 px-2 rounded-lg, selectedFolderTitle">
+    <div className={`flex justify-between bg-base-100 hover:border-slate-500 ${isOpen && "border-slate-500!"} border border-transparent px-2 rounded-lg transition-border-color`}>
       <div className="collapse group w-3/4!">
-        <input className="p-0" type="checkbox" defaultChecked={defaultOpen} />
+        <input
+          className="p-0"
+          type="checkbox"
+          defaultChecked={defaultOpen}
+          onClick={toggleFolder}
+        />
         <div className="collapse-title flex items-center justify-between p-0">
           <div className="flex items-center">
             <ChevronDown className="w-icon h-icon stroke-3 mr-1 transform duration-300 group-has-[:checked]:rotate-180 " />

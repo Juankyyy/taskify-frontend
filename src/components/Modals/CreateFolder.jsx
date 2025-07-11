@@ -6,7 +6,7 @@ export const CreateFolder = ({
   handleCreate,
   isLoading,
   initialForm,
-  type = "folder",
+  type,
   selectedFolderTitle = null,
 }) => {
   const { formState, onInputChange, onSubmit } = useModalCreate(
@@ -42,7 +42,7 @@ export const CreateFolder = ({
         </div>
         <h3 className="font-bold text-lg">{title}</h3>
         <form className="mt-4" onSubmit={onSubmit}>
-          <label className="input w-full">
+          <label className="input w-full transition-all focus-within:outline-0 focus-within:border-black [html[data-theme=dark]_&]:focus-within:border-white focus-within:rounded-md">
             {icon}
             <input
               name={inputName}
@@ -52,7 +52,7 @@ export const CreateFolder = ({
               maxLength="30"
               title="Mínimo 3 caracteres, máximo 30"
               type="text"
-              className="grow"
+              className="grow "
               placeholder={placeholder}
               onChange={onInputChange}
             />

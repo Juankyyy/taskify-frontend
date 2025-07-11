@@ -1,24 +1,58 @@
+import { Text } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
+import { BadgeAlert } from "lucide-react";
 
 export const TaskInfo = () => {
-  const { selectedTask } = useTasks();
+  const { selectedTask, completeTaskbyId } = useTasks();
 
   return (
     <dialog id="task-info-modal" className="modal">
-      <div className="modal-box">
+      <form className="modal-box flex flex-col gap-4">
         <div>
           <div className="flex items-center gap-3 group">
             <input
+              checked={selectedTask.completed}
               type="checkbox"
               className="checkbox checkbox-info cursor-default"
-              onClick={(e) => e.stopPropagation()}
+              onClick={() => completeTaskbyId(selectedTask._id)}
             />
-            <h1 className="font-bold text-2xl group-has-[:checked]:line-through">
-              {selectedTask.title}
-            </h1>
+            <input
+              type="text"
+              placeholder="Título de la tarea"
+              className="input input-ghost rounded-none font-bold text-2xl group-has-[:checked]:line-through p-0 border-b focus:border-b-black [html[data-theme=dark]_&]:focus:border-b-white focus:outline-0"
+              value={selectedTask.title}
+            />
           </div>
         </div>
-        <p className="py-4">{selectedTask.description}</p>
+
+        <div className="flex flex-col gap-1">
+          <div className="flex gap-2 items-center">
+            <Text className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
+            <p>Descripción</p>
+          </div>
+          <textarea
+            className="textarea w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
+            placeholder="Escribe una descripción"
+            value={selectedTask.description}
+          ></textarea>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <div className="flex gap-2 items-center">
+            <BadgeAlert className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
+            <p>Prioridad</p>
+          </div>
+          <select
+            value={selectedTask.priority}
+            className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
+          >
+            <option disabled={true}>Prioridad</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
+
         <div
           className={`badge badge-soft badge-outline ${
             selectedTask.priority == "low" && "badge-info"
@@ -35,7 +69,17 @@ export const TaskInfo = () => {
           ></span>
           {selectedTask.priority}
         </div>
-      </div>
+
+        <div className="flex justify-end mt-4">
+          <button type="submit" className="btn btn-info">
+            {/* {isLoading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+              )} */}
+            Guardar
+          </button>
+        </div>
+      </form>
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>

@@ -8,12 +8,12 @@ import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
 
 export const Tasks = () => {
-  const { selectedList } = useTasks();
+  const { selectedList, selectedTask } = useTasks();
 
   return (
     <>
       {selectedList && (
-        <section className="bg-base-200 p-5 rounded-xl w-full h-full">
+        <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto"> 
           <div className="flex justify-between items-center">
             <div className="breadcrumbs text-sm text-gray-400">
               <ul>
@@ -28,11 +28,11 @@ export const Tasks = () => {
               </ul>
             </div>
             <div className="flex gap-2 items-center">
-              <button className="btn btn-info p-1 w-8 h-8">
-                <Pencil className="stroke-white" />
+              <button className="btn btn-info btn-soft p-1 w-8 h-8">
+                <Pencil className="stroke-black [html[data-theme=dark]_&]:stroke-white" />
               </button>
-              <button className="btn btn-error p-1 w-8 h-8">
-                <Trash className="stroke-white" />
+              <button className="btn btn-error btn-soft p-1 w-8 h-8">
+                <Trash className="stroke-black [html[data-theme=dark]_&]:stroke-white" />
               </button>
             </div>
           </div>
@@ -46,7 +46,7 @@ export const Tasks = () => {
             <Task />
           </div>
 
-          <TaskInfo />
+          {selectedTask && <TaskInfo />}
           <CreateTask />
         </section>
       )}
