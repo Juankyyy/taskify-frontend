@@ -112,9 +112,14 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const updateSelectedList = (list) => {
+  const updateSelectedList = (list, folder = null) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
+
+    if (folder) {
+      setSelectedFolderId(folder);
+      sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
+    }
   };
 
   const updateSelectedFolder = (folder) => {
@@ -129,7 +134,9 @@ export const TasksProvider = ({ children }) => {
 
   const unSelectList = () => {
     setSelectedList(null);
+    setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
+    sessionStorage.removeItem("selectedFolder");
   };
 
   useEffect(() => {

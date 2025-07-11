@@ -77,7 +77,7 @@ export const Folders = () => {
                           ? "font-bold bg-gray-100 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
                           : ""
                       }`}
-                      onClick={() => updateSelectedList(list)}
+                      onClick={() => updateSelectedList(list, folder._id)}
                     >
                       {list.title}
                     </p>
