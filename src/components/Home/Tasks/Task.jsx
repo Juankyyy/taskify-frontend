@@ -3,7 +3,7 @@ import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
-  const { tasks, selectedList, completeTaskbyId, updateSelectedTask } =
+  const { tasks, selectedList, completeTaskbyId, archiveTaskbyId, updateSelectedTask } =
     useTasks();
 
   const handleCompleteTask = (e, taskId) => {
@@ -54,13 +54,11 @@ export const Task = () => {
                   <Trash2
                     onClick={(e) => {
                       e.stopPropagation();
+                      archiveTaskbyId(task._id);
                     }}
                     className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
                   />
                 </div>
-              </div>
-              <div className="flex justify-center py-2">
-                <div className="w-[95%] border-b border-gray-300 [html[data-theme=dark]_&]:border-gray-700"></div>
               </div>
             </div>
           ))}

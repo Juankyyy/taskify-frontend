@@ -2,7 +2,12 @@ import { TasksContext } from "./TasksContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { completeTask, getTasks, createTask } from "../../services/task";
+import {
+  completeTask,
+  getTasks,
+  createTask,
+  archiveTask,
+} from "../../services/task";
 import toast from "react-hot-toast";
 
 export const TasksProvider = ({ children }) => {
@@ -102,11 +107,32 @@ export const TasksProvider = ({ children }) => {
       );
       if (!response.error) {
         notifySuccess(response.message);
-        document.getElementById("create-task-modal").close();
         await getTasksByList();
+        document.getElementById("create-task-modal").close();
       }
     } catch (err) {
       console.error("Error al crear la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const archiveTaskbyId = async (taskId) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await archiveTask(taskId, token);
+      if (!response.error) {
+        notifySuccess(response);
+        await getTasksByList();
+      }
+    } catch (err) {
+      console.error("Error al completar la tarea:", err.message);
     } finally {
       setIsLoading(false);
     }
@@ -147,6 +173,7 @@ export const TasksProvider = ({ children }) => {
     unSelectList,
     completeTaskbyId,
     createTaskbyId,
+    archiveTaskbyId,
     updateSelectedTask,
     updateSelectedList,
   };
