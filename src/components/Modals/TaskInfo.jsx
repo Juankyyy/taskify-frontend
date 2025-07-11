@@ -1,5 +1,6 @@
 import { Text } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
+import { BadgeAlert } from "lucide-react";
 
 export const TaskInfo = () => {
   const { selectedTask, completeTaskbyId } = useTasks();
@@ -30,18 +31,27 @@ export const TaskInfo = () => {
             <p>Descripción</p>
           </div>
           <textarea
-            className="textarea transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
+            className="textarea w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
             placeholder="Escribe una descripción"
             value={selectedTask.description}
           ></textarea>
         </div>
 
-        <select defaultValue="Prioridad" className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md">
-          <option disabled={true}>Prioridad</option>
-          <option value="high">Alta</option>
-          <option value="medium">Media</option>
-          <option value="low">Baja</option>
-        </select>
+        <div className="flex flex-col gap-1">
+          <div className="flex gap-2 items-center">
+            <BadgeAlert className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
+            <p>Prioridad</p>
+          </div>
+          <select
+            value={selectedTask.priority}
+            className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
+          >
+            <option disabled={true}>Prioridad</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
 
         <div
           className={`badge badge-soft badge-outline ${

@@ -28,11 +28,11 @@ export const Tasks = () => {
               </ul>
             </div>
             <div className="flex gap-2 items-center">
-              <button className="btn btn-info p-1 w-8 h-8">
-                <Pencil className="stroke-white" />
+              <button className="btn btn-info btn-soft p-1 w-8 h-8">
+                <Pencil className="stroke-black [html[data-theme=dark]_&]:stroke-white" />
               </button>
-              <button className="btn btn-error p-1 w-8 h-8">
-                <Trash className="stroke-white" />
+              <button className="btn btn-error btn-soft p-1 w-8 h-8">
+                <Trash className="stroke-black [html[data-theme=dark]_&]:stroke-white" />
               </button>
             </div>
           </div>

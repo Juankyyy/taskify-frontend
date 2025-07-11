@@ -22,7 +22,7 @@ export const Folders = () => {
     folderName: "",
   };
 
-  const { updateSelectedList, selectedList } = useTasks();
+  const { updateSelectedList, updateSelectedFolder, selectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 
@@ -99,6 +99,7 @@ export const Folders = () => {
         handleCreate={handleCreateFolder}
         isLoading={isLoading}
         initialForm={initialForm}
+        type="folder"
       />
     </div>
   );
