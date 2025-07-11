@@ -8,7 +8,7 @@ export const Home = () => {
 
   return (
     <MainLayout>
-      <main className="flex flex-col items-center justify-between w-full gap-2.5">
+      <main className="flex flex-col items-center justify-between w-full h-[calc(100dvh-20px)] gap-2.5">
         <Greetings />
         <Tasks />
       </main>
