@@ -13,7 +13,7 @@ export const ArchivedTasks = () => {
 
       {isLoading ? (
         <p className="text-center text-gray-500 py-8">
-          Cargando tareas archivadas...
+          Cargando tareas eliminadas...
         </p>
       ) : (
         <div className="flex flex-col gap-3">
