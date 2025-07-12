@@ -1,3 +1,4 @@
+import { BrushCleaning } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
 
@@ -7,7 +8,13 @@ export const ArchivedTasks = () => {
   return (
     <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
-        <h1 className="font-bold text-3xl">Papelera</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-bold text-3xl">Papelera</h1>
+          <button className="btn btn-error btn-outline btn-sm">
+            <BrushCleaning className="w-4 h-4" />
+            Vaciar Papelera
+          </button>
+        </div>
         <p className="text-gray-400">Tareas eliminadas</p>
       </div>
 
