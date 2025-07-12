@@ -153,7 +153,6 @@ export const TasksProvider = ({ children }) => {
       setIsLoading(true);
 
       const response = await getTrash(token);
-      console.log(response);
       if (!response.error) {
         setDeletedTasks(response);
         sessionStorage.setItem("deletedTasks", JSON.stringify(response));
@@ -190,8 +189,8 @@ export const TasksProvider = ({ children }) => {
 
   const onClickTrash = async () => {
     unSelectList();
-    await getTrashTasks();
     navigate("/trash");
+    await getTrashTasks();
   };
 
   useEffect(() => {

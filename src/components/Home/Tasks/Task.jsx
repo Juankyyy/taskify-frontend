@@ -3,8 +3,14 @@ import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
-  const { tasks, selectedList, completeTaskbyId, archiveTaskbyId, updateSelectedTask } =
-    useTasks();
+  const {
+    tasks,
+    selectedList,
+    completeTaskbyId,
+    archiveTaskbyId,
+    updateSelectedTask,
+    isLoading,
+  } = useTasks();
 
   const handleCompleteTask = (e, taskId) => {
     e.stopPropagation();

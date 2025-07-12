@@ -5,14 +5,11 @@ import { Outlet } from "react-router-dom";
 
 
 export const Home = () => {
-  // 🧠 Logic
-
   return (
     <MainLayout>
       <main className="flex flex-col items-center justify-between w-full h-[calc(100dvh-20px)] gap-2.5">
         <Greetings />
         <Outlet />
-        {/* <Tasks /> */}
       </main>
       <Toaster />
     </MainLayout>

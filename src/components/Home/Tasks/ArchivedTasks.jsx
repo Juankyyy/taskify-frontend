@@ -3,7 +3,6 @@ import { ArchiveRestore, Trash2 } from "lucide-react";
 
 export const ArchivedTasks = () => {
   const { deletedTasks, isLoading } = useTasks();
-  console.log(deletedTasks);
 
   return (
     <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto">
