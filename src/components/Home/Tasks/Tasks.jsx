@@ -9,11 +9,10 @@ import { CreateTask } from "../../Modals/CreateTask";
 
 export const Tasks = () => {
   const { selectedList, selectedTask } = useTasks();
-
   return (
     <>
       {selectedList && (
-        <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto"> 
+        <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto">
           <div className="flex justify-between items-center">
             <div className="breadcrumbs text-sm text-gray-400">
               <ul>

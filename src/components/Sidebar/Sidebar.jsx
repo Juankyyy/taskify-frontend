@@ -2,6 +2,7 @@ import { Logo } from "./Logo.jsx";
 import { Folders } from "./Folders.jsx";
 import { Account } from "./Account.jsx";
 import { Theme } from "./Theme.jsx";
+import { Trash } from "./Trash.jsx";
 
 export const Sidebar = () => {
   // 🧠 Logic
@@ -14,6 +15,7 @@ export const Sidebar = () => {
       </div>
 
       <div className="flex flex-col gap-4">
+        <Trash />
         <div className="flex justify-center items-center">
           <Theme />
         </div>

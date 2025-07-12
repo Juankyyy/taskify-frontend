@@ -7,6 +7,7 @@ import {
   getTasks,
   createTask,
   archiveTask,
+  getTrash,
 } from "../../services/task";
 import toast from "react-hot-toast";
 
@@ -28,6 +29,10 @@ export const TasksProvider = ({ children }) => {
   );
 
   const [selectedTask, setSelectedTask] = useState({});
+
+  const [deletedTasks, setDeletedTasks] = useState(
+    JSON.parse(sessionStorage.getItem("deletedTasks"))
+  );
 
   const getTasksByList = async () => {
     try {
@@ -138,12 +143,36 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const getTrashTasks = async () => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await getTrash(token);
+      console.log(response);
+      if (!response.error) {
+        setDeletedTasks(response);
+        sessionStorage.setItem("deletedTasks", JSON.stringify(response));
+      }
+    } catch (err) {
+      console.error("Error al cargar las tareas:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const updateSelectedList = (list, folder) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
 
     setSelectedFolderId(folder);
     sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
+
+    navigate("/tasks");
   };
 
   const updateSelectedTask = (task) => {
@@ -156,6 +185,13 @@ export const TasksProvider = ({ children }) => {
     setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
+    navigate("/");
+  };
+
+  const onClickTrash = async () => {
+    unSelectList();
+    await getTrashTasks();
+    navigate("/trash");
   };
 
   useEffect(() => {
@@ -166,6 +202,7 @@ export const TasksProvider = ({ children }) => {
 
   const value = {
     tasks,
+    deletedTasks,
     isLoading,
     selectedList,
     selectedTask,
@@ -176,6 +213,7 @@ export const TasksProvider = ({ children }) => {
     archiveTaskbyId,
     updateSelectedTask,
     updateSelectedList,
+    onClickTrash,
   };
 
   return (
