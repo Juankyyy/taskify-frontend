@@ -1,42 +1,34 @@
-import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
-import { CreateTaskButton } from "./CreateTaskButton";
+import { ArchiveRestore, Trash2 } from "lucide-react";
 
-export const Task = () => {
-  const {
-    tasks,
-    selectedList,
-    completeTaskbyId,
-    archiveTaskbyId,
-    updateSelectedTask,
-    isLoading,
-  } = useTasks();
-
-  const handleCompleteTask = (e, taskId) => {
-    e.stopPropagation();
-
-    completeTaskbyId(taskId);
-  };
+export const ArchivedTasks = () => {
+  const { deletedTasks, isLoading } = useTasks();
 
   return (
-    <>
-      {selectedList && (
+    <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto">
+      <div className="flex flex-col mb-8">
+        <h1 className="font-bold text-3xl">Papelera</h1>
+        <p className="text-gray-400">Tareas eliminadas</p>
+      </div>
+
+      {isLoading ? (
+        <p className="text-center text-gray-500 py-8">
+          Cargando tareas archivadas...
+        </p>
+      ) : (
         <div className="flex flex-col gap-3">
-          {tasks.map((task) => (
+          {deletedTasks.map((task) => (
             <div key={task._id}>
-              <div
-                onClick={() => updateSelectedTask(task)}
-                className="flex items-center justify-between gap-3 p-3 hover:bg-base-100 rounded-lg cursor-pointer"
-              >
+              <div className="flex items-center justify-between gap-3 p-3 hover:bg-base-100 rounded-lg opacity-75">
                 <div className="flex items-center gap-3 justify-center group">
                   <input
                     type="checkbox"
                     checked={task.completed}
-                    className="checkbox checkbox-info cursor-default"
-                    onClick={(e) => handleCompleteTask(e, task._id)}
+                    className="checkbox checkbox-info cursor-not-allowed"
+                    disabled
                     onChange={() => {}}
                   />
-                  <h1 className="group-has-[:checked]:line-through">
+                  <h1 className="group-has-[:checked]:line-through text-gray-600">
                     {task.title}
                   </h1>
                 </div>
@@ -57,23 +49,20 @@ export const Task = () => {
                     ></span>
                     {task.priority}
                   </div>
-                  <Trash2
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      archiveTaskbyId(task._id);
-                    }}
-                    className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
-                  />
+                  <ArchiveRestore className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
+                  <Trash2 className="w-icon h-icon cursor-pointer hover:stroke-red-600" />
                 </div>
               </div>
             </div>
           ))}
-          {tasks.length === 0 && (
-            <p className="text-center text-gray-500 py-2">No hay tareas</p>
+          {deletedTasks.length === 0 && (
+            <div className="text-center py-12">
+              <Trash2 className="w-12 h-12 mx-auto text-gray-400 mb-4" />
+              <p className="text-gray-500">No hay tareas eliminadas</p>
+            </div>
           )}
-          <CreateTaskButton />
         </div>
       )}
-    </>
+    </section>
   );
 };
