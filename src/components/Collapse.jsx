@@ -11,7 +11,6 @@ export const Collapse = ({
   handleCreateList,
   defaultOpen = false,
 }) => {
-
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const toggleFolder = () => {
@@ -19,7 +18,12 @@ export const Collapse = ({
   };
 
   return (
-    <div className={`flex justify-between bg-base-100 hover:border-slate-500 ${isOpen && "border-slate-500!"} border border-transparent px-2 rounded-lg transition-border-color`}>
+    <div
+      className={`flex justify-between bg-base-200/50 [html[data-theme=light]_&]:bg-base-300 [html[data-theme=dark]_&]:hover:bg-base-200 [html[data-theme=light]_&]:hover:border-slate-500 [html[data-theme=light]_&]:border-slate-300  ${
+        isOpen &&
+        "[html[data-theme=dark]_&]:bg-base-200! [html[data-theme=light]_&]:border-slate-500"
+      } border border-transparent px-2 rounded-lg transition-border-color-bg`}
+    >
       <div className="collapse group w-3/4!">
         <input
           className="p-0"

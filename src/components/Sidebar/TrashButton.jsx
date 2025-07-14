@@ -12,12 +12,15 @@ export const TrashButton = () => {
   return (
     <div
       onClick={onClickTrash}
-      className={`flex items-center cursor-pointer group gap-2 p-2 bg-base-100 [html[data-theme=light]_&]:border-slate-300 border-transparent hover:border-slate-500! border rounded-lg transition-border-color ${
-        isTrashView && "border-slate-500! bg-base-200!"
+      className={`flex items-center cursor-pointer group gap-2 p-2 px-3 bg-base-300/50 hover:bg-base-300 [html[data-theme=light]_&]:border-slate-300 [html[data-theme=light]_&]:hover:border-slate-500 border-transparent border rounded-lg transition-border-color-bg ${
+        isTrashView &&
+        "bg-base-300! [html[data-theme=light]_&]:border-slate-500"
       }`}
     >
       <Trash2 className="w-icon h-icon" />
-      <h1>Papelera</h1>
+      <h1 className={`${isTrashView && "font-bold"} transition-text-weight`}>
+        Papelera
+      </h1>
     </div>
   );
 };

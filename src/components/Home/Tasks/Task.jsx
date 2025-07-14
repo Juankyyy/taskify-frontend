@@ -25,7 +25,7 @@ export const Task = () => {
         <div key={task._id}>
           <div
             onClick={() => updateSelectedTask(task)}
-            className="flex items-center justify-between gap-3 p-3 hover:bg-base-100 rounded-lg cursor-pointer"
+            className="flex items-center justify-between gap-3 p-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
           >
             <div className="flex items-center gap-3 justify-center group">
               <input
@@ -54,7 +54,7 @@ export const Task = () => {
                     task.priority == "high" && "status-error"
                   }`}
                 ></span>
-                {task.priority}
+                <p className="font-medium">{task.priority}</p>
               </div>
               <Trash2
                 onClick={(e) => {
