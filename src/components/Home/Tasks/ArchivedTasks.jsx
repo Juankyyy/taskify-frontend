@@ -10,10 +10,17 @@ export const ArchivedTasks = () => {
       <div className="flex flex-col mb-8">
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-3xl">Papelera</h1>
-          <button onClick={emptyTrashTasks} className="btn btn-error btn-outline btn-sm">
-            <BrushCleaning className="w-4 h-4" />
-            Vaciar Papelera
-          </button>
+          {deletedTasks.length === 0 ? (
+            ""
+          ) : (
+            <button
+              onClick={emptyTrashTasks}
+              className="btn btn-error btn-outline btn-sm"
+            >
+              <BrushCleaning className="w-4 h-4" />
+              Vaciar Papelera
+            </button>
+          )}
         </div>
         <p className="text-gray-400">Tareas eliminadas</p>
       </div>
