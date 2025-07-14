@@ -123,3 +123,25 @@ export const getTrash = async (token) => {
     throw err;
   }
 };
+
+export const emptyTrash = async (token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/empty-trash`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al vaciar la papelera" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};

@@ -8,6 +8,7 @@ import {
   createTask,
   archiveTask,
   getTrash,
+  emptyTrash,
 } from "../../services/task";
 import toast from "react-hot-toast";
 
@@ -164,6 +165,27 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const emptyTrashTasks = async () => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await emptyTrash(token);
+      if (!response.error) {
+        notifySuccess(response);
+        await getTrashTasks();
+      }
+    } catch (err) {
+      console.error("Error al vaciar la papelera:", err.message); 
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const updateSelectedList = (list, folder) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
@@ -213,6 +235,7 @@ export const TasksProvider = ({ children }) => {
     updateSelectedTask,
     updateSelectedList,
     onClickTrash,
+    emptyTrashTasks,
   };
 
   return (

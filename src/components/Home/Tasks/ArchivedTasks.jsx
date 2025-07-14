@@ -3,14 +3,14 @@ import { useTasks } from "../../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
 
 export const ArchivedTasks = () => {
-  const { deletedTasks, isLoading } = useTasks();
+  const { deletedTasks, isLoading, emptyTrashTasks } = useTasks();
 
   return (
     <section className="bg-base-200 p-5 rounded-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-3xl">Papelera</h1>
-          <button className="btn btn-error btn-outline btn-sm">
+          <button onClick={emptyTrashTasks} className="btn btn-error btn-outline btn-sm">
             <BrushCleaning className="w-4 h-4" />
             Vaciar Papelera
           </button>
