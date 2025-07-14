@@ -2,7 +2,7 @@ import { BrushCleaning } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
 
-export const ArchivedTasks = () => {
+export const Trash = () => {
   const { deletedTasks, isLoading, emptyTrashTasks } = useTasks();
 
   return (

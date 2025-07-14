@@ -3,7 +3,7 @@ import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
 import { RouteGuard } from "./components/RouteGuard";
 import { Tasks } from "./components/Home/Tasks/Tasks";
-import { ArchivedTasks } from "./components/Home/Tasks/ArchivedTasks";
+import { Trash } from "./components/Home/Tasks/Trash";
 
 export const App = () => {
   return (
@@ -18,7 +18,7 @@ export const App = () => {
           }
         >
           <Route path="tasks" element={<Tasks />} />
-          <Route path="trash" element={<ArchivedTasks />} />
+          <Route path="trash" element={<Trash />} />
         </Route>
 
         <Route

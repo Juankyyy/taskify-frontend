@@ -2,7 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { useLocation } from "react-router-dom";
 
-export const Trash = () => {
+export const TrashButton = () => {
   const { onClickTrash } = useTasks();
 
   const location = useLocation();
