@@ -10,6 +10,7 @@ import {
   getTrash,
   emptyTrash,
   restoreTask,
+  deleteTask,
 } from "../../services/task";
 import toast from "react-hot-toast";
 
@@ -208,6 +209,27 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const deleteTaskbyId = async (taskId) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await deleteTask(taskId, token);
+      if (!response.error) {
+        notifySuccess(response);
+        await getTrashTasks();
+      }
+    } catch (err) {
+      console.error("Error al eliminar la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const updateSelectedList = (list, folder) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
@@ -259,6 +281,7 @@ export const TasksProvider = ({ children }) => {
     onClickTrash,
     emptyTrashTasks,
     restoreTaskbyId,
+    deleteTaskbyId,
   };
 
   return (
