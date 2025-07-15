@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
 import { RouteGuard } from "./components/RouteGuard";
+import { Tasks } from "./components/Home/Tasks/Tasks";
+import { Trash } from "./components/Home/Tasks/Trash";
 
 export const App = () => {
   return (
@@ -14,7 +16,10 @@ export const App = () => {
               <Home />
             </RouteGuard>
           }
-        />
+        >
+          <Route path="tasks" element={<Tasks />} />
+          <Route path="trash" element={<Trash />} />
+        </Route>
 
         <Route
           path="/auth"

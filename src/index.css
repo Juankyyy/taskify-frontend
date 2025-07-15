@@ -35,14 +35,14 @@
 
 [data-theme="dark"] {
   /* --bg-primary: linear-gradient(to bottom right, #2a2b2a, #1a1d1b); */
-  --bg-primary: linear-gradient(to bottom right, #2C5364, #203A43, #0F2027);
+  --bg-primary: linear-gradient(to bottom, #2C5364, #203A43, #0F2027);
   
   --text-primary: #ffffff;
 }
 
 [data-theme="light"] {
   /* --bg-primary: linear-gradient(to bottom right, #ecedec, #cdd0cf); */
-  --bg-primary: linear-gradient(to top left, #c4cdd7, #eef2f3);
+  --bg-primary: linear-gradient(to bottom, #c4cdd7, #DCE1E7, #eef2f3);
   --text-primary: #000000;
 }
 
@@ -57,7 +57,20 @@ html {
 }
 
 .transition-border-color {
-  transition: border-color 0.3s ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+.transition-border-color-bg {
+  transition: border-color 300ms ease-in-out, background-color 150ms ease-in-out;
+  
+}
+
+.transition-text-weight {
+  transition: font-weight 150ms ease-in-out;
+}
+
+.transition-bg {
+  transition: background-color 150ms ease-in-out;
 }
 
 .scrollbar-modal {

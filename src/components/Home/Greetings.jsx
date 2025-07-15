@@ -9,11 +9,11 @@ export const Greetings = () => {
   const { quote } = randomQuotes();
 
   return (
-    <section className="bg-base-200 p-5 rounded-xl w-full">
+    <section className="bg-base-200/50 p-5 rounded-xl w-full">
       <h1 className="font-bold text-3xl">
         {dateName}, {username ? username : "Unknown User"}!
       </h1>
-      <p className="text-gray-400">{quote}</p>
+      <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{quote}</p>
     </section>
   );
 };

@@ -12,22 +12,24 @@ export const Account = () => {
   const username = localStorage.getItem("username");
 
   const navigate = useNavigate();
-  
+
   const Logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    sessionStorage.removeItem("selectedList");
+    sessionStorage.removeItem("selectedFolder");
     navigate("/auth");
-  }
+  };
 
   return (
-    <div className="flex justify-between items-center bg-base-100 [html[data-theme=light]_&]:border-slate-300 p-2 border-transparent hover:border-slate-500! border rounded-lg transition-border-color">
+    <div className="flex justify-between items-center bg-base-300/50 hover:bg-base-300 [html[data-theme=light]_&]:border-slate-300 [html[data-theme=light]_&]:hover:border-slate-500 p-2 border-slate-600 hover:border-slate-500 border rounded-lg transition-border-color-bg">
       <div className="flex items-center justify-center gap-3">
         <div className="avatar">
           <div className="w-10 rounded-full">
             <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
           </div>
         </div>
-          <p className="font-bold">{username}</p>
+        <p className="font-bold">{username}</p>
       </div>
 
       <Dropdown

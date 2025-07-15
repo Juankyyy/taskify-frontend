@@ -2,7 +2,14 @@ import { TasksContext } from "./TasksContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { completeTask, getTasks, createTask } from "../../services/task";
+import {
+  completeTask,
+  getTasks,
+  createTask,
+  archiveTask,
+  getTrash,
+  emptyTrash,
+} from "../../services/task";
 import toast from "react-hot-toast";
 
 export const TasksProvider = ({ children }) => {
@@ -23,6 +30,10 @@ export const TasksProvider = ({ children }) => {
   );
 
   const [selectedTask, setSelectedTask] = useState({});
+
+  const [deletedTasks, setDeletedTasks] = useState(
+    JSON.parse(sessionStorage.getItem("deletedTasks"))
+  );
 
   const getTasksByList = async () => {
     try {
@@ -102,11 +113,74 @@ export const TasksProvider = ({ children }) => {
       );
       if (!response.error) {
         notifySuccess(response.message);
-        document.getElementById("create-task-modal").close();
         await getTasksByList();
+        document.getElementById("create-task-modal").close();
       }
     } catch (err) {
       console.error("Error al crear la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const archiveTaskbyId = async (taskId) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await archiveTask(taskId, token);
+      if (!response.error) {
+        notifySuccess(response);
+        await getTasksByList();
+      }
+    } catch (err) {
+      console.error("Error al completar la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getTrashTasks = async () => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await getTrash(token);
+      if (!response.error) {
+        setDeletedTasks(response);
+        sessionStorage.setItem("deletedTasks", JSON.stringify(response));
+      }
+    } catch (err) {
+      console.error("Error al cargar las tareas:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const emptyTrashTasks = async () => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await emptyTrash(token);
+      if (!response.error) {
+        notifySuccess(response);
+        await getTrashTasks();
+      }
+    } catch (err) {
+      console.error("Error al vaciar la papelera:", err.message); 
     } finally {
       setIsLoading(false);
     }
@@ -118,6 +192,8 @@ export const TasksProvider = ({ children }) => {
 
     setSelectedFolderId(folder);
     sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
+
+    navigate("/tasks");
   };
 
   const updateSelectedTask = (task) => {
@@ -130,6 +206,13 @@ export const TasksProvider = ({ children }) => {
     setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
+    navigate("/");
+  };
+
+  const onClickTrash = async () => {
+    unSelectList();
+    navigate("/trash");
+    await getTrashTasks();
   };
 
   useEffect(() => {
@@ -140,6 +223,7 @@ export const TasksProvider = ({ children }) => {
 
   const value = {
     tasks,
+    deletedTasks,
     isLoading,
     selectedList,
     selectedTask,
@@ -147,8 +231,11 @@ export const TasksProvider = ({ children }) => {
     unSelectList,
     completeTaskbyId,
     createTaskbyId,
+    archiveTaskbyId,
     updateSelectedTask,
     updateSelectedList,
+    onClickTrash,
+    emptyTrashTasks,
   };
 
   return (

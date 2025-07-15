@@ -81,7 +81,67 @@ export const createTask = async (
   }
 };
 
-export const tasks = {
-  getTasks,
-  completeTask,
+export const archiveTask = async (taskId, token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/archive/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al archivar la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const getTrash = async (token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/trash`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al obtener las tareas eliminadas" };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const emptyTrash = async (token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/empty-trash`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al vaciar la papelera" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };

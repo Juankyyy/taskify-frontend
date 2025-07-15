@@ -27,7 +27,7 @@ export const Folders = () => {
   if (isLoading) return <p>Cargando carpetas...</p>;
 
   return (
-    <div className="flex flex-col h-[740px]">
+    <div className="flex flex-col h-[640px]">
       <div className="flex w-full items-center justify-between mb-5">
         <h1 className="text-lg font-bold">Carpetas</h1>
         <Tooltip title={"Nueva carpeta"}>
@@ -72,9 +72,9 @@ export const Folders = () => {
 
                     <p
                       title={list.title}
-                      className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-all ${
+                      className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-text-weight ${
                         selectedList && selectedList._id === list._id
-                          ? "font-bold bg-gray-100 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
+                          ? "font-bold bg-gray-200 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
                           : ""
                       }`}
                       onClick={() => updateSelectedList(list, folder._id)}
