@@ -63,8 +63,8 @@ export const Trash = () => {
                     ></span>
                     {task.priority}
                   </div>
-                  <ArchiveRestore onClick={() => restoreTaskbyId(task._id)} className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
-                  <Trash2 onClick={() => deleteTaskbyId(task._id)} className="w-icon h-icon cursor-pointer hover:stroke-red-600" />
+                  <ArchiveRestore onClick={() => restoreTaskbyId(task)} className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
+                  <Trash2 onClick={() => deleteTaskbyId(task)} className="w-icon h-icon cursor-pointer hover:stroke-red-600" />
                 </div>
               </div>
             </div>

@@ -59,7 +59,7 @@ export const Task = () => {
               <Trash2
                 onClick={(e) => {
                   e.stopPropagation();
-                  archiveTaskbyId(task._id);
+                  archiveTaskbyId(task);
                 }}
                 className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
               />
