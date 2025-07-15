@@ -1,9 +1,9 @@
 import { BrushCleaning } from "lucide-react";
-import { useTasks } from "../../../hooks/useTasks";
+import { useTasks } from "../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
 
 export const Trash = () => {
-  const { deletedTasks, isLoading, emptyTrashTasks } = useTasks();
+  const { deletedTasks, isLoading, emptyTrashTasks, restoreTaskbyId } = useTasks();
 
   return (
     <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
@@ -63,7 +63,7 @@ export const Trash = () => {
                     ></span>
                     {task.priority}
                   </div>
-                  <ArchiveRestore className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
+                  <ArchiveRestore onClick={() => restoreTaskbyId(task._id)} className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
                   <Trash2 className="w-icon h-icon cursor-pointer hover:stroke-red-600" />
                 </div>
               </div>
