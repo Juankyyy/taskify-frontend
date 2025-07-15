@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
+import { relativeDate } from "../../../utils/dates";
 
 export const Task = () => {
   const {
@@ -40,6 +41,9 @@ export const Task = () => {
               </h1>
             </div>
             <div className="flex gap-4 items-center">
+              <div>
+                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{relativeDate(task.createdAt)}</p>
+              </div>
               <div
                 className={`badge badge-soft badge-outline ${
                   task.priority == "low" && "badge-info"
