@@ -6,9 +6,13 @@ import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
 import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
+import { useFolders } from "../../../hooks/useFolders";
+import { ModalDelete } from "../../Modals/ModalDelete";
 
 export const Tasks = () => {
   const { selectedList, selectedTask, isLoading } = useTasks();
+
+  const { DeleteListbyId } = useFolders();
 
   if (!selectedList) return null;
 
@@ -32,7 +36,12 @@ export const Tasks = () => {
             <Pencil className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
           </button>
           <button className="btn btn-error btn-soft p-1 w-8 h-8 group">
-            <Trash className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
+            <Trash
+              onClick={() =>
+                document.getElementById("delete-list-modal").showModal()
+              }
+              className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white"
+            />
           </button>
         </div>
       </div>
@@ -52,6 +61,12 @@ export const Tasks = () => {
 
       {selectedTask && <TaskInfo />}
       <CreateTask />
+      <ModalDelete
+        title={selectedList.title}
+        handleDelete={DeleteListbyId}
+        type="list"
+        modalId="delete-list-modal"
+      />
     </section>
   );
 };

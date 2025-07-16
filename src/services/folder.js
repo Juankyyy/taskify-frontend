@@ -122,9 +122,31 @@ export const createList = async (listName, folderId, token) => {
   }
 };
 
+export const deleteList = async (listId, token) => {
+  try {
+    const response = await fetch(`${LISTS_URL}/delete/${listId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al eliminar la lista" };
+    }
+    return data.message
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const folder = {
   getFolders,
   getLists,
   deleteFolder,
   createFolder,
+  deleteList,
 };

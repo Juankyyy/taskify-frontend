@@ -145,3 +145,47 @@ export const emptyTrash = async (token) => {
     throw err;
   }
 };
+
+export const restoreTask = async (taskId, token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/restore/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al restaurar la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const deleteTask = async (taskId, token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/delete/${taskId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al eliminar la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};

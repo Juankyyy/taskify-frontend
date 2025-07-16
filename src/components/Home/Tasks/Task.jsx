@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
+import { relativeDate } from "../../../utils/dates";
 
 export const Task = () => {
   const {
@@ -40,8 +41,11 @@ export const Task = () => {
               </h1>
             </div>
             <div className="flex gap-4 items-center">
+              <div>
+                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{relativeDate(task.createdAt)}</p>
+              </div>
               <div
-                className={`badge badge-soft badge-outline ${
+                className={`badge badge-soft badge-outline bg-base-200/50 ${
                   task.priority == "low" && "badge-info"
                 } ${task.priority == "medium" && "badge-warning"} ${
                   task.priority == "high" && "badge-error"
@@ -59,7 +63,7 @@ export const Task = () => {
               <Trash2
                 onClick={(e) => {
                   e.stopPropagation();
-                  archiveTaskbyId(task._id);
+                  archiveTaskbyId(task);
                 }}
                 className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
               />

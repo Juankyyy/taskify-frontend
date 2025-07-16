@@ -1,6 +1,7 @@
 import { Text } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { BadgeAlert } from "lucide-react";
+import { relativeDate } from "../../utils/dates";
 
 export const TaskInfo = () => {
   const { selectedTask, completeTaskbyId } = useTasks();
@@ -68,6 +69,10 @@ export const TaskInfo = () => {
             }`}
           ></span>
           {selectedTask.priority}
+        </div>
+
+        <div>
+            <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">creada {relativeDate(selectedTask.createdAt)}</p>
         </div>
 
         <div className="flex justify-end mt-4">

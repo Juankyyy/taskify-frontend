@@ -9,6 +9,8 @@ import {
   archiveTask,
   getTrash,
   emptyTrash,
+  restoreTask,
+  deleteTask,
 } from "../../services/task";
 import toast from "react-hot-toast";
 
@@ -17,7 +19,11 @@ export const TasksProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // const notifyError = (message) => toast.error(message);
-  const notifySuccess = (message) => toast.success(message);
+  const notifySuccess = (message) =>
+    toast.success(message, {
+      duration: 3000,
+      style: { width: "fit-content", maxWidth: "800px" },
+    });
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -31,9 +37,7 @@ export const TasksProvider = ({ children }) => {
 
   const [selectedTask, setSelectedTask] = useState({});
 
-  const [deletedTasks, setDeletedTasks] = useState(
-    JSON.parse(sessionStorage.getItem("deletedTasks"))
-  );
+  const [deletedTasks, setDeletedTasks] = useState([]);
 
   const getTasksByList = async () => {
     try {
@@ -112,7 +116,11 @@ export const TasksProvider = ({ children }) => {
         token
       );
       if (!response.error) {
-        notifySuccess(response.message);
+        notifySuccess(
+          <span>
+            Tarea<strong> {title} </strong> creada correctamente
+          </span>
+        );
         await getTasksByList();
         document.getElementById("create-task-modal").close();
       }
@@ -123,7 +131,7 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const archiveTaskbyId = async (taskId) => {
+  const archiveTaskbyId = async (task) => {
     try {
       if (!token) {
         console.error("Token no encontrado");
@@ -132,9 +140,13 @@ export const TasksProvider = ({ children }) => {
 
       setIsLoading(true);
 
-      const response = await archiveTask(taskId, token);
+      const response = await archiveTask(task._id, token);
       if (!response.error) {
-        notifySuccess(response);
+        notifySuccess(
+          <span>
+            Tarea<strong> {task.title} </strong> enviada a la papelera
+          </span>
+        );
         await getTasksByList();
       }
     } catch (err) {
@@ -156,7 +168,6 @@ export const TasksProvider = ({ children }) => {
       const response = await getTrash(token);
       if (!response.error) {
         setDeletedTasks(response);
-        sessionStorage.setItem("deletedTasks", JSON.stringify(response));
       }
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
@@ -176,11 +187,61 @@ export const TasksProvider = ({ children }) => {
 
       const response = await emptyTrash(token);
       if (!response.error) {
-        notifySuccess(response);
+        notifySuccess("Todas las tareas se han eliminado permanentemente");
         await getTrashTasks();
       }
     } catch (err) {
-      console.error("Error al vaciar la papelera:", err.message); 
+      console.error("Error al vaciar la papelera:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const restoreTaskbyId = async (task) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await restoreTask(task._id, token);
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Tarea<strong> {task.title} </strong> restaurada correctamente
+          </span>
+        );
+        await getTrashTasks();
+      }
+    } catch (err) {
+      console.error("Error al restaurar la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteTaskbyId = async (task) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await deleteTask(task._id, token);
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Tarea<strong> {task.title} </strong> eliminada permanentemente
+          </span>
+        );
+        await getTrashTasks();
+      }
+    } catch (err) {
+      console.error("Error al eliminar la tarea:", err.message);
     } finally {
       setIsLoading(false);
     }
@@ -202,17 +263,16 @@ export const TasksProvider = ({ children }) => {
   };
 
   const unSelectList = () => {
+    navigate("/");
     setSelectedList(null);
     setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
-    navigate("/");
   };
 
   const onClickTrash = async () => {
     unSelectList();
     navigate("/trash");
-    await getTrashTasks();
   };
 
   useEffect(() => {
@@ -235,7 +295,10 @@ export const TasksProvider = ({ children }) => {
     updateSelectedTask,
     updateSelectedList,
     onClickTrash,
+    getTrashTasks,
     emptyTrashTasks,
+    restoreTaskbyId,
+    deleteTaskbyId,
   };
 
   return (

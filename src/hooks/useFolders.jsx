@@ -6,10 +6,12 @@ import {
   deleteFolder,
   createFolder,
   createList,
+  deleteList,
 } from "../services/folder";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Folder } from "lucide-react";
+import { useTasks } from "./useTasks";
 
 export const useFolders = () => {
   const [folders, setFolders] = useState([]);
@@ -25,6 +27,7 @@ export const useFolders = () => {
     });
 
   const [selectedFolder, setSelectedFolder] = useState({});
+  const { selectedList } = useTasks();
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -143,11 +146,41 @@ export const useFolders = () => {
     }
   };
 
+  const DeleteListbyId = async () => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await deleteList(selectedList._id, token);
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Lista<strong> {selectedList.title} </strong>eliminada correctamente
+          </span>
+        );
+        
+        await getFoldersAndLists();
+        navigate("/");
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      console.error("Error al eliminar la lista:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getFoldersAndLists();
   }, []);
 
   return {
+    getFoldersAndLists,
     folders,
     lists,
     selectedFolder,
@@ -155,6 +188,7 @@ export const useFolders = () => {
     handleDeleteFolder,
     handleCreateFolder,
     handleCreateList,
+    DeleteListbyId,
     isLoading,
   };
 };
