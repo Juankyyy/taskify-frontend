@@ -2,6 +2,7 @@ import { useTasks } from "../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
 import { relativeDate } from "../../utils/dates";
 import { Shredder } from "lucide-react";
+import { useEffect } from "react";
 
 export const Trash = () => {
   const {
@@ -10,7 +11,12 @@ export const Trash = () => {
     emptyTrashTasks,
     restoreTaskbyId,
     deleteTaskbyId,
+    getTrashTasks,
   } = useTasks();
+
+  useEffect(() => {
+    getTrashTasks();
+  }, []);
 
   return (
     <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
@@ -49,12 +55,15 @@ export const Trash = () => {
                     disabled
                     onChange={() => {}}
                   />
-                  <h1 className="group-has-[:checked]:line-through text-gray-600">
+                  <h1 className="group-has-[:checked]:line-through text-gray-500">
                     {task.title}
                   </h1>
                 </div>
                 <div className="flex gap-4 items-center">
-                  <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500" title={`Creado ${relativeDate(task.updatedAt)}`}>
+                  <p
+                    className="text-gray-300 [html[data-theme=light]_&]:text-gray-500"
+                    title={`Creado ${relativeDate(task.updatedAt)}`}
+                  >
                     Eliminado {relativeDate(task.updatedAt)}
                   </p>
 

@@ -37,9 +37,7 @@ export const TasksProvider = ({ children }) => {
 
   const [selectedTask, setSelectedTask] = useState({});
 
-  const [deletedTasks, setDeletedTasks] = useState(
-    JSON.parse(sessionStorage.getItem("deletedTasks"))
-  );
+  const [deletedTasks, setDeletedTasks] = useState([]);
 
   const getTasksByList = async () => {
     try {
@@ -170,7 +168,6 @@ export const TasksProvider = ({ children }) => {
       const response = await getTrash(token);
       if (!response.error) {
         setDeletedTasks(response);
-        sessionStorage.setItem("deletedTasks", JSON.stringify(response));
       }
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
@@ -271,13 +268,11 @@ export const TasksProvider = ({ children }) => {
     setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
-    sessionStorage.removeItem("deletedTasks");
   };
 
   const onClickTrash = async () => {
     unSelectList();
     navigate("/trash");
-    await getTrashTasks();
   };
 
   useEffect(() => {
@@ -300,6 +295,7 @@ export const TasksProvider = ({ children }) => {
     updateSelectedTask,
     updateSelectedList,
     onClickTrash,
+    getTrashTasks,
     emptyTrashTasks,
     restoreTaskbyId,
     deleteTaskbyId,
