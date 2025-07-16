@@ -53,7 +53,7 @@ html {
   background: var(--bg-primary);
   color: var(--text-primary);
 
-  transition: color 0.3s ease-in-out;
+  transition: color 150ms ease-in-out;
 }
 
 .transition-border-color {

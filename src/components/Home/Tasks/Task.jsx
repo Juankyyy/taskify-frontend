@@ -45,7 +45,7 @@ export const Task = () => {
                 <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{relativeDate(task.createdAt)}</p>
               </div>
               <div
-                className={`badge badge-soft badge-outline ${
+                className={`badge badge-soft badge-outline bg-base-200/50 ${
                   task.priority == "low" && "badge-info"
                 } ${task.priority == "medium" && "badge-warning"} ${
                   task.priority == "high" && "badge-error"

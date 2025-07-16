@@ -1,9 +1,16 @@
-import { BrushCleaning } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { ArchiveRestore, Trash2 } from "lucide-react";
+import { relativeDate } from "../../utils/dates";
+import { Shredder } from "lucide-react";
 
 export const Trash = () => {
-  const { deletedTasks, isLoading, emptyTrashTasks, restoreTaskbyId, deleteTaskbyId } = useTasks();
+  const {
+    deletedTasks,
+    isLoading,
+    emptyTrashTasks,
+    restoreTaskbyId,
+    deleteTaskbyId,
+  } = useTasks();
 
   return (
     <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
@@ -17,7 +24,7 @@ export const Trash = () => {
               onClick={emptyTrashTasks}
               className="btn btn-error btn-outline btn-sm"
             >
-              <BrushCleaning className="w-4 h-4" />
+              <Shredder className="w-4 h-4" />
               Vaciar Papelera
             </button>
           )}
@@ -33,7 +40,7 @@ export const Trash = () => {
         <div className="flex flex-col gap-3">
           {deletedTasks.map((task) => (
             <div key={task._id}>
-              <div className="flex items-center justify-between gap-3 p-3 hover:bg-base-100 rounded-lg opacity-75">
+              <div className="flex items-center justify-between gap-3 p-3 hover:bg-base-200/50 rounded-lg transition-border-color-bg">
                 <div className="flex items-center gap-3 justify-center group">
                   <input
                     type="checkbox"
@@ -47,8 +54,12 @@ export const Trash = () => {
                   </h1>
                 </div>
                 <div className="flex gap-4 items-center">
+                  <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500" title={`Creado ${relativeDate(task.updatedAt)}`}>
+                    Eliminado {relativeDate(task.updatedAt)}
+                  </p>
+
                   <div
-                    className={`badge badge-soft badge-outline ${
+                    className={`badge badge-soft badge-outline bg-base-200/50 ${
                       task.priority == "low" && "badge-info"
                     } ${task.priority == "medium" && "badge-warning"} ${
                       task.priority == "high" && "badge-error"
@@ -63,8 +74,15 @@ export const Trash = () => {
                     ></span>
                     {task.priority}
                   </div>
-                  <ArchiveRestore onClick={() => restoreTaskbyId(task)} className="w-icon h-icon cursor-pointer hover:stroke-green-600" />
-                  <Trash2 onClick={() => deleteTaskbyId(task)} className="w-icon h-icon cursor-pointer hover:stroke-red-600" />
+
+                  <ArchiveRestore
+                    onClick={() => restoreTaskbyId(task)}
+                    className="w-icon h-icon cursor-pointer hover:stroke-green-600"
+                  />
+                  <Trash2
+                    onClick={() => deleteTaskbyId(task)}
+                    className="w-icon h-icon cursor-pointer hover:stroke-red-600"
+                  />
                 </div>
               </div>
             </div>
