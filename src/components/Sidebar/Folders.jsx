@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 import { useFolders } from "../../hooks/useFolders";
-import { DeleteFolder } from "../Modals/DeleteFolder";
+import { ModalDelete } from "../Modals/ModalDelete";
 import { CreateFolder } from "../Modals/CreateFolder";
 import { useTasks } from "../../hooks/useTasks";
 
@@ -91,10 +91,11 @@ export const Folders = () => {
         })}
       </div>
 
-      <DeleteFolder
+      <ModalDelete
         title={selectedFolder.title}
-        folderId={selectedFolder.folderId}
-        handleDeleteFolder={handleDeleteFolder}
+        handleDelete={handleDeleteFolder}
+        type="folder"
+        modalId="delete-folder-modal"
       />
 
       <CreateFolder

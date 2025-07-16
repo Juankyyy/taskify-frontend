@@ -266,11 +266,12 @@ export const TasksProvider = ({ children }) => {
   };
 
   const unSelectList = () => {
+    navigate("/");
     setSelectedList(null);
     setSelectedFolderId(null);
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
-    navigate("/");
+    sessionStorage.removeItem("deletedTasks");
   };
 
   const onClickTrash = async () => {
