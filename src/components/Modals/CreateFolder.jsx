@@ -7,7 +7,7 @@ export const CreateFolder = ({
   isLoading,
   initialForm,
   type,
-  selectedFolderTitle = null,
+  selectedFolderTitle,
 }) => {
   const { formState, onInputChange, onSubmit } = useModalCreate(
     initialForm,

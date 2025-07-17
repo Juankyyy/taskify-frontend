@@ -11,10 +11,8 @@ export const Folders = () => {
     folders,
     lists,
     selectedFolder,
-    selectFolder,
     handleDeleteFolder,
     handleCreateFolder,
-    handleCreateList,
     isLoading,
   } = useFolders();
 
@@ -55,9 +53,6 @@ export const Folders = () => {
               key={folder._id}
               title={folder.name}
               folderId={folder._id}
-              selectFolder={selectFolder}
-              handleCreateList={handleCreateList}
-              selectedFolderTitle={selectedFolder.title}
               defaultOpen={isSelectedListInFolder}
             >
               {listsInFolder.length > 0 ? (

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { FoldersContext } from "./FoldersContext";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getFolders,
@@ -7,17 +8,16 @@ import {
   createFolder,
   createList,
   deleteList,
-} from "../services/folder";
-import { useEffect } from "react";
+} from "../../services/folder";
 import toast from "react-hot-toast";
 import { Folder } from "lucide-react";
-import { useTasks } from "./useTasks";
+import { useTasks } from "../../hooks/useTasks";
 
-export const useFolders = () => {
+export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState({});
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -26,11 +26,9 @@ export const useFolders = () => {
       style: { width: "fit-content", maxWidth: "800px" },
     });
 
-  const [selectedFolder, setSelectedFolder] = useState({});
-  const { selectedList } = useTasks();
-
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const { selectedList } = useTasks();
 
   const getFoldersAndLists = async () => {
     try {
@@ -51,10 +49,6 @@ export const useFolders = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const selectFolder = (title = null, folderId) => {
-    setSelectedFolder({ title, folderId });
   };
 
   const handleDeleteFolder = async () => {
@@ -146,7 +140,7 @@ export const useFolders = () => {
     }
   };
 
-  const DeleteListbyId = async () => {
+  const deleteListById = async () => {
     try {
       if (!token) {
         console.error("Token no encontrado");
@@ -162,7 +156,7 @@ export const useFolders = () => {
             Lista<strong> {selectedList.title} </strong>eliminada correctamente
           </span>
         );
-        
+
         await getFoldersAndLists();
         navigate("/");
       } else {
@@ -175,20 +169,28 @@ export const useFolders = () => {
     }
   };
 
+  const selectFolder = (title = null, folderId) => {
+    setSelectedFolder({ title, folderId });
+  };
+
   useEffect(() => {
     getFoldersAndLists();
   }, []);
 
-  return {
-    getFoldersAndLists,
+  const value = {
     folders,
     lists,
     selectedFolder,
+    isLoading,
+    getFoldersAndLists,
     selectFolder,
     handleDeleteFolder,
     handleCreateFolder,
     handleCreateList,
-    DeleteListbyId,
-    isLoading,
+    deleteListById,
   };
+
+  return (
+    <FoldersContext.Provider value={value}>{children}</FoldersContext.Provider>
+  );
 };

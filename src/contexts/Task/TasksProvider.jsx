@@ -270,11 +270,6 @@ export const TasksProvider = ({ children }) => {
     sessionStorage.removeItem("selectedFolder");
   };
 
-  const onClickTrash = async () => {
-    unSelectList();
-    navigate("/trash");
-  };
-
   useEffect(() => {
     if (selectedList) {
       getTasksByList();
@@ -294,7 +289,6 @@ export const TasksProvider = ({ children }) => {
     archiveTaskbyId,
     updateSelectedTask,
     updateSelectedList,
-    onClickTrash,
     getTrashTasks,
     emptyTrashTasks,
     restoreTaskbyId,
