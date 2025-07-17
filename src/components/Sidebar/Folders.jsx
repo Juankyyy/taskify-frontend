@@ -1,16 +1,17 @@
 import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
-import { useFolders } from "../../hooks/useFolders";
 import { ModalDelete } from "../Modals/ModalDelete";
 import { CreateFolder } from "../Modals/CreateFolder";
-import { useTasks } from "../../hooks/useTasks";
+import { useFolders } from "../../hooks/useFolders";
 
 export const Folders = () => {
   const {
     folders,
     lists,
     selectedFolder,
+    selectedList,
+    updateSelectedList,
     handleDeleteFolder,
     handleCreateFolder,
     isLoading,
@@ -19,8 +20,6 @@ export const Folders = () => {
   const initialForm = {
     folderName: "",
   };
-
-  const { updateSelectedList, selectedList } = useTasks();
 
   if (isLoading) return <p>Cargando carpetas...</p>;
 

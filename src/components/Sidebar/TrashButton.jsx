@@ -1,17 +1,17 @@
 import { Trash2 } from "lucide-react";
-import { useTasks } from "../../hooks/useTasks";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useFolders } from "../../hooks/useFolders";
 
 export const TrashButton = () => {
-  const { unSelectList } = useTasks();
+  const { unSelectList } = useFolders();
 
+    const navigate = useNavigate();
   const location = useLocation();
-
   const isTrashView = location.pathname === "/trash";
 
-    const onClickTrash = async () => {
+  const onClickTrash = () => {
     unSelectList();
-    Navigate("/trash");
+    navigate("/trash");
   };
 
   return (

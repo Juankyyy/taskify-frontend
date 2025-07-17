@@ -1,6 +1,7 @@
 import { FoldersContext } from "./FoldersContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Folder } from "lucide-react";
 import {
   getFolders,
   getLists,
@@ -10,8 +11,6 @@ import {
   deleteList,
 } from "../../services/folder";
 import toast from "react-hot-toast";
-import { Folder } from "lucide-react";
-import { useTasks } from "../../hooks/useTasks";
 
 export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
@@ -28,7 +27,14 @@ export const FoldersProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const { selectedList } = useTasks();
+
+  const [selectedList, setSelectedList] = useState(
+    JSON.parse(sessionStorage.getItem("selectedList"))
+  );
+
+  const [selectedFolderId, setSelectedFolderId] = useState(
+    JSON.parse(sessionStorage.getItem("selectedFolder"))
+  );
 
   const getFoldersAndLists = async () => {
     try {
@@ -169,25 +175,42 @@ export const FoldersProvider = ({ children }) => {
     }
   };
 
+  const updateSelectedList = (list, folder) => {
+    setSelectedList(list);
+    sessionStorage.setItem("selectedList", JSON.stringify(list));
+
+    setSelectedFolderId(folder);
+    sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
+
+    navigate("/tasks");
+  };
+
   const selectFolder = (title = null, folderId) => {
     setSelectedFolder({ title, folderId });
   };
 
-  useEffect(() => {
-    getFoldersAndLists();
-  }, []);
+  const unSelectList = () => {
+    setSelectedList(null);
+    setSelectedFolderId(null);
+    sessionStorage.removeItem("selectedList");
+    sessionStorage.removeItem("selectedFolder");
+  };
 
   const value = {
+    getFoldersAndLists,
     folders,
     lists,
-    selectedFolder,
-    isLoading,
-    getFoldersAndLists,
+    selectedList,
     selectFolder,
+    selectedFolder,
+    selectedFolderId,
+    updateSelectedList,
     handleDeleteFolder,
     handleCreateFolder,
     handleCreateList,
     deleteListById,
+    unSelectList,
+    isLoading,
   };
 
   return (

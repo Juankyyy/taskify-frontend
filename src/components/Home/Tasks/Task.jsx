@@ -1,16 +1,18 @@
 import { Trash2 } from "lucide-react";
-import { useTasks } from "../../../hooks/useTasks";
-import { CreateTaskButton } from "./CreateTaskButton";
 import { relativeDate } from "../../../utils/dates";
+import { CreateTaskButton } from "./CreateTaskButton";
+import { useTasks } from "../../../hooks/useTasks";
+import { useFolders } from "../../../hooks/useFolders";
 
 export const Task = () => {
   const {
     tasks,
-    selectedList,
     completeTaskbyId,
     archiveTaskbyId,
     updateSelectedTask,
   } = useTasks();
+
+  const { selectedList } = useFolders();
 
   const handleCompleteTask = (e, taskId) => {
     e.stopPropagation();

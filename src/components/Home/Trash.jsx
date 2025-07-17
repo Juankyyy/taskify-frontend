@@ -1,17 +1,16 @@
-import { useTasks } from "../../hooks/useTasks";
-import { ArchiveRestore, Trash2 } from "lucide-react";
-import { relativeDate } from "../../utils/dates";
-import { Shredder } from "lucide-react";
 import { useEffect } from "react";
+import { ArchiveRestore, Trash2, Shredder } from "lucide-react";
+import { relativeDate } from "../../utils/dates";
+import { useTasks } from "../../hooks/useTasks";
 
 export const Trash = () => {
   const {
+    getTrashTasks,
     deletedTasks,
     isLoading,
     emptyTrashTasks,
     restoreTaskbyId,
     deleteTaskbyId,
-    getTrashTasks,
   } = useTasks();
 
   useEffect(() => {

@@ -2,11 +2,13 @@ import { ClipboardList } from "lucide-react";
 import { Text } from "lucide-react";
 import { BookCheck } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
+import { useFolders } from "../../hooks/useFolders";
 import { useModalCreate } from "../../hooks/useModalCreate";
 
 export const CreateTask = () => {
-  const { selectedList, selectedFolderId, createTaskbyId, isLoading } =
-    useTasks();
+  const { createTaskbyId, isLoading } = useTasks();
+
+  const { selectedList, selectedFolderId } = useFolders();
 
   const initialForm = {
     title: "",
@@ -76,7 +78,9 @@ export const CreateTask = () => {
             required
             className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"
           >
-            <option value="" disabled={true}>Prioridad</option>
+            <option value="" disabled={true}>
+              Prioridad
+            </option>
             <option value="high">Alta</option>
             <option value="medium">Media</option>
             <option value="low">Baja</option>
