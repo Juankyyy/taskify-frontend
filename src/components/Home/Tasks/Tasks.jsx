@@ -1,18 +1,22 @@
-import { Folder } from "lucide-react";
+import { useEffect } from "react";
+import { Folder, ClipboardList, Pencil, Trash } from "lucide-react";
 import { useTasks } from "../../../hooks/useTasks";
+import { useFolders } from "../../../hooks/useFolders";
 import { Task } from "./Task";
-import { ClipboardList } from "lucide-react";
-import { Pencil } from "lucide-react";
-import { Trash } from "lucide-react";
 import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
-import { useFolders } from "../../../hooks/useFolders";
 import { ModalDelete } from "../../Modals/ModalDelete";
 
 export const Tasks = () => {
-  const { selectedList, selectedTask, isLoading } = useTasks();
+  const { getTasksByList, selectedTask, isLoading } = useTasks();
 
-  const { DeleteListbyId } = useFolders();
+  const { deleteListById, selectedList } = useFolders();
+  
+  useEffect(() => {
+    if (selectedList) {
+      getTasksByList();
+    }
+  }, [selectedList]);
 
   if (!selectedList) return null;
 
@@ -61,9 +65,10 @@ export const Tasks = () => {
 
       {selectedTask && <TaskInfo />}
       <CreateTask />
+      
       <ModalDelete
         title={selectedList.title}
-        handleDelete={DeleteListbyId}
+        handleDelete={deleteListById}
         type="list"
         modalId="delete-list-modal"
       />

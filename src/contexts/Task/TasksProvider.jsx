@@ -1,7 +1,8 @@
 import { TasksContext } from "./TasksContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { useFolders } from "../../hooks/useFolders";
 import {
   completeTask,
   getTasks,
@@ -12,7 +13,6 @@ import {
   restoreTask,
   deleteTask,
 } from "../../services/task";
-import toast from "react-hot-toast";
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
@@ -27,13 +27,8 @@ export const TasksProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [selectedList, setSelectedList] = useState(
-    JSON.parse(sessionStorage.getItem("selectedList"))
-  );
 
-  const [selectedFolderId, setSelectedFolderId] = useState(
-    JSON.parse(sessionStorage.getItem("selectedFolder"))
-  );
+  const { selectedList } = useFolders();
 
   const [selectedTask, setSelectedTask] = useState({});
 
@@ -247,54 +242,21 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
-  const updateSelectedList = (list, folder) => {
-    setSelectedList(list);
-    sessionStorage.setItem("selectedList", JSON.stringify(list));
-
-    setSelectedFolderId(folder);
-    sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
-
-    navigate("/tasks");
-  };
-
   const updateSelectedTask = (task) => {
     setSelectedTask(task);
     document.getElementById("task-info-modal").showModal();
   };
 
-  const unSelectList = () => {
-    navigate("/");
-    setSelectedList(null);
-    setSelectedFolderId(null);
-    sessionStorage.removeItem("selectedList");
-    sessionStorage.removeItem("selectedFolder");
-  };
-
-  const onClickTrash = async () => {
-    unSelectList();
-    navigate("/trash");
-  };
-
-  useEffect(() => {
-    if (selectedList) {
-      getTasksByList();
-    }
-  }, [selectedList]);
-
   const value = {
+    getTasksByList,
     tasks,
     deletedTasks,
     isLoading,
-    selectedList,
     selectedTask,
-    selectedFolderId,
-    unSelectList,
     completeTaskbyId,
     createTaskbyId,
     archiveTaskbyId,
     updateSelectedTask,
-    updateSelectedList,
-    onClickTrash,
     getTrashTasks,
     emptyTrashTasks,
     restoreTaskbyId,

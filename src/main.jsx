@@ -1,15 +1,18 @@
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 import { TasksProvider } from "./contexts/Task/TasksProvider";
+import { FoldersProvider } from "./contexts/Folders/FoldersProvider.jsx";
 import { App } from "./App.jsx";
 
-import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <TasksProvider>
-      <App />
-    </TasksProvider>
+    <FoldersProvider>
+      <TasksProvider>
+        <App />
+      </TasksProvider>
+    </FoldersProvider>
   </BrowserRouter>
 );

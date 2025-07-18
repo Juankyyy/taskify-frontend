@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
-import { ChevronRight } from "lucide-react";
-import { Languages } from "lucide-react";
-import { EllipsisVertical } from "lucide-react";
+import { ChevronRight, Languages, EllipsisVertical } from "lucide-react";
 import { Dropdown } from "../Dropdown";
 
 import en from "../../assets/en-flag.svg";
