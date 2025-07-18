@@ -27,6 +27,7 @@ export const Tasks = () => {
           <ul>
             <li className="gap-1">
               <Folder className="w-icon h-icon stroke-gray-300 [html[data-theme=light]_&]:stroke-gray-500 cursor-default!" />
+              {selectedFolder.name}
             </li>
             <li className="gap-1 before:opacity-100!">
               <ClipboardList className="w-icon h-icon stroke-gray-300 [html[data-theme=light]_&]:stroke-gray-500 cursor-default!" />

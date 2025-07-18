@@ -31,9 +31,9 @@ export const FoldersProvider = ({ children }) => {
     JSON.parse(sessionStorage.getItem("selectedList"))
   );
 
-  const [selectedFolder, setSelectedFolder] = useState({});
+  const [modalSelectedFolder, setModalSelectedFolder] = useState({});
   
-  const [selectedFolderId, setSelectedFolderId] = useState(
+  const [selectedFolder, setSelectedFolder] = useState(
     JSON.parse(sessionStorage.getItem("selectedFolder"))
   );
 
@@ -67,11 +67,11 @@ export const FoldersProvider = ({ children }) => {
 
       setIsLoading(true);
 
-      const response = await deleteFolder(selectedFolder.folderId, token);
+      const response = await deleteFolder(modalSelectedFolder.folderId, token);
       if (response.ok) {
         notifySuccess(
           <span>
-            Carpeta<strong> {selectedFolder.title} </strong>eliminada
+            Carpeta<strong> {modalSelectedFolder.title} </strong>eliminada
           </span>
         );
         await getFoldersAndLists();
@@ -123,7 +123,7 @@ export const FoldersProvider = ({ children }) => {
 
       const response = await createList(
         listName,
-        selectedFolder.folderId,
+        modalSelectedFolder.folderId,
         token
       );
       if (!response.error) {
@@ -132,7 +132,7 @@ export const FoldersProvider = ({ children }) => {
             Lista<strong> {listName} </strong>creada en
             <div className="flex gap-1 items-center">
               <Folder className="w-4 h-4 stroke-gray-600" />
-              <strong>{selectedFolder.title}</strong>
+              <strong>{modalSelectedFolder.title}</strong>
             </div>
           </span>
         );
@@ -180,19 +180,19 @@ export const FoldersProvider = ({ children }) => {
     setSelectedList(list);
     sessionStorage.setItem("selectedList", JSON.stringify(list));
 
-    setSelectedFolderId(folder);
+    setSelectedFolder(folder);
     sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
 
     navigate("/tasks");
   };
 
-  const selectFolder = (title = null, folderId) => {
-    setSelectedFolder({ title, folderId });
+  const modalSelectFolder = (title = null, folderId) => {
+    setModalSelectedFolder({ title, folderId });
   };
 
   const unSelectList = () => {
     setSelectedList(null);
-    setSelectedFolderId(null);
+    setModalSelectedFolder({});
     sessionStorage.removeItem("selectedList");
     sessionStorage.removeItem("selectedFolder");
   };
@@ -209,9 +209,9 @@ export const FoldersProvider = ({ children }) => {
     folders,
     lists,
     selectedList,
-    selectFolder,
+    modalSelectFolder,
+    modalSelectedFolder,
     selectedFolder,
-    selectedFolderId,
     updateSelectedList,
     handleDeleteFolder,
     handleCreateFolder,

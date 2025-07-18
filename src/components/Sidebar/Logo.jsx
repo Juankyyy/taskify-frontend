@@ -7,9 +7,9 @@ export const Logo = () => {
   const navigate = useNavigate();
 
   const clearLists = () => {
+    navigate("/");
     unSelectList();
     closeAllFolders();
-    navigate("/");
   };
 
   return (

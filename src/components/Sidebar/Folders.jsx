@@ -2,14 +2,14 @@ import { Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 import { ModalDelete } from "../Modals/ModalDelete";
-import { CreateFolder } from "../Modals/CreateFolder";
+import { CreateFolderList } from "../Modals/CreateFolderList";
 import { useFolders } from "../../hooks/useFolders";
 
 export const Folders = () => {
   const {
     folders,
     lists,
-    selectedFolder,
+    modalSelectedFolder,
     selectedList,
     updateSelectedList,
     handleDeleteFolder,
@@ -71,7 +71,7 @@ export const Folders = () => {
                           ? "font-bold bg-gray-200 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
                           : ""
                       }`}
-                      onClick={() => updateSelectedList(list, folder._id)}
+                      onClick={() => updateSelectedList(list, folder)}
                     >
                       {list.title}
                     </p>
@@ -86,13 +86,13 @@ export const Folders = () => {
       </div>
 
       <ModalDelete
-        title={selectedFolder.title}
+        title={modalSelectedFolder.title}
         handleDelete={handleDeleteFolder}
         type="folder"
         modalId="delete-folder-modal"
       />
 
-      <CreateFolder
+      <CreateFolderList
         handleCreate={handleCreateFolder}
         isLoading={isLoading}
         initialForm={initialForm}

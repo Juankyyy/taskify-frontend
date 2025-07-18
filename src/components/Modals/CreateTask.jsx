@@ -6,7 +6,7 @@ import { useModalCreate } from "../../hooks/useModalCreate";
 export const CreateTask = () => {
   const { createTaskbyId, isLoading } = useTasks();
 
-  const { selectedList, selectedFolderId } = useFolders();
+  const { selectedList, selectedFolder } = useFolders();
 
   const initialForm = {
     title: "",
@@ -24,7 +24,7 @@ export const CreateTask = () => {
 
   if (formState.listId === "" || formState != selectedList._id) {
     formState.listId = selectedList._id;
-    formState.folderId = selectedFolderId;
+    formState.folderId = selectedFolder._id;
   }
 
   return (
