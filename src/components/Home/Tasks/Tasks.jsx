@@ -10,7 +10,7 @@ import { ModalDelete } from "../../Modals/ModalDelete";
 export const Tasks = () => {
   const { getTasksByList, selectedTask, isLoading } = useTasks();
 
-  const { DeleteListbyId, selectedList } = useFolders();
+  const { deleteListById, selectedList } = useFolders();
   
   useEffect(() => {
     if (selectedList) {
@@ -68,7 +68,7 @@ export const Tasks = () => {
       
       <ModalDelete
         title={selectedList.title}
-        handleDelete={DeleteListbyId}
+        handleDelete={deleteListById}
         type="list"
         modalId="delete-list-modal"
       />
