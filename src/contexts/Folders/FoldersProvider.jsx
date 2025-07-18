@@ -32,7 +32,7 @@ export const FoldersProvider = ({ children }) => {
   );
 
   const [modalSelectedFolder, setModalSelectedFolder] = useState({});
-  
+
   const [selectedFolder, setSelectedFolder] = useState(
     JSON.parse(sessionStorage.getItem("selectedFolder"))
   );
@@ -74,7 +74,9 @@ export const FoldersProvider = ({ children }) => {
             Carpeta<strong> {modalSelectedFolder.title} </strong>eliminada
           </span>
         );
+        
         await getFoldersAndLists();
+        navigate("/");
       } else {
         notifyError(response.message);
       }
