@@ -1,4 +1,4 @@
-export const ModalDelete = ({ title, handleDelete, type, modalId }) => {
+export const ModalDelete = ({ title = "Carpeta", handleDelete, type, modalId }) => {
   const typeLabels = {
     folder: "carpeta",
     task: "tarea",

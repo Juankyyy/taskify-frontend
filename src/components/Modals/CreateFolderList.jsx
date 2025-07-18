@@ -1,7 +1,7 @@
 import { Folder, ClipboardList } from "lucide-react";
 import { useModalCreate } from "../../hooks/useModalCreate";
 
-export const CreateFolder = ({
+export const CreateFolderList = ({
   handleCreate,
   isLoading,
   initialForm,

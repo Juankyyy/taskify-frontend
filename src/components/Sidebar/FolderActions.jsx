@@ -1,6 +1,6 @@
 import { Trash, Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
-import { CreateFolder } from "../Modals/CreateFolder";
+import { CreateFolderList } from "../Modals/CreateFolderList";
 import { useFolders } from "../../hooks/useFolders";
 
 export const FolderActions = ({ title, folderId }) => {
@@ -9,15 +9,17 @@ export const FolderActions = ({ title, folderId }) => {
     folderId: folderId,
   };
 
-  const { selectFolder, selectedFolder, handleCreateList } = useFolders();
+  const { modalSelectFolder, modalSelectedFolder, handleCreateList } =
+    useFolders();
+  // console.log(modalSelectedFolder);
 
   const onCreateClick = () => {
-    selectFolder(title, folderId);
+    modalSelectFolder(title, folderId);
     document.getElementById("create-list-modal").showModal();
   };
 
   const onDeleteClick = () => {
-    selectFolder(title, folderId);
+    modalSelectFolder(title, folderId);
     document.getElementById("delete-folder-modal").showModal();
   };
 
@@ -37,8 +39,8 @@ export const FolderActions = ({ title, folderId }) => {
         />
       </Tooltip>
 
-      <CreateFolder
-        selectedFolderTitle={selectedFolder.title}
+      <CreateFolderList
+        selectedFolderTitle={modalSelectedFolder.title}
         type="list"
         handleCreate={handleCreateList}
         initialForm={initialForm}

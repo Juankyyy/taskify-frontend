@@ -23,7 +23,7 @@ export const Collapse = ({
     >
       <div className="collapse group w-3/4!">
         <input
-          className="p-0"
+          className="p-0 folder-collapse"
           type="checkbox"
           defaultChecked={defaultOpen}
           onClick={toggleFolder}
