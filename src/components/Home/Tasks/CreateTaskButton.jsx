@@ -1,8 +1,6 @@
 import { Plus } from "lucide-react";
 
 export const CreateTaskButton = () => {
-  // 🧠 Logic
-
   return (
     <div className="flex justify-center">
       <div

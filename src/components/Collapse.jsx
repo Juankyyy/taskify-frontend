@@ -1,14 +1,11 @@
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
-import { useState } from "react";
 
 export const Collapse = ({
   title,
   folderId,
   children,
-  selectFolder,
-  selectedFolderTitle,
-  handleCreateList,
   defaultOpen = false,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -42,13 +39,7 @@ export const Collapse = ({
         </div>
       </div>
 
-      <FolderActions
-        title={title}
-        folderId={folderId}
-        selectFolder={selectFolder}
-        handleCreateList={handleCreateList}
-        selectedFolderTitle={selectedFolderTitle}
-      />
+      <FolderActions title={title} folderId={folderId} />
     </div>
   );
 };

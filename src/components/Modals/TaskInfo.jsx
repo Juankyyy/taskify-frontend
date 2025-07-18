@@ -1,7 +1,6 @@
-import { Text } from "lucide-react";
-import { useTasks } from "../../hooks/useTasks";
-import { BadgeAlert } from "lucide-react";
+import { Text, BadgeAlert } from "lucide-react";
 import { relativeDate } from "../../utils/dates";
+import { useTasks } from "../../hooks/useTasks";
 
 export const TaskInfo = () => {
   const { selectedTask, completeTaskbyId } = useTasks();

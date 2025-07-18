@@ -1,5 +1,8 @@
+import { FoldersContext } from "./FoldersContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Folder } from "lucide-react";
+import toast from "react-hot-toast";
 import {
   getFolders,
   getLists,
@@ -7,17 +10,13 @@ import {
   createFolder,
   createList,
   deleteList,
-} from "../services/folder";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import { Folder } from "lucide-react";
-import { useTasks } from "./useTasks";
+} from "../../services/folder";
 
-export const useFolders = () => {
+export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState({});
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -26,11 +25,16 @@ export const useFolders = () => {
       style: { width: "fit-content", maxWidth: "800px" },
     });
 
-  const [selectedFolder, setSelectedFolder] = useState({});
-  const { selectedList } = useTasks();
-
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
+  const [selectedList, setSelectedList] = useState(
+    JSON.parse(sessionStorage.getItem("selectedList"))
+  );
+
+  const [selectedFolderId, setSelectedFolderId] = useState(
+    JSON.parse(sessionStorage.getItem("selectedFolder"))
+  );
 
   const getFoldersAndLists = async () => {
     try {
@@ -51,10 +55,6 @@ export const useFolders = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const selectFolder = (title = null, folderId) => {
-    setSelectedFolder({ title, folderId });
   };
 
   const handleDeleteFolder = async () => {
@@ -146,7 +146,7 @@ export const useFolders = () => {
     }
   };
 
-  const DeleteListbyId = async () => {
+  const deleteListById = async () => {
     try {
       if (!token) {
         console.error("Token no encontrado");
@@ -162,7 +162,7 @@ export const useFolders = () => {
             Lista<strong> {selectedList.title} </strong>eliminada correctamente
           </span>
         );
-        
+
         await getFoldersAndLists();
         navigate("/");
       } else {
@@ -175,20 +175,45 @@ export const useFolders = () => {
     }
   };
 
-  useEffect(() => {
-    getFoldersAndLists();
-  }, []);
+  const updateSelectedList = (list, folder) => {
+    setSelectedList(list);
+    sessionStorage.setItem("selectedList", JSON.stringify(list));
 
-  return {
+    setSelectedFolderId(folder);
+    sessionStorage.setItem("selectedFolder", JSON.stringify(folder));
+
+    navigate("/tasks");
+  };
+
+  const selectFolder = (title = null, folderId) => {
+    setSelectedFolder({ title, folderId });
+  };
+
+  const unSelectList = () => {
+    setSelectedList(null);
+    setSelectedFolderId(null);
+    sessionStorage.removeItem("selectedList");
+    sessionStorage.removeItem("selectedFolder");
+  };
+
+  const value = {
     getFoldersAndLists,
     folders,
     lists,
-    selectedFolder,
+    selectedList,
     selectFolder,
+    selectedFolder,
+    selectedFolderId,
+    updateSelectedList,
     handleDeleteFolder,
     handleCreateFolder,
     handleCreateList,
-    DeleteListbyId,
+    deleteListById,
+    unSelectList,
     isLoading,
   };
+
+  return (
+    <FoldersContext.Provider value={value}>{children}</FoldersContext.Provider>
+  );
 };

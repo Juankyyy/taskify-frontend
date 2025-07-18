@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "../Layouts/AuthLayout";
 import { LoginForm } from "../components/Auth/LoginForm";
-import { Logo } from "../components/Sidebar/Logo";
-import { useState } from "react";
 import { SignupForm } from "../components/Auth/SignupForm";
-import { Toaster } from "react-hot-toast";
+import { Logo } from "../components/Sidebar/Logo";
 import { Theme } from "../components/Sidebar/Theme";
+import { Toaster } from "react-hot-toast";
 
 export const Auth = () => {
   const [formType, setformType] = useState("Login");
