@@ -10,8 +10,8 @@ import { ModalDelete } from "../../Modals/ModalDelete";
 export const Tasks = () => {
   const { getTasksByList, selectedTask, isLoading } = useTasks();
 
-  const { deleteListById, selectedList } = useFolders();
-  
+  const { deleteListById, selectedList, selectedFolder } = useFolders();
+
   useEffect(() => {
     if (selectedList) {
       getTasksByList();
@@ -27,7 +27,6 @@ export const Tasks = () => {
           <ul>
             <li className="gap-1">
               <Folder className="w-icon h-icon stroke-gray-300 [html[data-theme=light]_&]:stroke-gray-500 cursor-default!" />
-              Carpeta
             </li>
             <li className="gap-1 before:opacity-100!">
               <ClipboardList className="w-icon h-icon stroke-gray-300 [html[data-theme=light]_&]:stroke-gray-500 cursor-default!" />
@@ -65,7 +64,7 @@ export const Tasks = () => {
 
       {selectedTask && <TaskInfo />}
       <CreateTask />
-      
+
       <ModalDelete
         title={selectedList.title}
         handleDelete={deleteListById}

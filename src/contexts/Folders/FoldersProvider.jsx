@@ -16,7 +16,6 @@ export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedFolder, setSelectedFolder] = useState({});
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -32,6 +31,8 @@ export const FoldersProvider = ({ children }) => {
     JSON.parse(sessionStorage.getItem("selectedList"))
   );
 
+  const [selectedFolder, setSelectedFolder] = useState({});
+  
   const [selectedFolderId, setSelectedFolderId] = useState(
     JSON.parse(sessionStorage.getItem("selectedFolder"))
   );
@@ -196,6 +197,13 @@ export const FoldersProvider = ({ children }) => {
     sessionStorage.removeItem("selectedFolder");
   };
 
+  const closeAllFolders = () => {
+    const allFolderCollapses = document.querySelectorAll(".folder-collapse");
+    allFolderCollapses.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  };
+
   const value = {
     getFoldersAndLists,
     folders,
@@ -210,6 +218,7 @@ export const FoldersProvider = ({ children }) => {
     handleCreateList,
     deleteListById,
     unSelectList,
+    closeAllFolders,
     isLoading,
   };
 

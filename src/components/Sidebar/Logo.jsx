@@ -2,12 +2,13 @@ import { useFolders } from "../../hooks/useFolders";
 import { useNavigate } from "react-router-dom";
 
 export const Logo = () => {
-  const { unSelectList } = useFolders();
+  const { unSelectList, closeAllFolders } = useFolders();
 
   const navigate = useNavigate();
 
   const clearLists = () => {
     unSelectList();
+    closeAllFolders();
     navigate("/");
   };
 
