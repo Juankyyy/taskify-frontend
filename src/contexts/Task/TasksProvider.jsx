@@ -1,6 +1,8 @@
 import { TasksContext } from "./TasksContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useFolders } from "../../hooks/useFolders";
 import {
   completeTask,
   getTasks,
@@ -11,8 +13,6 @@ import {
   restoreTask,
   deleteTask,
 } from "../../services/task";
-import toast from "react-hot-toast";
-import { useFolders } from "../../hooks/useFolders";
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);

@@ -1,9 +1,9 @@
-import { EmailInput } from "./FormInputs/EmailInput";
-import { PasswordInput } from "./FormInputs/PasswordInput";
-import { useForm } from "../../hooks/useForm";
-import { ButtonForm } from "./FormInputs/ButtonForm";
 import { useEffect } from "react";
 import { useState } from "react";
+import { EmailInput } from "./FormInputs/EmailInput";
+import { PasswordInput } from "./FormInputs/PasswordInput";
+import { ButtonForm } from "./FormInputs/ButtonForm";
+import { useForm } from "../../hooks/useForm";
 
 export const LoginForm = () => {
   const initialForm = {

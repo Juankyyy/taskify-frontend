@@ -1,5 +1,4 @@
-import { Trash } from "lucide-react";
-import { Plus } from "lucide-react";
+import { Trash, Plus } from "lucide-react";
 import { Tooltip } from "../Tooltip";
 import { CreateFolder } from "../Modals/CreateFolder";
 import { useFolders } from "../../hooks/useFolders";

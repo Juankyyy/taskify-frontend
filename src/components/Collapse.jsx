@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
-import { useState } from "react";
 
 export const Collapse = ({
   title,

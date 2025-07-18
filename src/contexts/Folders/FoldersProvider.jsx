@@ -2,6 +2,7 @@ import { FoldersContext } from "./FoldersContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Folder } from "lucide-react";
+import toast from "react-hot-toast";
 import {
   getFolders,
   getLists,
@@ -10,7 +11,6 @@ import {
   createList,
   deleteList,
 } from "../../services/folder";
-import toast from "react-hot-toast";
 
 export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);

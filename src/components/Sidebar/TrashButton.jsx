@@ -1,5 +1,5 @@
-import { Trash2 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Trash2 } from "lucide-react";
 import { useFolders } from "../../hooks/useFolders";
 
 export const TrashButton = () => {

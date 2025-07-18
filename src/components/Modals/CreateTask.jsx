@@ -1,6 +1,4 @@
-import { ClipboardList } from "lucide-react";
-import { Text } from "lucide-react";
-import { BookCheck } from "lucide-react";
+import { Text, BookCheck, ClipboardList } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { useFolders } from "../../hooks/useFolders";
 import { useModalCreate } from "../../hooks/useModalCreate";

@@ -1,8 +1,8 @@
+import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { MainLayout } from "../Layouts/MainLayout";
 import { Greetings } from "../components/Home/Greetings";
-import { Toaster } from "react-hot-toast";
-import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
 import { useFolders } from "../hooks/useFolders";
 
 export const Home = () => {
