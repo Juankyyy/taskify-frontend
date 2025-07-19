@@ -19,7 +19,7 @@ export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const notifyError = (message) => toast.error(message);
+  const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
     toast.success(message, {
       duration: 3000,
@@ -68,23 +68,13 @@ export const TasksProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
-
       const response = await completeTask(taskId, token);
       if (!response.error) {
         notifySuccess(response);
-
-        if (selectedTask) {
-          const TaskUpdated = await getTasksByList();
-          setSelectedTask(TaskUpdated);
-        } else {
-          await getTasksByList();
-        }
       }
     } catch (err) {
-      console.error("Error al completar la tarea:", err.message);
-    } finally {
-      setIsLoading(false);
+      notifyError("Error al completar la tarea", err);
+      throw new Error(err);
     }
   };
 

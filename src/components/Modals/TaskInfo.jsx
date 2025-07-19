@@ -5,7 +5,7 @@ import { useTasks } from "../../hooks/useTasks";
 import { useModalCreate } from "../../hooks/useModalCreate";
 
 export const TaskInfo = () => {
-  const { selectedTask, completeTaskbyId, updateTaskbyId, isLoading } =
+  const { selectedTask, updateTaskbyId, isLoading } =
     useTasks();
 
   const initialForm = {

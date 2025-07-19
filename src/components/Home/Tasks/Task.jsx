@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { relativeDate } from "../../../utils/dates";
 import { useTasks } from "../../../hooks/useTasks";
 import { useFolders } from "../../../hooks/useFolders";
@@ -6,7 +7,7 @@ import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
   const {
-    tasks,
+    tasks: originalTasks,
     completeTaskbyId,
     archiveTaskbyId,
     updateSelectedTask,
@@ -14,10 +15,34 @@ export const Task = () => {
 
   const { selectedList } = useFolders();
 
-  const handleCompleteTask = (e, taskId) => {
+  // Estado local para manejar las tareas
+  const [tasks, setTasks] = useState(originalTasks);
+
+  // Sincronizar con las tareas originales cuando cambien
+  useEffect(() => {
+    setTasks(originalTasks);
+  }, [originalTasks]);
+
+  const handleCompleteTask = async (e, taskId) => {
     e.stopPropagation();
 
-    completeTaskbyId(taskId);
+    // Cambiar manualmente el completed en el estado local
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
+
+    try {
+      await completeTaskbyId(taskId);
+    } catch {
+      // Revertir en caso de error
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, completed: !task.completed } : task
+        )
+      );
+    }
   };
 
   if (!selectedList) return null;
@@ -44,7 +69,9 @@ export const Task = () => {
             </div>
             <div className="flex gap-4 items-center">
               <div>
-                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{relativeDate(task.createdAt)}</p>
+                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
+                  {relativeDate(task.createdAt)}
+                </p>
               </div>
               <div
                 className={`badge badge-soft badge-outline bg-base-200/50 ${
