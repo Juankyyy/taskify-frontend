@@ -38,9 +38,10 @@ export const Trash = () => {
       </div>
 
       {isLoading ? (
-        <p className="text-center text-gray-500 py-8">
-          Cargando tareas eliminadas...
-        </p>
+        <div className="flex flex-col items-center justify-center py-5">
+            <div className="loading loading-dots loading-lg mb-4"></div>
+            <p className="text-gray-500">Cargando tareas eliminadas...</p>
+          </div>
       ) : (
         <div className="flex flex-col gap-3">
           {deletedTasks.map((task) => (
