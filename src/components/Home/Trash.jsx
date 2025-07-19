@@ -93,13 +93,10 @@ export const Trash = () => {
                     </div>
 
                     <div
-                      onClick={() => restoreTaskbyId(task)}
+                      onClick={() => deleteTaskbyId(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
                     >
-                      <Trash2
-                        onClick={() => deleteTaskbyId(task)}
-                        className="w-icon h-icon cursor-pointer group-hover:stroke-red-600"
-                      />
+                      <Trash2 className="w-icon h-icon cursor-pointer group-hover:stroke-red-600" />
                     </div>
                   </div>
                 </div>
