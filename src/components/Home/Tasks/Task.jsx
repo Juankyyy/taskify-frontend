@@ -50,24 +50,28 @@ export const Task = () => {
   return (
     <div className="flex flex-col gap-3">
       {tasks.map((task) => (
-        <div key={task._id}>
+        <div key={task._id} className="flex justify-center items-center">
           <div
             onClick={() => updateSelectedTask(task)}
-            className="flex items-center justify-between gap-3 p-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
+            className="flex w-full h-12 px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
           >
-            <div className="flex items-center gap-3 justify-center group">
-              <input
-                type="checkbox"
-                checked={task.completed}
-                className="checkbox checkbox-info cursor-default"
+            <div className="flex items-center gap-1 justify-center group h-full">
+              <div
                 onClick={(e) => handleCompleteTask(e, task._id)}
-                onChange={() => {}}
-              />
+                className="h-full flex items-center cursor-default px-2"
+              >
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  className="checkbox checkbox-info"
+                  onChange={() => {}}
+                />
+              </div>
               <h1 className="group-has-[:checked]:line-through">
                 {task.title}
               </h1>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex h-full gap-4 items-center">
               <div>
                 <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
                   {relativeDate(task.createdAt)}
@@ -89,13 +93,15 @@ export const Task = () => {
                 ></span>
                 <p className="font-medium">{task.priority}</p>
               </div>
-              <Trash2
+              <div
                 onClick={(e) => {
                   e.stopPropagation();
                   archiveTaskbyId(task);
                 }}
-                className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
-              />
+                className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
+              >
+                <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
+              </div>
             </div>
           </div>
         </div>
