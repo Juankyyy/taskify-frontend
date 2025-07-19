@@ -8,7 +8,7 @@ import { CreateTask } from "../../Modals/CreateTask";
 import { ModalDelete } from "../../Modals/ModalDelete";
 
 export const Tasks = () => {
-  const { getTasksByList, selectedTask, isLoading } = useTasks();
+  const { getTasksByList, isLoading } = useTasks();
 
   const { deleteListById, selectedList, selectedFolder } = useFolders();
 
@@ -63,7 +63,7 @@ export const Tasks = () => {
         )}
       </div>
 
-      {selectedTask && <TaskInfo />}
+      <TaskInfo />
       <CreateTask />
 
       <ModalDelete

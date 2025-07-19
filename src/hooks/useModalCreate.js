@@ -13,8 +13,10 @@ export const useModalCreate = (initialForm, createFunction, type) => {
 
     if (type === "folder") {
       await createFunction(formState.folderName);
+      setFormState(initialForm);
     } else if (type === "list") {
       await createFunction(formState.title, formState.folderId);
+      setFormState(initialForm);
     } else if (type === "task") {
       await createFunction(
         formState.title,
@@ -23,14 +25,17 @@ export const useModalCreate = (initialForm, createFunction, type) => {
         formState.listId,
         formState.folderId
       );
+      setFormState(initialForm);
+    } else if (type === "task-edit") {
+      console.log(formState);
+      await createFunction(formState);
     }
-    
-    setFormState(initialForm);
   };
 
   return {
     ...formState,
     formState,
+    setFormState,
     onSubmit,
     onInputChange,
   };
