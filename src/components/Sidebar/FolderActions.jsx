@@ -9,9 +9,12 @@ export const FolderActions = ({ title, folderId }) => {
     folderId: folderId,
   };
 
-  const { modalSelectFolder, modalSelectedFolder, handleCreateList } =
-    useFolders();
-  // console.log(modalSelectedFolder);
+  const {
+    modalSelectFolder,
+    modalSelectedFolder,
+    handleCreateList,
+    isCreating,
+  } = useFolders();
 
   const onCreateClick = () => {
     modalSelectFolder(title, folderId);
@@ -25,14 +28,14 @@ export const FolderActions = ({ title, folderId }) => {
 
   return (
     <div className="flex justify-center items-center gap-2 z-20 overflow-visible h-min mt-[2px]">
-      <Tooltip title={"Nueva lista"}>
+      <Tooltip title={"Nueva carpeta"}>
         <Plus
           onClick={onCreateClick}
           className="w-7 h-7 p-1 stroke-3 stroke-slate-400 cursor-pointer rounded-full transition-colors hover:bg-green-600 hover:stroke-white hover:animate-pop hover:animate-duration-500"
         />
       </Tooltip>
 
-      <Tooltip title={"Eliminar lista"}>
+      <Tooltip title={"Eliminar carpeta"}>
         <Trash
           onClick={onDeleteClick}
           className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600"
@@ -43,6 +46,7 @@ export const FolderActions = ({ title, folderId }) => {
         selectedFolderTitle={modalSelectedFolder.title}
         type="list"
         handleCreate={handleCreateList}
+        isLoading={isCreating}
         initialForm={initialForm}
       />
     </div>

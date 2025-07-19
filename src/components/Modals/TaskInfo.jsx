@@ -129,11 +129,10 @@ export const TaskInfo = () => {
 
             <div className="flex justify-end mt-4">
               <button type="submit" className="btn btn-info">
-                {isLoading ? (
-                  <span className="loading loading-spinner loading-md"></span>
-                ) : (
-                  "Guardar"
-                )}
+                {isLoading && (
+                <span className="loading loading-spinner loading-sm mr-1"></span>
+              )}
+              Guardar
               </button>
             </div>
           </form>

@@ -8,9 +8,9 @@ import { CreateTask } from "../../Modals/CreateTask";
 import { ModalDelete } from "../../Modals/ModalDelete";
 
 export const Tasks = () => {
-  const { getTasksByList, isLoading } = useTasks();
+  const { getTasksByList, isLoading: isLoadingTasks } = useTasks();
 
-  const { deleteListById, selectedList, selectedFolder } = useFolders();
+  const { deleteListById, selectedList, selectedFolder, isLoading: isLoadingList } = useFolders();
 
   useEffect(() => {
     if (selectedList) {
@@ -56,7 +56,7 @@ export const Tasks = () => {
       </div>
 
       <div>
-        {isLoading ? (
+        {isLoadingTasks ? (
           <p className="text-center text-gray-500 py-2">Cargando tareas...</p>
         ) : (
           <Task />
@@ -69,6 +69,7 @@ export const Tasks = () => {
       <ModalDelete
         title={selectedList.title}
         handleDelete={deleteListById}
+        isLoading={isLoadingList}
         type="list"
         modalId="delete-list-modal"
       />

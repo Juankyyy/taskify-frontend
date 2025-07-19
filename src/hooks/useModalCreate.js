@@ -27,7 +27,6 @@ export const useModalCreate = (initialForm, createFunction, type) => {
       );
       setFormState(initialForm);
     } else if (type === "task-edit") {
-      console.log(formState);
       await createFunction(formState);
     }
   };
