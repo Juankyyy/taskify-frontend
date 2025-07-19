@@ -10,7 +10,12 @@ import { ModalDelete } from "../../Modals/ModalDelete";
 export const Tasks = () => {
   const { getTasksByList, isLoading: isLoadingTasks } = useTasks();
 
-  const { deleteListById, selectedList, selectedFolder, isLoading: isLoadingList } = useFolders();
+  const {
+    deleteListById,
+    selectedList,
+    selectedFolder,
+    isLoading: isLoadingList,
+  } = useFolders();
 
   useEffect(() => {
     if (selectedList) {
@@ -39,13 +44,13 @@ export const Tasks = () => {
           <button className="btn btn-info btn-soft p-1 w-8 h-8 group">
             <Pencil className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
           </button>
-          <button className="btn btn-error btn-soft p-1 w-8 h-8 group">
-            <Trash
-              onClick={() =>
-                document.getElementById("delete-list-modal").showModal()
-              }
-              className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white"
-            />
+          <button
+            onClick={() =>
+              document.getElementById("delete-list-modal").showModal()
+            }
+            className="btn btn-error btn-soft p-1 w-8 h-8 group"
+          >
+            <Trash className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
           </button>
         </div>
       </div>
@@ -57,7 +62,10 @@ export const Tasks = () => {
 
       <div>
         {isLoadingTasks ? (
-          <p className="text-center text-gray-500 py-2">Cargando tareas...</p>
+          <div className="flex flex-col items-center justify-center py-5">
+            <div className="loading loading-dots loading-lg mb-4"></div>
+            <p className="text-gray-500">Cargando tareas...</p>
+          </div>
         ) : (
           <Task />
         )}

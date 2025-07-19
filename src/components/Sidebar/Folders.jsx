@@ -39,7 +39,7 @@ export const Folders = () => {
       {isLoading ? (
         <div className="flex items-center justify-center flex-1">
           <div className="flex flex-col items-center gap-2">
-            <span className="loading loading-spinner loading-lg"></span>
+            <span className="loading loading-dots loading-lg"></span>
             <p className="text-sm text-gray-500">Cargando carpetas...</p>
           </div>
         </div>
