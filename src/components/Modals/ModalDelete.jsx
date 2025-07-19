@@ -1,4 +1,10 @@
-export const ModalDelete = ({ title = "Carpeta", handleDelete, type, modalId }) => {
+export const ModalDelete = ({
+  title = "Carpeta",
+  handleDelete,
+  isLoading,
+  type,
+  modalId,
+}) => {
   const typeLabels = {
     folder: "carpeta",
     task: "tarea",
@@ -38,7 +44,10 @@ export const ModalDelete = ({ title = "Carpeta", handleDelete, type, modalId }) 
             type="button"
             className="btn btn-error"
           >
-            Eliminar
+            {isLoading && (
+                <span className="loading loading-spinner loading-sm mr-1"></span>
+              )}
+              Eliminar
           </button>
         </div>
       </div>

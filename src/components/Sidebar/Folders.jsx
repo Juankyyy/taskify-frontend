@@ -15,13 +15,12 @@ export const Folders = () => {
     handleDeleteFolder,
     handleCreateFolder,
     isLoading,
+    isCreating,
   } = useFolders();
 
   const initialForm = {
     folderName: "",
   };
-
-  if (isLoading) return <p>Cargando carpetas...</p>;
 
   return (
     <div className="flex flex-col h-[640px]">
@@ -37,64 +36,74 @@ export const Folders = () => {
         </Tooltip>
       </div>
 
-      <div className="flex flex-col gap-1.5 flex-1 overflow-y-auto overflow-x-hidden">
-        {folders.map((folder) => {
-          const listsInFolder = lists.filter(
-            (list) => list.folder === folder._id
-          );
+      {isLoading ? (
+        <div className="flex items-center justify-center flex-1">
+          <div className="flex flex-col items-center gap-2">
+            <span className="loading loading-dots loading-lg"></span>
+            <p className="text-sm text-gray-500">Cargando carpetas...</p>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-1.5 flex-1 overflow-y-auto overflow-x-hidden">
+          {folders.map((folder) => {
+            const listsInFolder = lists.filter(
+              (list) => list.folder === folder._id
+            );
 
-          const isSelectedListInFolder =
-            selectedList &&
-            listsInFolder.some((list) => list._id === selectedList._id);
+            const isSelectedListInFolder =
+              selectedList &&
+              listsInFolder.some((list) => list._id === selectedList._id);
 
-          return (
-            <Collapse
-              key={folder._id}
-              title={folder.name}
-              folderId={folder._id}
-              defaultOpen={isSelectedListInFolder}
-            >
-              {listsInFolder.length > 0 ? (
-                listsInFolder.map((list, index) => (
-                  <div key={list._id} className="relative">
-                    <div
-                      className={`absolute -left-2 top-0 bottom-0 w-0.5 bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 ${
-                        index === listsInFolder.length - 1 ? "h-1" : "h-7"
-                      }`}
-                    ></div>
-                    <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
+            return (
+              <Collapse
+                key={folder._id}
+                title={folder.name}
+                folderId={folder._id}
+                defaultOpen={isSelectedListInFolder}
+              >
+                {listsInFolder.length > 0 ? (
+                  listsInFolder.map((list, index) => (
+                    <div key={list._id} className="relative">
+                      <div
+                        className={`absolute -left-2 top-0 bottom-0 w-0.5 bg-gray-300 [html[data-theme=dark]_&]:bg-gray-600 ${
+                          index === listsInFolder.length - 1 ? "h-1" : "h-7"
+                        }`}
+                      ></div>
+                      <div className="absolute -left-2 top-0.5 w-2 h-3 border-l-2 border-b-2 border-gray-300 [html[data-theme=dark]_&]:border-gray-600 rounded-bl-md"></div>
 
-                    <p
-                      title={list.title}
-                      className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-text-weight ${
-                        selectedList && selectedList._id === list._id
-                          ? "font-bold bg-gray-200 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
-                          : ""
-                      }`}
-                      onClick={() => updateSelectedList(list, folder)}
-                    >
-                      {list.title}
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-500 px-2 -ml-4">No hay Listas</p>
-              )}
-            </Collapse>
-          );
-        })}
-      </div>
+                      <p
+                        title={list.title}
+                        className={`px-2 w-min cursor-pointer truncate max-w-[153px] transition-text-weight ${
+                          selectedList && selectedList._id === list._id
+                            ? "font-bold bg-gray-200 [html[data-theme=dark]_&]:bg-gray-600 rounded-md"
+                            : ""
+                        }`}
+                        onClick={() => updateSelectedList(list, folder)}
+                      >
+                        {list.title}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500 px-2 -ml-4">No hay Listas</p>
+                )}
+              </Collapse>
+            );
+          })}
+        </div>
+      )}
 
       <ModalDelete
         title={modalSelectedFolder.title}
         handleDelete={handleDeleteFolder}
+        isLoading={isLoading}
         type="folder"
         modalId="delete-folder-modal"
       />
 
       <CreateFolderList
         handleCreate={handleCreateFolder}
-        isLoading={isLoading}
+        isLoading={isCreating}
         initialForm={initialForm}
         type="folder"
       />

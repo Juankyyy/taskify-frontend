@@ -19,7 +19,7 @@ export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const notifyError = (message) => toast.error(message);
+  const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
     toast.success(message, {
       duration: 3000,
@@ -47,6 +47,8 @@ export const TasksProvider = ({ children }) => {
       const response = await getTasks(selectedList._id, token);
       if (!response.error) {
         setTasks(response);
+      } else {
+        notifyError(response.message);
       }
       if (selectedTask) {
         const TaskUpdated = response.find(
@@ -68,23 +70,13 @@ export const TasksProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
-
       const response = await completeTask(taskId, token);
       if (!response.error) {
         notifySuccess(response);
-
-        if (selectedTask) {
-          const TaskUpdated = await getTasksByList();
-          setSelectedTask(TaskUpdated);
-        } else {
-          await getTasksByList();
-        }
       }
     } catch (err) {
-      console.error("Error al completar la tarea:", err.message);
-    } finally {
-      setIsLoading(false);
+      notifyError("Error al completar la tarea", err);
+      throw new Error(err);
     }
   };
 
@@ -119,6 +111,8 @@ export const TasksProvider = ({ children }) => {
         );
         await getTasksByList();
         document.getElementById("create-task-modal").close();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al crear la tarea:", err.message);
@@ -144,6 +138,8 @@ export const TasksProvider = ({ children }) => {
           </span>
         );
         await getTasksByList();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al completar la tarea:", err.message);
@@ -164,6 +160,8 @@ export const TasksProvider = ({ children }) => {
       const response = await getTrash(token);
       if (!response.error) {
         setDeletedTasks(response);
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al cargar las tareas:", err.message);
@@ -185,6 +183,8 @@ export const TasksProvider = ({ children }) => {
       if (!response.error) {
         notifySuccess("Todas las tareas se han eliminado permanentemente");
         await getTrashTasks();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al vaciar la papelera:", err.message);
@@ -210,6 +210,8 @@ export const TasksProvider = ({ children }) => {
           </span>
         );
         await getTrashTasks();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al restaurar la tarea:", err.message);
@@ -235,6 +237,8 @@ export const TasksProvider = ({ children }) => {
           </span>
         );
         await getTrashTasks();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al eliminar la tarea:", err.message);
@@ -267,6 +271,8 @@ export const TasksProvider = ({ children }) => {
           </span>
         );
         await getTasksByList();
+      } else {
+        notifyError(response.message);
       }
     } catch (err) {
       console.error("Error al actualizar la tarea:", err.message);

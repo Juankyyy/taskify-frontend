@@ -16,6 +16,7 @@ export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCreating, setIsCreating] = useState(false); // Solo un estado adicional
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -84,6 +85,7 @@ export const FoldersProvider = ({ children }) => {
       console.error("Error al eliminar la carpeta:", err.message);
     } finally {
       setIsLoading(false);
+      document.getElementById("delete-folder-modal").close();
     }
   };
 
@@ -94,7 +96,7 @@ export const FoldersProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
+      setIsCreating(true); // Usar isCreating en lugar de isLoading
 
       const response = await createFolder(folderName, token);
       if (!response.error) {
@@ -110,7 +112,8 @@ export const FoldersProvider = ({ children }) => {
     } catch (err) {
       console.error("Error al crear la carpeta:", err.message);
     } finally {
-      setIsLoading(false);
+      setIsCreating(false);
+      document.getElementById("create-folder-modal").close();
     }
   };
 
@@ -121,7 +124,7 @@ export const FoldersProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
+      setIsCreating(true); // Usar isCreating en lugar de isLoading
 
       const response = await createList(
         listName,
@@ -145,7 +148,8 @@ export const FoldersProvider = ({ children }) => {
     } catch (err) {
       console.error("Error al crear la lista:", err.message);
     } finally {
-      setIsLoading(false);
+      setIsCreating(false);
+      document.getElementById("create-list-modal").close();
     }
   };
 
@@ -166,8 +170,8 @@ export const FoldersProvider = ({ children }) => {
           </span>
         );
 
-        await getFoldersAndLists();
         navigate("/");
+        await getFoldersAndLists();
       } else {
         notifyError(response.message);
       }
@@ -222,6 +226,7 @@ export const FoldersProvider = ({ children }) => {
     unSelectList,
     closeAllFolders,
     isLoading,
+    isCreating,
   };
 
   return (

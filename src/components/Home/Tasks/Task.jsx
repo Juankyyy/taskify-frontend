@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { relativeDate } from "../../../utils/dates";
 import { useTasks } from "../../../hooks/useTasks";
 import { useFolders } from "../../../hooks/useFolders";
@@ -6,7 +7,7 @@ import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
   const {
-    tasks,
+    tasks: originalTasks,
     completeTaskbyId,
     archiveTaskbyId,
     updateSelectedTask,
@@ -14,10 +15,34 @@ export const Task = () => {
 
   const { selectedList } = useFolders();
 
-  const handleCompleteTask = (e, taskId) => {
+  // Estado local para manejar las tareas
+  const [tasks, setTasks] = useState(originalTasks);
+
+  // Sincronizar con las tareas originales cuando cambien
+  useEffect(() => {
+    setTasks(originalTasks);
+  }, [originalTasks]);
+
+  const handleCompleteTask = async (e, taskId) => {
     e.stopPropagation();
 
-    completeTaskbyId(taskId);
+    // Cambiar manualmente el completed en el estado local
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
+
+    try {
+      await completeTaskbyId(taskId);
+    } catch {
+      // Revertir en caso de error
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, completed: !task.completed } : task
+        )
+      );
+    }
   };
 
   if (!selectedList) return null;
@@ -25,26 +50,32 @@ export const Task = () => {
   return (
     <div className="flex flex-col gap-3">
       {tasks.map((task) => (
-        <div key={task._id}>
+        <div key={task._id} className="flex justify-center items-center">
           <div
             onClick={() => updateSelectedTask(task)}
-            className="flex items-center justify-between gap-3 p-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
+            className="flex w-full h-12 px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
           >
-            <div className="flex items-center gap-3 justify-center group">
-              <input
-                type="checkbox"
-                checked={task.completed}
-                className="checkbox checkbox-info cursor-default"
+            <div className="flex items-center gap-1 justify-center group h-full">
+              <div
                 onClick={(e) => handleCompleteTask(e, task._id)}
-                onChange={() => {}}
-              />
+                className="h-full flex items-center cursor-default px-2"
+              >
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  className="checkbox checkbox-info"
+                  onChange={() => {}}
+                />
+              </div>
               <h1 className="group-has-[:checked]:line-through">
                 {task.title}
               </h1>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex h-full gap-4 items-center">
               <div>
-                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">{relativeDate(task.createdAt)}</p>
+                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
+                  {relativeDate(task.createdAt)}
+                </p>
               </div>
               <div
                 className={`badge badge-soft badge-outline bg-base-200/50 ${
@@ -62,13 +93,15 @@ export const Task = () => {
                 ></span>
                 <p className="font-medium">{task.priority}</p>
               </div>
-              <Trash2
+              <div
                 onClick={(e) => {
                   e.stopPropagation();
                   archiveTaskbyId(task);
                 }}
-                className="w-icon h-icon cursor-pointer hover:animate-tada hover:stroke-red-600"
-              />
+                className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
+              >
+                <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
+              </div>
             </div>
           </div>
         </div>

@@ -86,11 +86,10 @@ export const CreateTask = () => {
 
           <div className="flex justify-end mt-4">
             <button type="submit" className="btn btn-success">
-              {isLoading ? (
-                <span className="loading loading-spinner loading-md"></span>
-              ) : (
-                "Crear"
+              {isLoading && (
+                <span className="loading loading-spinner loading-sm mr-1"></span>
               )}
+              Crear
             </button>
           </div>
         </form>
