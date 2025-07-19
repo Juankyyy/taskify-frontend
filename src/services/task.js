@@ -189,3 +189,32 @@ export const deleteTask = async (taskId, token) => {
     throw err;
   }
 };
+
+export const updateTask = async (taskId, title, description, priority, completed, token) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/update/${taskId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        priority,
+        completed,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al actualizar la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};

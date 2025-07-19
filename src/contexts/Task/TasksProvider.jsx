@@ -12,6 +12,7 @@ import {
   emptyTrash,
   restoreTask,
   deleteTask,
+  updateTask,
 } from "../../services/task";
 
 export const TasksProvider = ({ children }) => {
@@ -30,7 +31,7 @@ export const TasksProvider = ({ children }) => {
 
   const { selectedList } = useFolders();
 
-  const [selectedTask, setSelectedTask] = useState({});
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const [deletedTasks, setDeletedTasks] = useState([]);
 
@@ -242,25 +243,59 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const updateTaskbyId = async (task) => {
+    try {
+      if (!token) {
+        console.error("Token no encontrado");
+        navigate("/auth");
+      }
+
+      setIsLoading(true);
+
+      const response = await updateTask(
+        task.id,
+        task.title,
+        task.description,
+        task.priority,
+        task.completed,
+        token
+      );
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Tarea<strong> {task.title} </strong> actualizada correctamente
+          </span>
+        );
+        await getTasksByList();
+      }
+    } catch (err) {
+      console.error("Error al actualizar la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+      document.getElementById("task-info-modal").close();
+    }
+  };
+
   const updateSelectedTask = (task) => {
     setSelectedTask(task);
     document.getElementById("task-info-modal").showModal();
   };
 
   const value = {
+    isLoading,
     getTasksByList,
     tasks,
-    deletedTasks,
-    isLoading,
     selectedTask,
     completeTaskbyId,
     createTaskbyId,
     archiveTaskbyId,
     updateSelectedTask,
+    deletedTasks,
     getTrashTasks,
     emptyTrashTasks,
     restoreTaskbyId,
     deleteTaskbyId,
+    updateTaskbyId,
   };
 
   return (
