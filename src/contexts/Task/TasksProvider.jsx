@@ -128,8 +128,6 @@ export const TasksProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
-
       const response = await archiveTask(task._id, token);
       if (!response.error) {
         notifySuccess(
@@ -137,14 +135,12 @@ export const TasksProvider = ({ children }) => {
             Tarea<strong> {task.title} </strong> enviada a la papelera
           </span>
         );
-        await getTasksByList();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error("Error al completar la tarea:", err.message);
-    } finally {
-      setIsLoading(false);
+      notifyError("Error al completar la tarea:", err.message);
+      throw new Error(err);
     }
   };
 
@@ -200,8 +196,6 @@ export const TasksProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
-
       const response = await restoreTask(task._id, token);
       if (!response.error) {
         notifySuccess(
@@ -209,14 +203,12 @@ export const TasksProvider = ({ children }) => {
             Tarea<strong> {task.title} </strong> restaurada correctamente
           </span>
         );
-        await getTrashTasks();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error("Error al restaurar la tarea:", err.message);
-    } finally {
-      setIsLoading(false);
+      notifyError("Error al restaurar la tarea", err);
+      throw new Error(err);
     }
   };
 
@@ -227,8 +219,6 @@ export const TasksProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsLoading(true);
-
       const response = await deleteTask(task._id, token);
       if (!response.error) {
         notifySuccess(
@@ -236,14 +226,12 @@ export const TasksProvider = ({ children }) => {
             Tarea<strong> {task.title} </strong> eliminada permanentemente
           </span>
         );
-        await getTrashTasks();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error("Error al eliminar la tarea:", err.message);
-    } finally {
-      setIsLoading(false);
+      notifyError("Error al eliminar la tarea:", err.message);
+      throw new Error(err);
     }
   };
 

@@ -45,6 +45,23 @@ export const Task = () => {
     }
   };
 
+  const handleArchiveTask = async (e, task) => {
+    e.stopPropagation();
+
+    setTasks(
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+    );
+
+    try {
+      await archiveTaskbyId(task);
+    } catch {
+      // Revertir en caso de error
+      setTasks(
+        (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+      );
+    }
+  };
+
   if (!selectedList) return null;
 
   return (
@@ -94,10 +111,7 @@ export const Task = () => {
                 <p className="font-medium">{task.priority}</p>
               </div>
               <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  archiveTaskbyId(task);
-                }}
+                onClick={(e) => handleArchiveTask(e, task)}
                 className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
               >
                 <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
