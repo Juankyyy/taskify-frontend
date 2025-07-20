@@ -2,20 +2,53 @@ import { useEffect } from "react";
 import { ArchiveRestore, Trash2, Shredder } from "lucide-react";
 import { relativeDate } from "../../utils/dates";
 import { useTasks } from "../../hooks/useTasks";
+import { useState } from "react";
 
 export const Trash = () => {
   const {
     getTrashTasks,
-    deletedTasks,
+    deletedTasks: originalDeletedTasks,
     isLoading,
     emptyTrashTasks,
     restoreTaskbyId,
     deleteTaskbyId,
   } = useTasks();
 
+  const [deletedTasks, setDeletedTasks] = useState(originalDeletedTasks);
+
   useEffect(() => {
     getTrashTasks();
   }, []);
+
+  useEffect(() => {
+    setDeletedTasks(originalDeletedTasks);
+  }, [originalDeletedTasks]);
+
+  const handleRestoreTask = async (task) => {
+    setDeletedTasks(
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+    );
+
+    try {
+      await restoreTaskbyId(task);
+    } catch {
+      // Revertir en caso de error
+      setDeletedTasks((prevTasks) => [...prevTasks, task]);
+    }
+  };
+
+  const handleDeleteTask = async (task) => {
+    setDeletedTasks(
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+    );
+
+    try {
+      await deleteTaskbyId(task);
+    } catch {
+      // Revertir en caso de error
+      setDeletedTasks((prevTasks) => [...prevTasks, task]);
+    }
+  };
 
   return (
     <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
@@ -86,14 +119,14 @@ export const Trash = () => {
 
                   <div className="flex gap-1 h-full items-center">
                     <div
-                      onClick={() => restoreTaskbyId(task)}
+                      onClick={() => handleRestoreTask(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
                     >
                       <ArchiveRestore className="w-icon h-icon group-hover:stroke-green-600" />
                     </div>
 
                     <div
-                      onClick={() => deleteTaskbyId(task)}
+                      onClick={() => handleDeleteTask(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
                     >
                       <Trash2 className="w-icon h-icon cursor-pointer group-hover:stroke-red-600" />

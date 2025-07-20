@@ -16,7 +16,7 @@ export const FoldersProvider = ({ children }) => {
   const [folders, setFolders] = useState([]);
   const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCreating, setIsCreating] = useState(false); // Solo un estado adicional
+  const [isCreating, setIsCreating] = useState(false);
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -96,7 +96,7 @@ export const FoldersProvider = ({ children }) => {
         navigate("/auth");
       }
 
-      setIsCreating(true); // Usar isCreating en lugar de isLoading
+      setIsCreating(true); // IsCreating solo es pa funciones creadoras
 
       const response = await createFolder(folderName, token);
       if (!response.error) {
