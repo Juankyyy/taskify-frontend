@@ -28,7 +28,7 @@ export const CreateTask = () => {
   }
 
   return (
-    <dialog id="create-task-modal" className="modal">
+    <dialog id="create-task-modal" className="modal modal-top sm:modal-middle">
       <div className="modal-box">
         <div className="flex gap-2 items-center">
           <ClipboardList className="w-4 h-4 stroke-gray-500 [html[data-theme=dark]_&]:stroke-gray-400" />

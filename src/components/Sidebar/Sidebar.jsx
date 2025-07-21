@@ -14,9 +14,9 @@ export const Sidebar = () => {
         <Folders />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col sm:gap-4 gap-2">
         <TrashButton />
-        <div className="flex justify-center items-center">
+        <div className="justify-center items-center sm:flex hidden">
           <Theme />
         </div>
         <Account />
