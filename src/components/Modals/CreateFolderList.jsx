@@ -29,7 +29,7 @@ export const CreateFolderList = ({
   const placeholder = isFolder ? "Nombre de la carpeta" : "Nombre de la lista";
 
   return (
-    <dialog id={modalId} className="modal">
+    <dialog id={modalId} className="modal modal-top sm:modal-middle">
       <div className="modal-box md:w-96">
         <div className="flex gap-2 items-center">
           {!isFolder && (

@@ -49,15 +49,14 @@ export const Task = () => {
     e.stopPropagation();
 
     setTasks(
-      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccione
     );
 
     try {
       await archiveTaskbyId(task);
     } catch {
-      // Revertir en caso de error
       setTasks(
-        (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+        (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccione
       );
     }
   };
@@ -65,7 +64,7 @@ export const Task = () => {
   if (!selectedList) return null;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 overflow-y-auto sm:max-h-[650px] max-h-[200px] sm:pb-6">
       {tasks.map((task) => (
         <div key={task._id} className="flex justify-center items-center">
           <div
@@ -84,13 +83,13 @@ export const Task = () => {
                   onChange={() => {}}
                 />
               </div>
-              <h1 className="group-has-[:checked]:line-through">
+              <h1 className="group-has-[:checked]:line-through truncate inline-block max-w-[120px] sm:max-w-[300px]">
                 {task.title}
               </h1>
             </div>
             <div className="flex h-full gap-4 items-center">
               <div>
-                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
+                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500 sm:block hidden">
                   {relativeDate(task.createdAt)}
                 </p>
               </div>

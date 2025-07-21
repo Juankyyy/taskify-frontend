@@ -1,5 +1,6 @@
 import { useFolders } from "../../hooks/useFolders";
 import { useNavigate } from "react-router-dom";
+import { Theme } from "./Theme";
 
 export const Logo = () => {
   const { unSelectList, closeAllFolders } = useFolders();
@@ -13,13 +14,16 @@ export const Logo = () => {
   };
 
   return (
-    <div className="flex gap-1 items-center mb-5">
+    <div className="flex gap-1 items-center mb-5 justify-between">
       <div
         onClick={clearLists}
         className="flex items-center gap-1 cursor-pointer"
       >
         <img width="20px" height="20px" src="/taskify.png" alt="Taskify Logo" />
         <h1 className="text-2xl font-bold">Taskify</h1>
+      </div>
+      <div className="sm:hidden block">
+        <Theme />
       </div>
     </div>
   );

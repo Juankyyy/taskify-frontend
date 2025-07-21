@@ -26,20 +26,19 @@ export const Trash = () => {
 
   const handleRestoreTask = async (task) => {
     setDeletedTasks(
-      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccione
     );
 
     try {
       await restoreTaskbyId(task);
     } catch {
-      // Revertir en caso de error
       setDeletedTasks((prevTasks) => [...prevTasks, task]);
     }
   };
 
   const handleDeleteTask = async (task) => {
     setDeletedTasks(
-      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccioné
+      (prevTasks) => prevTasks.filter((t) => t._id !== task._id) // Todas las tareas menos la que seleccione
     );
 
     try {
@@ -76,7 +75,7 @@ export const Trash = () => {
           <p className="text-gray-500">Cargando tareas eliminadas...</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 overflow-y-auto sm:max-h-[650px] max-h-[230px]">
           {deletedTasks.map((task) => (
             <div key={task._id} className="flex justify-center items-center">
               <div className="flex w-full h-12 px-3 items-center justify-between gap-3 hover:bg-base-200/50 rounded-lg transition-border-color-bg">
@@ -88,13 +87,16 @@ export const Trash = () => {
                     disabled
                     onChange={() => {}}
                   />
-                  <h1 className="group-has-[:checked]:line-through text-gray-500">
+                  <h1
+                    title={task.title}
+                    className="group-has-[:checked]:line-through text-gray-500 truncate inline-block max-w-[100px] sm:max-w-[250px]"
+                  >
                     {task.title}
                   </h1>
                 </div>
                 <div className="flex h-full gap-4 items-center">
                   <p
-                    className="text-gray-300 [html[data-theme=light]_&]:text-gray-500"
+                    className="text-gray-300 [html[data-theme=light]_&]:text-gray-500 sm:block hidden"
                     title={`Creado ${relativeDate(task.updatedAt)}`}
                   >
                     Eliminado {relativeDate(task.updatedAt)}
