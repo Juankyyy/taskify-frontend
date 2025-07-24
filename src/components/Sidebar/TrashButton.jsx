@@ -5,7 +5,7 @@ import { useFolders } from "../../hooks/useFolders";
 export const TrashButton = () => {
   const { unSelectList } = useFolders();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const isTrashView = location.pathname === "/trash";
 
