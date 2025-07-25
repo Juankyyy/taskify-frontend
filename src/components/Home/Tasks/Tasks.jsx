@@ -56,7 +56,7 @@ export const Tasks = () => {
       </div>
 
       <div className="flex flex-col mb-8">
-        <h1 className="font-bold text-3xl">Tareas</h1>
+        <h1 className="font-bold sm:text-3xl text-xl">Tareas</h1> 
         <p className="text-gray-400">{selectedList.description}</p>
       </div>
 
