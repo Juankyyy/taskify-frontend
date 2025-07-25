@@ -23,7 +23,7 @@ export const Folders = () => {
   };
 
   return (
-    <div className="flex flex-col sm:h-[640px] min-h-[200px] max-h-[165px]">
+    <div className="flex flex-col sm:max-h-[640px] max-h-[165px]">
       <div className="flex w-full items-center justify-between sm:mb-5 mb-3">
         <h1 className="text-lg font-bold">Carpetas</h1>
         <Tooltip title={"Nueva carpeta"}>
