@@ -50,10 +50,10 @@ export const Trash = () => {
   };
 
   return (
-    <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
+    <section className="bg-base-200/50 sm:p-5 p-4 rounded-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
         <div className="flex justify-between items-center">
-          <h1 className="font-bold text-3xl">Papelera</h1>
+          <h1 className="font-bold sm:text-3xl text-xl">Papelera</h1>
           {deletedTasks.length === 0 ? (
             ""
           ) : (

@@ -3,24 +3,13 @@ import { Folders } from "./Folders.jsx";
 import { Account } from "./Account.jsx";
 import { Theme } from "./Theme.jsx";
 import { TrashButton } from "./TrashButton.jsx";
-import { useState, useEffect } from "react";
+import { useLargeScreen } from "../../hooks/useLargeScreen.js";
 
 export const Sidebar = () => {
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 640);
-    };
-
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+  const { isLargeScreen } = useLargeScreen();
 
   return (
-    <nav className="bg-base-200/50 flex flex-col justify-between p-4 rounded-xl h-1/2 sm:max-w-80 sm:min-w-72 sm:h-[calc(100dvh-20px)]">
+    <nav className="bg-base-200/50 flex flex-col justify-between sm:p-5 p-4 rounded-xl h-1/2 sm:max-w-80 sm:min-w-72 sm:h-[calc(100dvh-20px)]">
       <div>
         <Logo />
         <Folders />

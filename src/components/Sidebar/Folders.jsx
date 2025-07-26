@@ -23,8 +23,8 @@ export const Folders = () => {
   };
 
   return (
-    <div className="flex flex-col sm:max-h-[640px] max-h-[165px]">
-      <div className="flex w-full items-center justify-between sm:mb-5 mb-3">
+    <div className="flex flex-col sm:max-h-[640px] max-h-[230px] overflow-y-auto overflow-x-hidden">
+      <div className="w-full items-center justify-between sm:mb-5 mb-3 sm:flex hidden">
         <h1 className="text-lg font-bold">Carpetas</h1>
         <Tooltip title={"Nueva carpeta"}>
           <Plus
@@ -44,7 +44,7 @@ export const Folders = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-1.5 flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="flex flex-col gap-1.5 flex-1">
           {folders.map((folder) => {
             const listsInFolder = lists.filter(
               (list) => list.folder === folder._id

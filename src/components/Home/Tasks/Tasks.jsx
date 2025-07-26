@@ -26,7 +26,7 @@ export const Tasks = () => {
   if (!selectedList) return null;
 
   return (
-    <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1">
+    <section className="bg-base-200/50 sm:p-5 p-4 rounded-xl w-full flex-1 h-full">
       <div className="flex justify-between items-center">
         <div className="breadcrumbs text-sm text-gray-300 [html[data-theme=light]_&]:text-gray-500">
           <ul>
@@ -55,21 +55,19 @@ export const Tasks = () => {
         </div>
       </div>
 
-      <div className="flex flex-col mb-8">
-        <h1 className="font-bold sm:text-3xl text-xl">Tareas</h1> 
+      <div className="flex flex-col sm:mb-8 mb-1">
+        <h1 className="font-bold sm:text-3xl text-xl">Tareas</h1>
         <p className="text-gray-400">{selectedList.description}</p>
       </div>
 
-      <div>
-        {isLoadingTasks ? (
-          <div className="flex flex-col items-center justify-center py-5">
-            <div className="loading loading-dots loading-lg mb-4"></div>
-            <p className="text-gray-500">Cargando tareas...</p>
-          </div>
-        ) : (
-          <Task />
-        )}
-      </div>
+      {isLoadingTasks ? (
+        <div className="flex flex-col items-center justify-center py-5">
+          <div className="loading loading-dots loading-lg mb-4"></div>
+          <p className="text-gray-500">Cargando tareas...</p>
+        </div>
+      ) : (
+        <Task />
+      )}
 
       <TaskInfo />
       <CreateTask />
