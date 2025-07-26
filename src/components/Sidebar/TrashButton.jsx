@@ -17,7 +17,7 @@ export const TrashButton = () => {
   return (
     <div
       onClick={onClickTrash}
-      className={`flex items-center cursor-pointer mt-2 group gap-2 p-2 px-3 bg-base-300/50 hover:bg-base-300 [html[data-theme=light]_&]:border-slate-300 [html[data-theme=light]_&]:hover:border-slate-500 border-transparent border rounded-lg transition-border-color-bg ${
+      className={`flex items-center cursor-pointer mt-2 group gap-2 sm:p-2 p-1 px-3 bg-base-300/50 hover:bg-base-300 [html[data-theme=light]_&]:border-slate-300 [html[data-theme=light]_&]:hover:border-slate-500 border-transparent border rounded-lg transition-border-color-bg ${
         isTrashView &&
         "bg-base-300! [html[data-theme=light]_&]:border-slate-500"
       }`}

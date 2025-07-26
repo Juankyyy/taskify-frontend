@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { relativeDate } from "../../../utils/dates";
 import { useTasks } from "../../../hooks/useTasks";
 import { useFolders } from "../../../hooks/useFolders";
+import { useLargeScreen } from "../../../hooks/useLargeScreen";
 import { CreateTaskButton } from "./CreateTaskButton";
 
 export const Task = () => {
@@ -12,6 +13,8 @@ export const Task = () => {
     archiveTaskbyId,
     updateSelectedTask,
   } = useTasks();
+
+  const { isLargeScreen } = useLargeScreen();
 
   const { selectedList } = useFolders();
 
@@ -64,12 +67,12 @@ export const Task = () => {
   if (!selectedList) return null;
 
   return (
-    <div className="flex flex-col gap-3 overflow-y-auto sm:max-h-[650px] max-h-[200px] sm:pb-6">
+    <div className="flex flex-col sm:gap-3 gap-1 overflow-y-auto sm:max-h-[650px] max-h-4/5 min-h-[210px] sm:pb-6">
       {tasks.map((task) => (
         <div key={task._id} className="flex justify-center items-center">
           <div
             onClick={() => updateSelectedTask(task)}
-            className="flex w-full h-12 px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
+            className="flex w-full h-12 sm:px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
           >
             <div className="flex items-center gap-1 justify-center group h-full">
               <div
@@ -83,16 +86,19 @@ export const Task = () => {
                   onChange={() => {}}
                 />
               </div>
-              <h1 className="group-has-[:checked]:line-through truncate inline-block max-w-[120px] sm:max-w-[300px]">
+              <h1 className="group-has-[:checked]:line-through truncate inline-block max-w-[115px] sm:max-w-[300px]">
                 {task.title}
               </h1>
             </div>
             <div className="flex h-full gap-4 items-center">
-              <div>
-                <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500 sm:block hidden">
-                  {relativeDate(task.createdAt)}
-                </p>
-              </div>
+              {isLargeScreen && (
+                <div>
+                  <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
+                    {relativeDate(task.createdAt)}
+                  </p>
+                </div>
+              )}
+
               <div
                 className={`badge badge-soft badge-outline bg-base-200/50 ${
                   task.priority == "low" && "badge-info"
