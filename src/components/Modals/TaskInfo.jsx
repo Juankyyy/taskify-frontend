@@ -43,7 +43,7 @@ export const TaskInfo = () => {
   };
 
   return (
-    <dialog id="task-info-modal" className="modal">
+    <dialog id="task-info-modal" className="modal modal-top sm:modal-middle">
       {selectedTask && (
         <>
           <form className="modal-box flex flex-col gap-4" onSubmit={onSubmit}>

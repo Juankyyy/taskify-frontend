@@ -3,6 +3,7 @@ import { ArchiveRestore, Trash2, Shredder } from "lucide-react";
 import { relativeDate } from "../../utils/dates";
 import { useTasks } from "../../hooks/useTasks";
 import { useState } from "react";
+import { useLargeScreen } from "../../hooks/useLargeScreen";
 
 export const Trash = () => {
   const {
@@ -13,6 +14,8 @@ export const Trash = () => {
     restoreTaskbyId,
     deleteTaskbyId,
   } = useTasks();
+
+  const { isLargeScreen } = useLargeScreen();
 
   const [deletedTasks, setDeletedTasks] = useState(originalDeletedTasks);
 
@@ -50,10 +53,10 @@ export const Trash = () => {
   };
 
   return (
-    <section className="bg-base-200/50 p-5 rounded-xl w-full flex-1 overflow-y-auto">
+    <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
         <div className="flex justify-between items-center">
-          <h1 className="font-bold text-3xl">Papelera</h1>
+          <h1 className="font-bold sm:text-3xl text-xl">Papelera</h1>
           {deletedTasks.length === 0 ? (
             ""
           ) : (
@@ -89,18 +92,20 @@ export const Trash = () => {
                   />
                   <h1
                     title={task.title}
-                    className="group-has-[:checked]:line-through text-gray-500 truncate inline-block max-w-[100px] sm:max-w-[250px]"
+                    className="group-has-[:checked]:line-through text-gray-500 truncate inline-block max-w-[90px] sm:max-w-[250px]"
                   >
                     {task.title}
                   </h1>
                 </div>
-                <div className="flex h-full gap-4 items-center">
-                  <p
-                    className="text-gray-300 [html[data-theme=light]_&]:text-gray-500 sm:block hidden"
-                    title={`Creado ${relativeDate(task.updatedAt)}`}
-                  >
-                    Eliminado {relativeDate(task.updatedAt)}
-                  </p>
+                <div className="flex h-full sm:gap-4 gap-2 items-center">
+                  {isLargeScreen && (
+                    <p
+                      className="text-gray-300 [html[data-theme=light]_&]:text-gray-500 sm:block hidden"
+                      title={`Creado ${relativeDate(task.updatedAt)}`}
+                    >
+                      Eliminado {relativeDate(task.updatedAt)}
+                    </p>
+                  )}
 
                   <div
                     className={`badge badge-soft badge-outline bg-base-200/50 ${
