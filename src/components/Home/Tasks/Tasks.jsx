@@ -26,7 +26,7 @@ export const Tasks = () => {
   if (!selectedList) return null;
 
   return (
-    <section className="bg-base-200/50 sm:p-5 p-4 rounded-xl w-full flex-1 h-full">
+    <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 h-full">
       <div className="flex justify-between items-center">
         <div className="breadcrumbs text-sm text-gray-300 [html[data-theme=light]_&]:text-gray-500">
           <ul>
