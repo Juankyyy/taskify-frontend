@@ -75,7 +75,7 @@ export const FoldersProvider = ({ children }) => {
             Carpeta<strong> {modalSelectedFolder.title} </strong>eliminada
           </span>
         );
-        
+
         await getFoldersAndLists();
         navigate("/");
       } else {
@@ -210,6 +210,12 @@ export const FoldersProvider = ({ children }) => {
     });
   };
 
+  const redirectToTasks = () => {
+    if (selectedList) {
+      navigate("/tasks");
+    }
+  };
+
   const value = {
     getFoldersAndLists,
     folders,
@@ -225,6 +231,7 @@ export const FoldersProvider = ({ children }) => {
     deleteListById,
     unSelectList,
     closeAllFolders,
+    redirectToTasks,
     isLoading,
     isCreating,
   };
