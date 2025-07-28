@@ -19,7 +19,7 @@ export const auth = async (email, password) => {
     if (!response.ok) {
       return { ok: false, message: data.message };
     } else {
-      return { ok: true, message: data.message, token: data.token, name: data.user.name };
+      return { ok: true, message: data.message, token: data.token, name: data.user.name, avatar: data.user.imageUrl };
     }
   } catch (error) {
     console.error(error);

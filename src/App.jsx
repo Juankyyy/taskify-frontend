@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
+import { Settings } from "./pages/Settings";
 import { RouteGuard } from "./components/RouteGuard";
 import { Tasks } from "./components/Home/Tasks/Tasks";
 import { Trash } from "./components/Home/Trash";
@@ -20,6 +21,15 @@ export const App = () => {
           <Route path="tasks" element={<Tasks />} />
           <Route path="trash" element={<Trash />} />
         </Route>
+
+        <Route
+          path="/settings"
+          element={
+            <RouteGuard requiresAuth={true}>
+              <Settings />
+            </RouteGuard>
+          }
+        ></Route>
 
         <Route
           path="/auth"
