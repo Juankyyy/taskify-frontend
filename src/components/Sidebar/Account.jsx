@@ -1,22 +1,32 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut } from "lucide-react";
-import { ChevronRight, Languages, EllipsisVertical } from "lucide-react";
+import { LogOut, ChevronRight, Languages, EllipsisVertical } from "lucide-react";
 import { Dropdown } from "../Dropdown";
+import { useUser } from "../../contexts/User/UserProvider"; // ⬅️ Hook personalizado
 
 import en from "../../assets/en-flag.svg";
 import es from "../../assets/es-flag.svg";
 
 export const Account = () => {
-  const username = localStorage.getItem("username");
-
   const navigate = useNavigate();
+  const { user, setUser } = useUser(); // ⬅️ Hook para acceder al contexto
 
-  const Logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    sessionStorage.removeItem("selectedList");
-    sessionStorage.removeItem("selectedFolder");
-    navigate("/auth");
+  const Logout = async () => {
+    try {
+      // Lógica de logout del servicio
+      await fetch("http://localhost:5000/api/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      localStorage.removeItem("username");
+      localStorage.removeItem("selectedList");
+      localStorage.removeItem("selectedFolder");
+
+      setUser(null); // Actualiza el contexto global
+      navigate("/auth", { replace: true }); // Redirige al login
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
   };
 
   return (
@@ -24,24 +34,24 @@ export const Account = () => {
       <div className="flex items-center justify-center gap-3">
         <div className="avatar">
           <div className="sm:w-10 w-8 rounded-full">
-            <img src="https://img.daisyui.com/images/profile/demo/yellingcat@192.webp" />
+            <img
+              src={user?.avatar?.url || "https://img.daisyui.com/images/profile/demo/yellingcat@192.webp"}
+              alt="User Avatar"
+            />
           </div>
         </div>
-        <p className="font-bold">{username}</p>
+        <p className="font-bold">{user?.username || "Usuario"}</p>
       </div>
 
-      <Dropdown
-        icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}
-      >
+      <Dropdown icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}>
         <li className="rounded-[4px]">
           <Dropdown
             icon={
-              <div className="flex justify-between items-center ">
+              <div className="flex justify-between items-center">
                 <div className="flex gap-[7.7px]">
                   <Languages className="w-icon h-icon" />
                   <a>Idioma</a>
                 </div>
-
                 <ChevronRight className="w-icon h-icon" />
               </div>
             }
