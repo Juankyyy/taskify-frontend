@@ -1,5 +1,5 @@
-// src/contexts/User/UserProvider.jsx
 import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 const PREFIX_API = "http://localhost:5000/api";
@@ -7,8 +7,15 @@ const PREFIX_API = "http://localhost:5000/api";
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation(); // ✅ Para saber en qué ruta estamos
 
   useEffect(() => {
+    // ⛔ Evitamos llamar a /users/me si estamos en /auth
+    if (location.pathname === "/auth") {
+      setLoading(false);
+      return;
+    }
+
     const fetchUser = async () => {
       try {
         const res = await fetch(`${PREFIX_API}/users/me`, {
@@ -19,9 +26,11 @@ export const UserProvider = ({ children }) => {
 
         const data = await res.json();
 
-        // ✅ Nos aseguramos de que esté extrayendo el usuario
         setUser(data);
-      } catch {
+      } catch (error) {
+        if (error.message !== "Unauthorized") {
+          console.error("Error al verificar sesión:", error);
+        }
         setUser(null);
       } finally {
         setLoading(false);
@@ -29,19 +38,11 @@ export const UserProvider = ({ children }) => {
     };
 
     fetchUser();
-  }, []);
+  }, [location.pathname]);
 
   const logout = async () => {
-    try {
-      await fetch(`${PREFIX_API}/users/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-
-      setUser(null); // Limpiar el contexto
-    } catch (error) {
-      console.error("Error cerrando sesión:", error);
-    }
+    await user.logout(); // Este método debería estar en el servicio, revisa esto
+    setUser(null);
   };
 
   return (

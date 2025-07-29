@@ -40,7 +40,7 @@ export const Account = () => {
             />
           </div>
         </div>
-        <p className="font-bold">{user?.username || "Usuario"}</p>
+        <p className="font-bold">{user?.name || "Usuario"}</p>
       </div>
 
       <Dropdown icon={<EllipsisVertical className="cursor-pointer w-icon h-icon" />}>
