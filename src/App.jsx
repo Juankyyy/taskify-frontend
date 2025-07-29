@@ -1,3 +1,4 @@
+// App.jsx
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
@@ -7,29 +8,30 @@ import { Trash } from "./components/Home/Trash";
 
 export const App = () => {
   return (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <RouteGuard requiresAuth={true}>
-              <Home />
-            </RouteGuard>
-          }
-        >
-          <Route path="tasks" element={<Tasks />} />
-          <Route path="trash" element={<Trash />} />
-        </Route>
+    <Routes>
+      {/* 🔐 Ruta protegida */}
+      <Route
+        path="/"
+        element={
+          <RouteGuard requiresAuth={true}>
+            <Home />
+          </RouteGuard>
+        }
+      >
+        {/* 📁 Subrutas protegidas */}
+        <Route path="tasks" element={<Tasks />} />
+        <Route path="trash" element={<Trash />} />
+      </Route>
 
-        <Route
-          path="/auth"
-          element={
-            <RouteGuard requiresAuth={false}>
-              <Auth />
-            </RouteGuard>
-          }
-        />
-      </Routes>
-    </>
+      {/* 🔓 Ruta pública (login/signup) */}
+      <Route
+        path="/auth"
+        element={
+          <RouteGuard requiresAuth={false}>
+            <Auth />
+          </RouteGuard>
+        }
+      />
+    </Routes>
   );
 };

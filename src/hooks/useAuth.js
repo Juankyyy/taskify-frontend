@@ -15,18 +15,19 @@ export const useAuth = () => {
       setMessage("");
 
       const res = await auth(email, password);
+
       if (!res.ok) {
         setError(res.message);
       } else {
         setMessage(res.message);
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("username", res.name);
+        localStorage.setItem("username", res.user.name); // ✅ solo si necesitas mostrar el nombre
         setTimeout(() => {
           navigate("/");
         }, 1000);
       }
     } catch (err) {
-      throw new Error(err);
+      console.error(err);
+      setError("Error interno al iniciar sesión");
     } finally {
       setIsLoading(false);
     }
@@ -37,18 +38,20 @@ export const useAuth = () => {
       setIsLoading(true);
       setError(null);
       setMessage("");
-      
+
       const res = await signup(name, email, password);
+
       if (!res.ok) {
         setError(res.message);
       } else {
-        setMessage(res.data);
+        setMessage(res.message);
         setTimeout(() => {
           Login(email, password);
         }, 500);
       }
     } catch (err) {
-      throw new Error(err);
+      console.error(err);
+      setError("Error interno al registrar usuario");
     } finally {
       setIsLoading(false);
     }
