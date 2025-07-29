@@ -1,6 +1,7 @@
 const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 const AUTH_URL = `${PREFIX_API}/users/login`;
 const SIGNUP_URL = `${PREFIX_API}/users/register`;
+const AVATAR_URL = `${PREFIX_API}/users/avatar`;
 
 export const auth = async (email, password) => {
   try {
@@ -19,7 +20,13 @@ export const auth = async (email, password) => {
     if (!response.ok) {
       return { ok: false, message: data.message };
     } else {
-      return { ok: true, message: data.message, token: data.token, name: data.user.name };
+      return {
+        ok: true,
+        message: data.message,
+        token: data.token,
+        name: data.user.name,
+        avatar: data.user.imageUrl,
+      };
     }
   } catch (error) {
     console.error(error);
@@ -51,7 +58,31 @@ export const signup = async (name, email, password) => {
   }
 };
 
+export const changeAvatar = async (avatar, token) => {
+  try {
+    const avatarFile = new FormData();
+    avatarFile.append("image", avatar);
+    const response = await fetch(`${AVATAR_URL}/update`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: avatarFile,
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const user = {
   auth,
   signup,
+  changeAvatar,
 };

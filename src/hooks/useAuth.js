@@ -21,6 +21,7 @@ export const useAuth = () => {
         setMessage(res.message);
         localStorage.setItem("token", res.token);
         localStorage.setItem("username", res.name);
+        localStorage.setItem("avatar", res.avatar);
         setTimeout(() => {
           navigate("/");
         }, 1000);

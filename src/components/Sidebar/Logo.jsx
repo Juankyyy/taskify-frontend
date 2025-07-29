@@ -2,7 +2,7 @@ import { useFolders } from "../../hooks/useFolders";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Theme } from "./Theme";
 import { Tooltip } from "../Tooltip";
-import { Plus } from "lucide-react";
+import { FolderPlus } from "lucide-react";
 
 export const Logo = () => {
   const { unSelectList, closeAllFolders } = useFolders();
@@ -32,11 +32,11 @@ export const Logo = () => {
         </div>
       )}
       <Tooltip title={"Nueva carpeta"}>
-        <Plus
+        <FolderPlus
           onClick={() =>
             document.getElementById("create-folder-modal").showModal()
           }
-          className="w-6 h-6 p-1 bg-sky-400 rounded-full stroke-3 stroke-white cursor-pointer hover:animate-squeeze hover:animate-duration-500 sm:hidden block"
+          className="w-7 h-7 p-1 bg-sky-400 rounded-full stroke-3 stroke-white cursor-pointer hover:animate-squeeze hover:animate-duration-500 sm:hidden block"
         />
       </Tooltip>
     </div>
