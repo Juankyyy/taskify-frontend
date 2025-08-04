@@ -2,20 +2,31 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogOut, Settings } from "lucide-react";
 import { Dropdown } from "../Dropdown";
 import { DefaultAvatar } from "../DefaultAvatar";
+import { useUser } from "../../contexts/User/UserProvider"; // ⬅️ Hook personalizado
 
 export const Account = () => {
-  const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+  const { user, setUser } = useUser(); // ⬅️ Hook para acceder al contexto
   const avatar = localStorage.getItem("avatar");
 
-  const navigate = useNavigate();
+  const Logout = async () => {
+    try {
+      // Lógica de logout del servicio
+      await fetch("http://localhost:5000/api/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
 
-  const Logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("avatar");
-    sessionStorage.removeItem("selectedList");
-    sessionStorage.removeItem("selectedFolder");
-    navigate("/auth");
+      localStorage.removeItem("avatar");
+      localStorage.removeItem("username");
+      localStorage.removeItem("selectedList");
+      localStorage.removeItem("selectedFolder");
+
+      setUser(null); // Actualiza el contexto global
+      navigate("/auth", { replace: true }); // Redirige al login
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
   };
 
   return (
@@ -30,7 +41,7 @@ export const Account = () => {
             )}
           </div>
         </div>
-        <p className="font-bold">{username}</p>
+        <p className="font-bold">{user?.name || "Usuario"}</p>
       </div>
 
       <Dropdown>

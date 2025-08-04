@@ -1,12 +1,11 @@
-const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
+// const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
+const PREFIX_API = "http://localhost:5000/api";
 const TASKS_URL = `${PREFIX_API}/tasks`;
 
-export const getTasks = async (listId, token) => {
+export const getTasks = async (listId) => {
   try {
     const response = await fetch(`${TASKS_URL}/list/${listId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -22,13 +21,11 @@ export const getTasks = async (listId, token) => {
   }
 };
 
-export const completeTask = async (taskId, token) => {
+export const completeTask = async (taskId) => {
   try {
     const response = await fetch(`${TASKS_URL}/toggle/${taskId}`, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -44,20 +41,13 @@ export const completeTask = async (taskId, token) => {
   }
 };
 
-export const createTask = async (
-  title,
-  description,
-  priority,
-  listId,
-  folderId,
-  token
-) => {
+export const createTask = async (title, description, priority, listId, folderId) => {
   try {
     const response = await fetch(`${TASKS_URL}/create`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title,
@@ -81,13 +71,11 @@ export const createTask = async (
   }
 };
 
-export const archiveTask = async (taskId, token) => {
+export const archiveTask = async (taskId) => {
   try {
     const response = await fetch(`${TASKS_URL}/archive/${taskId}`, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -103,12 +91,10 @@ export const archiveTask = async (taskId, token) => {
   }
 };
 
-export const getTrash = async (token) => {
+export const getTrash = async () => {
   try {
     const response = await fetch(`${TASKS_URL}/trash`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -124,13 +110,11 @@ export const getTrash = async (token) => {
   }
 };
 
-export const emptyTrash = async (token) => {
+export const emptyTrash = async () => {
   try {
     const response = await fetch(`${TASKS_URL}/empty-trash`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -146,13 +130,11 @@ export const emptyTrash = async (token) => {
   }
 };
 
-export const restoreTask = async (taskId, token) => {
+export const restoreTask = async (taskId) => {
   try {
     const response = await fetch(`${TASKS_URL}/restore/${taskId}`, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -168,13 +150,11 @@ export const restoreTask = async (taskId, token) => {
   }
 };
 
-export const deleteTask = async (taskId, token) => {
+export const deleteTask = async (taskId) => {
   try {
     const response = await fetch(`${TASKS_URL}/delete/${taskId}`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -190,13 +170,13 @@ export const deleteTask = async (taskId, token) => {
   }
 };
 
-export const updateTask = async (taskId, title, description, priority, completed, token) => {
+export const updateTask = async (taskId, title, description, priority, completed) => {
   try {
     const response = await fetch(`${TASKS_URL}/update/${taskId}`, {
       method: "PATCH",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title,
@@ -217,4 +197,15 @@ export const updateTask = async (taskId, title, description, priority, completed
     console.error(err);
     throw err;
   }
+};
+export const task = {
+  getTasks,
+  completeTask,
+  createTask,
+  archiveTask,
+  getTrash,
+  emptyTrash,
+  restoreTask,
+  deleteTask,
+  updateTask,
 };
