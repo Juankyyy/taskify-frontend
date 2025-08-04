@@ -2,10 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogOut, Settings } from "lucide-react";
 import { Dropdown } from "../Dropdown";
 import { DefaultAvatar } from "../DefaultAvatar";
-
-export const Account = () => {
-  const username = localStorage.getItem("username");
-  const avatar = localStorage.getItem("avatar");
 import { useUser } from "../../contexts/User/UserProvider"; // ⬅️ Hook personalizado
 
 export const Account = () => {
