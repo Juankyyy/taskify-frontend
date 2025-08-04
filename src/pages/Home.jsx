@@ -6,11 +6,12 @@ import { Greetings } from "../components/Home/Greetings";
 import { useFolders } from "../hooks/useFolders";
 
 export const Home = () => {
-  const { getFoldersAndLists } = useFolders();
+  const { getFoldersAndLists, redirectToTasks } = useFolders();
 
   useEffect(() => {
     getFoldersAndLists();
-  }, [])
+    redirectToTasks();
+  }, []);
 
   return (
     <MainLayout>

@@ -1,8 +1,10 @@
-export const Dropdown = ({ icon, children, second = false }) => {
+import { EllipsisVertical } from "lucide-react";
+
+export const Dropdown = ({ children }) => {
   return (
-    <div className="dropdown sm:dropdown-start dropdown-top dropdown-end">  
+    <div className="dropdown sm:dropdown-start dropdown-top dropdown-end">
       <div tabIndex={0} role="button">
-        {icon}
+        <EllipsisVertical className="cursor-pointer w-icon h-icon" />
       </div>
       <ul
         tabIndex={0}

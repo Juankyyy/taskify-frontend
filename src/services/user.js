@@ -2,6 +2,7 @@
 const PREFIX_API = "http://localhost:5000/api";
 const AUTH_URL = `${PREFIX_API}/users/login`;
 const SIGNUP_URL = `${PREFIX_API}/users/register`;
+const AVATAR_URL = `${PREFIX_API}/users/avatar`;
 
 export const auth = async (email, password) => {
   try {
@@ -25,6 +26,7 @@ export const auth = async (email, password) => {
           name: data.user.name,
           email: data.user.email,
         },
+        avatar: data.user.imageUrl,
       };
     }
   } catch (error) {
@@ -54,6 +56,30 @@ export const signup = async (name, email, password) => {
   } catch (err) {
     console.error(err);
     return { ok: false, message: "Error al registrar usuario" };
+  }
+};
+
+
+export const changeAvatar = async (avatar, token) => {
+  try {
+    const avatarFile = new FormData();
+    avatarFile.append("image", avatar);
+    const response = await fetch(`${AVATAR_URL}/update`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: avatarFile,
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
   }
 };
 
@@ -88,6 +114,7 @@ const logout = async () => {
 export const user = {
   auth,
   signup,
+  changeAvatar,
   fetchCurrentUser,
   logout,
 };

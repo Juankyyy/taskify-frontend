@@ -195,6 +195,12 @@ export const FoldersProvider = ({ children }) => {
     });
   };
 
+  const redirectToTasks = () => {
+    if (selectedList) {
+      navigate("/tasks");
+    }
+  };
+
   const value = {
     getFoldersAndLists,
     folders,
@@ -210,6 +216,7 @@ export const FoldersProvider = ({ children }) => {
     deleteListById,
     unSelectList,
     closeAllFolders,
+    redirectToTasks,
     isLoading,
     isCreating,
   };

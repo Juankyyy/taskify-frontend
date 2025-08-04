@@ -37,6 +37,7 @@ export const useAuth = () => {
         const meData = await meRes.json();
         setUser(meData); // ✅ Actualiza el contexto global
         localStorage.setItem("username", meData.name); // solo si es necesario
+        localStorage.setItem("avatar", res.avatar);
       }
 
       // ⏳ Esperar un poco antes de redirigir
