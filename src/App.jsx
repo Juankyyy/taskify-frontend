@@ -8,38 +8,30 @@ import { Trash } from "./components/Home/Trash";
 
 export const App = () => {
   return (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <RouteGuard requiresAuth={true}>
-              <Home />
-            </RouteGuard>
-          }
-        >
-          <Route path="tasks" element={<Tasks />} />
-          <Route path="trash" element={<Trash />} />
-        </Route>
+    <Routes>
+      {/* 🔓 Ruta pública (Login / Registro) */}
+      <Route
+        path="/auth"
+        element={
+          <RouteGuard requiresAuth={false}>
+            <Auth />
+          </RouteGuard>
+        }
+      />
 
-        <Route
-          path="/settings"
-          element={
-            <RouteGuard requiresAuth={true}>
-              <Settings />
-            </RouteGuard>
-          }
-        ></Route>
-
-        <Route
-          path="/auth"
-          element={
-            <RouteGuard requiresAuth={false}>
-              <Auth />
-            </RouteGuard>
-          }
-        />
-      </Routes>
-    </>
+      {/* 🔐 Ruta protegida: Home */}
+      <Route
+        path="/"
+        element={
+          <RouteGuard requiresAuth={true}>
+            <Home />
+          </RouteGuard>
+        }
+      >
+        {/* 🗂️ Subrutas protegidas (se renderizan dentro de <Outlet /> en Home) */}
+        <Route path="tasks" element={<Tasks />} />
+        <Route path="trash" element={<Trash />} />
+      </Route>
+    </Routes>
   );
 };

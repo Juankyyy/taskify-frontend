@@ -26,7 +26,6 @@ export const FoldersProvider = ({ children }) => {
     });
 
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
   const [selectedList, setSelectedList] = useState(
     JSON.parse(sessionStorage.getItem("selectedList"))
@@ -40,19 +39,17 @@ export const FoldersProvider = ({ children }) => {
 
   const getFoldersAndLists = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
 
-      const foldersData = await getFolders(token);
-      const allLists = await getLists(foldersData, token);
+      const foldersData = await getFolders();
+      const allLists = await getLists(foldersData);
 
       setFolders(foldersData);
       setLists(allLists);
     } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
       console.error("Error al cargar las carpetas:", err.message);
     } finally {
       setIsLoading(false);
@@ -61,14 +58,9 @@ export const FoldersProvider = ({ children }) => {
 
   const handleDeleteFolder = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
 
-      const response = await deleteFolder(modalSelectedFolder.folderId, token);
+      const response = await deleteFolder(modalSelectedFolder.folderId);
       if (response.ok) {
         notifySuccess(
           <span>
@@ -82,6 +74,9 @@ export const FoldersProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
       console.error("Error al eliminar la carpeta:", err.message);
     } finally {
       setIsLoading(false);
@@ -91,14 +86,9 @@ export const FoldersProvider = ({ children }) => {
 
   const handleCreateFolder = async (folderName) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
+      setIsCreating(true);
 
-      setIsCreating(true); // IsCreating solo es pa funciones creadoras
-
-      const response = await createFolder(folderName, token);
+      const response = await createFolder(folderName);
       if (!response.error) {
         notifySuccess(
           <span>
@@ -110,6 +100,9 @@ export const FoldersProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
       console.error("Error al crear la carpeta:", err.message);
     } finally {
       setIsCreating(false);
@@ -119,18 +112,9 @@ export const FoldersProvider = ({ children }) => {
 
   const handleCreateList = async (listName) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
+      setIsCreating(true);
 
-      setIsCreating(true); // Usar isCreating en lugar de isLoading
-
-      const response = await createList(
-        listName,
-        modalSelectedFolder.folderId,
-        token
-      );
+      const response = await createList(listName, modalSelectedFolder.folderId);
       if (!response.error) {
         notifySuccess(
           <span className="flex gap-2 items-center">
@@ -146,6 +130,9 @@ export const FoldersProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
       console.error("Error al crear la lista:", err.message);
     } finally {
       setIsCreating(false);
@@ -155,14 +142,9 @@ export const FoldersProvider = ({ children }) => {
 
   const deleteListById = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
 
-      const response = await deleteList(selectedList._id, token);
+      const response = await deleteList(selectedList._id);
       if (!response.error) {
         notifySuccess(
           <span>
@@ -176,6 +158,9 @@ export const FoldersProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
       console.error("Error al eliminar la lista:", err.message);
     } finally {
       setIsLoading(false);
@@ -237,6 +222,8 @@ export const FoldersProvider = ({ children }) => {
   };
 
   return (
-    <FoldersContext.Provider value={value}>{children}</FoldersContext.Provider>
+    <FoldersContext.Provider value={value}>
+      {children}
+    </FoldersContext.Provider>
   );
 };

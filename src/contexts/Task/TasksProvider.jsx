@@ -18,6 +18,11 @@ import {
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [deletedTasks, setDeletedTasks] = useState([]);
+
+  const navigate = useNavigate();
+  const { selectedList } = useFolders();
 
   const notifyError = (message) => toast.error(message);
   const notifySuccess = (message) =>
@@ -26,38 +31,32 @@ export const TasksProvider = ({ children }) => {
       style: { width: "fit-content", maxWidth: "800px" },
     });
 
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-  const { selectedList } = useFolders();
-
-  const [selectedTask, setSelectedTask] = useState(null);
-
-  const [deletedTasks, setDeletedTasks] = useState([]);
+  const handleUnauthorized = (err) => {
+    if (err?.response?.status === 401) {
+      navigate("/auth");
+    }
+  };
 
   const getTasksByList = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
+      const response = await getTasks(selectedList._id); // ❌ sin token
 
-      const response = await getTasks(selectedList._id, token);
       if (!response.error) {
         setTasks(response);
       } else {
         notifyError(response.message);
       }
+
       if (selectedTask) {
-        const TaskUpdated = response.find(
-          (task) => task._id == selectedTask._id
+        const updated = response.find(
+          (task) => task._id === selectedTask._id
         );
-        return TaskUpdated;
+        return updated;
       }
     } catch (err) {
-      console.error("Error al cargar las tareas:", err.message);
+      console.error("Error al cargar tareas:", err.message);
+      handleUnauthorized(err);
     } finally {
       setIsLoading(false);
     }
@@ -65,18 +64,13 @@ export const TasksProvider = ({ children }) => {
 
   const completeTaskbyId = async (taskId) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
-      const response = await completeTask(taskId, token);
+      const response = await completeTask(taskId);
       if (!response.error) {
         notifySuccess(response);
       }
     } catch (err) {
-      notifyError("Error al completar la tarea", err);
-      throw new Error(err);
+      handleUnauthorized(err);
+      notifyError("Error al completar la tarea");
     }
   };
 
@@ -88,20 +82,13 @@ export const TasksProvider = ({ children }) => {
     folderId
   ) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
-
       const response = await createTask(
         title,
         description,
         priority,
         listId,
-        folderId,
-        token
+        folderId
       );
       if (!response.error) {
         notifySuccess(
@@ -110,11 +97,12 @@ export const TasksProvider = ({ children }) => {
           </span>
         );
         await getTasksByList();
-        document.getElementById("create-task-modal").close();
+        document.getElementById("create-task-modal")?.close();
       } else {
         notifyError(response.message);
       }
     } catch (err) {
+      handleUnauthorized(err);
       console.error("Error al crear la tarea:", err.message);
     } finally {
       setIsLoading(false);
@@ -123,12 +111,7 @@ export const TasksProvider = ({ children }) => {
 
   const archiveTaskbyId = async (task) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
-      const response = await archiveTask(task._id, token);
+      const response = await archiveTask(task._id);
       if (!response.error) {
         notifySuccess(
           <span>
@@ -139,28 +122,23 @@ export const TasksProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      notifyError("Error al completar la tarea:", err.message);
-      throw new Error(err);
+      handleUnauthorized(err);
+      notifyError("Error al archivar la tarea");
     }
   };
 
   const getTrashTasks = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
-
-      const response = await getTrash(token);
+      const response = await getTrash();
       if (!response.error) {
         setDeletedTasks(response);
       } else {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error("Error al cargar las tareas:", err.message);
+      handleUnauthorized(err);
+      console.error("Error al cargar la papelera:", err.message);
     } finally {
       setIsLoading(false);
     }
@@ -168,14 +146,8 @@ export const TasksProvider = ({ children }) => {
 
   const emptyTrashTasks = async () => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
-
-      const response = await emptyTrash(token);
+      const response = await emptyTrash();
       if (!response.error) {
         notifySuccess("Todas las tareas se han eliminado permanentemente");
         await getTrashTasks();
@@ -183,6 +155,7 @@ export const TasksProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      handleUnauthorized(err);
       console.error("Error al vaciar la papelera:", err.message);
     } finally {
       setIsLoading(false);
@@ -191,12 +164,7 @@ export const TasksProvider = ({ children }) => {
 
   const restoreTaskbyId = async (task) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
-      const response = await restoreTask(task._id, token);
+      const response = await restoreTask(task._id);
       if (!response.error) {
         notifySuccess(
           <span>
@@ -207,19 +175,14 @@ export const TasksProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      notifyError("Error al restaurar la tarea", err);
-      throw new Error(err);
+      handleUnauthorized(err);
+      notifyError("Error al restaurar la tarea");
     }
   };
 
   const deleteTaskbyId = async (task) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
-      const response = await deleteTask(task._id, token);
+      const response = await deleteTask(task._id);
       if (!response.error) {
         notifySuccess(
           <span>
@@ -230,27 +193,20 @@ export const TasksProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      notifyError("Error al eliminar la tarea:", err.message);
-      throw new Error(err);
+      handleUnauthorized(err);
+      notifyError("Error al eliminar la tarea");
     }
   };
 
   const updateTaskbyId = async (task) => {
     try {
-      if (!token) {
-        console.error("Token no encontrado");
-        navigate("/auth");
-      }
-
       setIsLoading(true);
-
       const response = await updateTask(
         task.id,
         task.title,
         task.description,
         task.priority,
-        task.completed,
-        token
+        task.completed
       );
       if (!response.error) {
         notifySuccess(
@@ -263,16 +219,17 @@ export const TasksProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
+      handleUnauthorized(err);
       console.error("Error al actualizar la tarea:", err.message);
     } finally {
       setIsLoading(false);
-      document.getElementById("task-info-modal").close();
+      document.getElementById("task-info-modal")?.close();
     }
   };
 
   const updateSelectedTask = (task) => {
     setSelectedTask(task);
-    document.getElementById("task-info-modal").showModal();
+    document.getElementById("task-info-modal")?.showModal();
   };
 
   const value = {
