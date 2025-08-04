@@ -1,5 +1,4 @@
-// const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
-const PREFIX_API = "http://localhost:5000/api";
+const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 const AUTH_URL = `${PREFIX_API}/users/login`;
 const SIGNUP_URL = `${PREFIX_API}/users/register`;
 const AVATAR_URL = `${PREFIX_API}/users/avatar`;
