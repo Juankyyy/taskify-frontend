@@ -59,16 +59,13 @@ export const signup = async (name, email, password) => {
   }
 };
 
-
-export const changeAvatar = async (avatar, token) => {
+export const changeAvatar = async (avatar) => {
   try {
     const avatarFile = new FormData();
     avatarFile.append("image", avatar);
     const response = await fetch(`${AVATAR_URL}/update`, {
       method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
       body: avatarFile,
     });
     const data = await response.json();
@@ -109,7 +106,6 @@ const logout = async () => {
     console.error("Error al cerrar sesión:", error);
   }
 };
-
 
 export const user = {
   auth,

@@ -7,6 +7,7 @@ import { useUser } from "../../contexts/User/UserProvider"; // ⬅️ Hook perso
 export const Account = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // ⬅️ Hook para acceder al contexto
+  const avatar = localStorage.getItem("avatar");
 
   const Logout = async () => {
     try {
@@ -16,10 +17,7 @@ export const Account = () => {
         credentials: "include",
       });
 
-  const Logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("avatar");
-    navigate("/auth");
+      localStorage.removeItem("avatar");
       localStorage.removeItem("username");
       localStorage.removeItem("selectedList");
       localStorage.removeItem("selectedFolder");

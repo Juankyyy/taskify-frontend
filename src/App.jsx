@@ -32,6 +32,15 @@ export const App = () => {
         <Route path="tasks" element={<Tasks />} />
         <Route path="trash" element={<Trash />} />
       </Route>
+
+      <Route
+          path="/settings"
+          element={
+            <RouteGuard requiresAuth={true}>
+              <Settings />
+            </RouteGuard>
+          }
+        ></Route>
     </Routes>
   );
 };
