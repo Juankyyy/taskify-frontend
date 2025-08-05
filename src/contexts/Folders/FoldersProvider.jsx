@@ -48,6 +48,7 @@ export const FoldersProvider = ({ children }) => {
       setLists(allLists);
     } catch (err) {
       if (err.message === "Unauthorized") {
+        console.log("arroz 1");
         navigate("/auth");
       }
       console.error("Error al cargar las carpetas:", err.message);
@@ -75,6 +76,7 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
+        console.log("arroz 2");
         navigate("/auth");
       }
       console.error("Error al eliminar la carpeta:", err.message);
@@ -101,6 +103,7 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
+        console.log("arroz 3");
         navigate("/auth");
       }
       console.error("Error al crear la carpeta:", err.message);
@@ -131,6 +134,7 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
+        console.log("arroz 4");
         navigate("/auth");
       }
       console.error("Error al crear la lista:", err.message);
@@ -159,6 +163,7 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
+        console.log("arroz 5");
         navigate("/auth");
       }
       console.error("Error al eliminar la lista:", err.message);
@@ -222,8 +227,6 @@ export const FoldersProvider = ({ children }) => {
   };
 
   return (
-    <FoldersContext.Provider value={value}>
-      {children}
-    </FoldersContext.Provider>
+    <FoldersContext.Provider value={value}>{children}</FoldersContext.Provider>
   );
 };

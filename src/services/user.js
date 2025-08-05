@@ -78,16 +78,21 @@ export const changeAvatar = async (avatar) => {
   }
 };
 
-const fetchCurrentUser = async () => {
+export const fetchCurrentUser = async () => {
   try {
-    const res = await fetch("https://taskify-backend-98jt.onrender.com/api/users/me", {
+    const res = await fetch("http://localhost:5000/api/users/me", {
       credentials: "include",
     });
 
     if (!res.ok) throw new Error("No autenticado");
 
     const data = await res.json();
-    return data;
+
+    if (!res.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
   } catch (error) {
     console.error("Error al obtener usuario actual:", error);
     return null;
@@ -105,10 +110,30 @@ const logout = async () => {
   }
 };
 
+    const response = await fetch(`${AVATAR_URL}/update`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: null,
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const user = {
   auth,
   signup,
   changeAvatar,
   fetchCurrentUser,
   logout,
+  deleteAvatar,
 };

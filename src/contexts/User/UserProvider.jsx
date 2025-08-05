@@ -1,55 +1,104 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
-
-const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
+import {
+  changeAvatar,
+  deleteAvatar,
+  fetchCurrentUser,
+  logout,
+} from "../../services/user";
+import toast from "react-hot-toast";
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const location = useLocation(); // ✅ Para saber en qué ruta estamos
+  const [user, setUser] = useState(localStorage.getItem("username"));
+  const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  const notifyError = (message) => toast.error(message);
+  const notifySuccess = (message) => toast.success(message);
+
+  const handleChangeAvatar = async (avatar) => {
+    try {
+      setIsLoading(true);
+      const response = await changeAvatar(avatar);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("avatar", response.imageUrl);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteAvatar = async () => {
+    try {
+      setIsLoading(true);
+      const response = await deleteAvatar();
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("avatar", "undefined");
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchUser = async () => {
+    try {
+      setIsLoading(true);
+
+      const res = await fetchCurrentUser();
+
+      if (res.error) {
+        throw new Error("Unauthorized");
+      } else {
+        setUser(res);
+        return res;
+      }
+    } catch (error) {
+      if (error.message !== "Unauthorized") {
+        console.error("Error al verificar sesión:", error);
+      }
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     // ⛔ Evitamos llamar a /users/me si estamos en /auth
     if (location.pathname === "/auth") {
-      setLoading(false);
+      setIsLoading(false);
       return;
     }
-
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`${PREFIX_API}/users/me`, {
-          credentials: "include",
-        });
-
-        if (!res.ok) throw new Error("Unauthorized");
-
-        const data = await res.json();
-
-        setUser(data);
-      } catch (error) {
-        if (error.message !== "Unauthorized") {
-          console.error("Error al verificar sesión:", error);
-        }
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
 
     fetchUser();
   }, [location.pathname]);
 
-  const logout = async () => {
-    await user.logout(); // Este método debería estar en el servicio, revisa esto
+  const handleLogout = async () => {
+    await logout();
     setUser(null);
   };
 
-  return (
-    <UserContext.Provider value={{ user, setUser, logout, loading }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+  const value = {
+    user,
+    setUser,
+    fetchUser,
+    handleLogout,
+    handleChangeAvatar,
+    handleDeleteAvatar,
+    isLoading,
+  };
 
-export const useUser = () => useContext(UserContext);
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};

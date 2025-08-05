@@ -10,10 +10,10 @@ import {
 import { Link } from "react-router-dom";
 import { Theme } from "../components/Sidebar/Theme";
 import { DefaultAvatar } from "../components/DefaultAvatar";
-import en from "/src/assets/en-flag.svg";
-import es from "/src/assets/es-flag.svg";
 import { useUser } from "../hooks/useUser";
 import { Toaster } from "react-hot-toast";
+import en from "/src/assets/en-flag.svg";
+import es from "/src/assets/es-flag.svg";
 
 export const Settings = () => {
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));

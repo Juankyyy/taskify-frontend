@@ -9,7 +9,6 @@ import { Trash } from "./components/Home/Trash";
 export const App = () => {
   return (
     <Routes>
-      {/* 🔓 Ruta pública (Login / Registro) */}
       <Route
         path="/auth"
         element={
@@ -19,7 +18,6 @@ export const App = () => {
         }
       />
 
-      {/* 🔐 Ruta protegida: Home */}
       <Route
         path="/"
         element={
@@ -28,19 +26,18 @@ export const App = () => {
           </RouteGuard>
         }
       >
-        {/* 🗂️ Subrutas protegidas (se renderizan dentro de <Outlet /> en Home) */}
         <Route path="tasks" element={<Tasks />} />
         <Route path="trash" element={<Trash />} />
       </Route>
 
       <Route
-          path="/settings"
-          element={
-            <RouteGuard requiresAuth={true}>
-              <Settings />
-            </RouteGuard>
-          }
-        ></Route>
+        path="/settings"
+        element={
+          <RouteGuard requiresAuth={true}>
+            <Settings />
+          </RouteGuard>
+        }
+      ></Route>
     </Routes>
   );
 };
