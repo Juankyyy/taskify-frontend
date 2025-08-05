@@ -99,17 +99,19 @@ export const fetchCurrentUser = async () => {
   }
 };
 
-const logout = async () => {
+export const logout = async () => {
   try {
     await fetch(`${PREFIX_API}/users/logout`, {
-      credentials: "include",
       method: "POST",
+      credentials: "include",
     });
   } catch (error) {
     console.error("Error al cerrar sesión:", error);
   }
 };
 
+export const deleteAvatar = async (token) => {
+  try {
     const response = await fetch(`${AVATAR_URL}/update`, {
       method: "PATCH",
       headers: {
