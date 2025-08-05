@@ -2,6 +2,7 @@ const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 const AUTH_URL = `${PREFIX_API}/users/login`;
 const SIGNUP_URL = `${PREFIX_API}/users/register`;
 const AVATAR_URL = `${PREFIX_API}/users/avatar`;
+const USER_URL = `${PREFIX_API}/users/me`;
 
 export const auth = async (email, password) => {
   try {
@@ -80,7 +81,7 @@ export const changeAvatar = async (avatar) => {
 
 export const fetchCurrentUser = async () => {
   try {
-    const res = await fetch("http://localhost:5000/api/users/me", {
+    const res = await fetch(USER_URL, {
       credentials: "include",
     });
 
