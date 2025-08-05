@@ -1,5 +1,5 @@
 import { Folder, ClipboardList } from "lucide-react";
-import { useModalCreate } from "../../hooks/useModalCreate";
+import { useFormModal } from "../../hooks/useFormModal";
 
 export const CreateFolderList = ({
   handleCreate,
@@ -8,7 +8,7 @@ export const CreateFolderList = ({
   type,
   selectedFolderTitle,
 }) => {
-  const { formState, onInputChange, onSubmit } = useModalCreate(
+  const { formState, onInputChange, onSubmit } = useFormModal(
     initialForm,
     handleCreate,
     type

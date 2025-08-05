@@ -2,7 +2,7 @@ import { Text, BadgeAlert } from "lucide-react";
 import { useEffect } from "react";
 import { relativeDate } from "../../utils/dates";
 import { useTasks } from "../../hooks/useTasks";
-import { useModalCreate } from "../../hooks/useModalCreate";
+import { useFormModal } from "../../hooks/useFormModal";
 
 export const TaskInfo = () => {
   const { selectedTask, updateTaskbyId, isLoading } =
@@ -16,7 +16,7 @@ export const TaskInfo = () => {
     completed: false,
   };
 
-  const { formState, onInputChange, onSubmit, setFormState } = useModalCreate(
+  const { formState, onInputChange, onSubmit, setFormState } = useFormModal(
     initialForm,
     updateTaskbyId,
     "task-edit"

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAuth } from "./useAuth";
 import toast from "react-hot-toast";
 
-export const useForm = (initialForm, formType) => {
+export const useFormAuth = (initialForm, formType) => {
   const [formState, setFormState] = useState(initialForm);
 
   const { Login, Signup, isLoading, error, message } = useAuth();

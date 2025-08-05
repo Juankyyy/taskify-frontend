@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error(err);
     } finally {
       setIsLoading(false);
     }

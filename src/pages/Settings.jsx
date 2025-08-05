@@ -2,7 +2,6 @@ import {
   ArrowLeft,
   Languages,
   UserRoundPen,
-  Check,
   LockKeyhole,
   PenLine,
 } from "lucide-react";
@@ -10,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Theme } from "../components/Sidebar/Theme";
 import { Toaster } from "react-hot-toast";
 import { Avatar } from "../components/Settings/Avatar";
+import { UserInfo } from "../components/Settings/UserInfo";
 
 export const Settings = () => {
   const username = localStorage.getItem("username");
@@ -23,8 +23,8 @@ export const Settings = () => {
   // };
 
   return (
-    <main className="m-5 h-[calc(100dvh-40px)] bg-base-300 rounded-2xl">
-      <nav className=" p-3 bg-base-100 rounded-2xl flex justify-between items-center">
+    <main className="m-5 h-[calc(100dvh-40px)] bg-base-100 rounded-2xl">
+      <nav className="p-3 rounded-2xl flex justify-between items-center">
         <Link to={"/"} className="btn">
           <ArrowLeft />
           Volver
@@ -40,38 +40,10 @@ export const Settings = () => {
             <h2 className="text-lg font-bold">Perfil</h2>
           </div>
 
-          <div className="flex gap-16 items-center">
+          <div className="flex flex-col gap-8 items-center justify-center">
             <Avatar />
 
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="input input-ghost rounded-lg text-lg border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
-                  name="username"
-                  value={username}
-                  required
-                />
-                <button className="btn btn-circle btn-sm">
-                  <Check className="w-icon h-icon" />
-                </button>
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Correo"
-                  className="input input-ghost rounded-lg text-md border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
-                  name="email"
-                  value="Nombre@gmail.com"
-                  required
-                />
-                <button className="btn btn-circle btn-sm">
-                  <Check className="w-icon h-icon" />
-                </button>
-              </div>
-            </div>
+            <UserInfo username={username} />
           </div>
         </article>
 

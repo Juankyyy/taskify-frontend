@@ -1,13 +1,16 @@
 import { useRef, useState } from "react";
 import { DefaultAvatar } from "../DefaultAvatar";
 import { useUser } from "../../hooks/useUser";
-import { Pencil, Trash2, Check } from "lucide-react";
+import { Pencil, Trash2, Save } from "lucide-react";
+import toast from "react-hot-toast";
 
 export const Avatar = () => {
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const [avatarFile, setAvatarFile] = useState(null);
   const { handleChangeAvatar, DeleteAvatar, isLoading } = useUser();
   const fileInputRef = useRef(null);
+
+  const notifyError = (message) => toast.error(message);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -23,13 +26,18 @@ export const Avatar = () => {
         };
         reader.readAsDataURL(file);
       } else {
-        alert("Por favor selecciona una imagen válida");
+        notifyError("Por favor selecciona una imagen válida");
       }
     }
   };
 
-  const uploadAvatar = () => {
-    handleChangeAvatar(avatarFile);
+  const uploadAvatar = async () => {
+    try {
+      await handleChangeAvatar(avatarFile);
+      setAvatarFile(null);
+    } catch (error) {
+      console.error("Error al subir avatar:", error);
+    }
   };
 
   // Función para abrir el selector de archivos
@@ -98,9 +106,10 @@ export const Avatar = () => {
         </div>
       </div>
 
-      {avatar != localStorage.getItem("avatar") && (
-        <button onClick={uploadAvatar} className="btn btn-circle btn-sm">
-          <Check className="w-icon h-icon" />
+      {avatarFile && !isLoading && (
+        <button onClick={uploadAvatar} className="btn btn-success">
+          <Save className="w-icon h-icon" />
+          Guardar
         </button>
       )}
     </>

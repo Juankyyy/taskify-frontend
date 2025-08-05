@@ -1,7 +1,7 @@
 import { Text, BookCheck, ClipboardList } from "lucide-react";
 import { useTasks } from "../../hooks/useTasks";
 import { useFolders } from "../../hooks/useFolders";
-import { useModalCreate } from "../../hooks/useModalCreate";
+import { useFormModal } from "../../hooks/useFormModal";
 
 export const CreateTask = () => {
   const { createTaskbyId, isLoading } = useTasks();
@@ -16,7 +16,7 @@ export const CreateTask = () => {
     folderId: "",
   };
 
-  const { formState, onInputChange, onSubmit } = useModalCreate(
+  const { formState, onInputChange, onSubmit } = useFormModal(
     initialForm,
     createTaskbyId,
     "task"
