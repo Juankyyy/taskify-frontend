@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import {
   changeAvatar,
-  deleteAvatar,
+  deleteAvatarByCookie,
   fetchCurrentUser,
   logout,
 } from "../../services/user";
@@ -35,10 +35,10 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const handleDeleteAvatar = async () => {
+  const DeleteAvatar = async () => {
     try {
       setIsLoading(true);
-      const response = await deleteAvatar();
+      const response = await deleteAvatarByCookie();
 
       if (!response.error) {
         notifySuccess(response.message);
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error(err);
     } finally {
       setIsLoading(false);
     }
@@ -67,6 +67,7 @@ export const UserProvider = ({ children }) => {
       }
     } catch (error) {
       if (error.message !== "Unauthorized") {
+        notifyError("Error al verificar sesión");
         console.error("Error al verificar sesión:", error);
       }
       setUser(null);
@@ -96,7 +97,7 @@ export const UserProvider = ({ children }) => {
     fetchUser,
     handleLogout,
     handleChangeAvatar,
-    handleDeleteAvatar,
+    DeleteAvatar,
     isLoading,
   };
 

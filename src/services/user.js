@@ -111,14 +111,11 @@ export const logout = async () => {
   }
 };
 
-export const deleteAvatar = async (token) => {
+export const deleteAvatarByCookie = async () => {
   try {
-    const response = await fetch(`${AVATAR_URL}/update`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: null,
+    const response = await fetch(`${AVATAR_URL}/delete`, {
+      method: "DELETE",
+      credentials: "include",
     });
     const data = await response.json();
 
@@ -138,5 +135,5 @@ export const user = {
   changeAvatar,
   fetchCurrentUser,
   logout,
-  deleteAvatar,
+  deleteAvatarByCookie,
 };

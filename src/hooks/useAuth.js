@@ -28,7 +28,7 @@ export const useAuth = () => {
 
       const meRes = await fetchUser();
       localStorage.setItem("username", meRes.name);
-      localStorage.setItem("avatar", meRes.avatar);
+      localStorage.setItem("avatar", meRes.imageUrl);
 
       setTimeout(() => {
         navigate("/");
