@@ -3,15 +3,18 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import {
   changeAvatar,
-  deleteAvatar,
+  deleteAvatarByCookie,
   fetchCurrentUser,
   logout,
+  changeUsernameByCookie,
+  changeEmailByCookie,
 } from "../../services/user";
 import toast from "react-hot-toast";
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(localStorage.getItem("username"));
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingForm, setIsLoadingForm] = useState(false);
   const location = useLocation();
 
   const notifyError = (message) => toast.error(message);
@@ -29,16 +32,16 @@ export const UserProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error(err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleDeleteAvatar = async () => {
+  const DeleteAvatar = async () => {
     try {
       setIsLoading(true);
-      const response = await deleteAvatar();
+      const response = await deleteAvatarByCookie();
 
       if (!response.error) {
         notifySuccess(response.message);
@@ -47,7 +50,7 @@ export const UserProvider = ({ children }) => {
         notifyError(response.message);
       }
     } catch (err) {
-      console.error(err);
+      throw new Error(err);
     } finally {
       setIsLoading(false);
     }
@@ -67,11 +70,48 @@ export const UserProvider = ({ children }) => {
       }
     } catch (error) {
       if (error.message !== "Unauthorized") {
+        notifyError("Error al verificar sesión");
         console.error("Error al verificar sesión:", error);
       }
       setUser(null);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const changeUsername = async (username) => {
+    try {
+      setIsLoadingForm(true);
+      const response = await changeUsernameByCookie(username);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("username", response.name);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setIsLoadingForm(false);
+    }
+  };
+
+  const changeEmail = async (email) => {
+    try {
+      setIsLoadingForm(true);
+      const response = await changeEmailByCookie(email);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("email", response.email);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setIsLoadingForm(false);
     }
   };
 
@@ -96,8 +136,11 @@ export const UserProvider = ({ children }) => {
     fetchUser,
     handleLogout,
     handleChangeAvatar,
-    handleDeleteAvatar,
+    DeleteAvatar,
+    changeUsername,
+    changeEmail,
     isLoading,
+    isLoadingForm,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

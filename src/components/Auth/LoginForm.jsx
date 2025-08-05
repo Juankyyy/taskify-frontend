@@ -3,7 +3,7 @@ import { useState } from "react";
 import { EmailInput } from "./FormInputs/EmailInput";
 import { PasswordInput } from "./FormInputs/PasswordInput";
 import { ButtonForm } from "./FormInputs/ButtonForm";
-import { useForm } from "../../hooks/useForm";
+import { useFormAuth } from "../../hooks/useFormAuth";
 
 export const LoginForm = () => {
   const initialForm = {
@@ -12,7 +12,7 @@ export const LoginForm = () => {
   };
 
   const { email, password, onSubmit, onInputChange, isLoading, error } =
-    useForm(initialForm, "login");
+    useFormAuth(initialForm, "login");
 
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);

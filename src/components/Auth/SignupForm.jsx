@@ -2,7 +2,7 @@ import { UsernameInput } from "./FormInputs/UsernameInput";
 import { EmailInput } from "./FormInputs/EmailInput";
 import { PasswordInput } from "./FormInputs/PasswordInput";
 import { ButtonForm } from "./FormInputs/ButtonForm";
-import { useForm } from "../../hooks/useForm";
+import { useFormAuth } from "../../hooks/useFormAuth";
 
 export const SignupForm = () => {
   const initialForm = {
@@ -12,7 +12,7 @@ export const SignupForm = () => {
   };
 
   const { name, email, password, onSubmit, onInputChange, isLoading, error } =
-    useForm(initialForm, "signup");
+    useFormAuth(initialForm, "signup");
 
   return (
     <form

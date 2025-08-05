@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useModalCreate = (initialForm, createFunction, type) => {
+export const useFormModal = (initialForm, createFunction, type) => {
   const [formState, setFormState] = useState(initialForm);
 
   const onInputChange = (e) => {

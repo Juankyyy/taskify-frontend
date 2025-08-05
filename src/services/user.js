@@ -1,12 +1,9 @@
 const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
-const AUTH_URL = `${PREFIX_API}/users/login`;
-const SIGNUP_URL = `${PREFIX_API}/users/register`;
-const AVATAR_URL = `${PREFIX_API}/users/avatar`;
-const USER_URL = `${PREFIX_API}/users/me`;
+const USER_URL = `${PREFIX_API}/users`;
 
 export const auth = async (email, password) => {
   try {
-    const response = await fetch(AUTH_URL, {
+    const response = await fetch(`${USER_URL}/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -36,7 +33,7 @@ export const auth = async (email, password) => {
 
 export const signup = async (name, email, password) => {
   try {
-    const response = await fetch(SIGNUP_URL, {
+    const response = await fetch(`${USER_URL}/register`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -62,7 +59,7 @@ export const changeAvatar = async (avatar) => {
   try {
     const avatarFile = new FormData();
     avatarFile.append("image", avatar);
-    const response = await fetch(`${AVATAR_URL}/update`, {
+    const response = await fetch(`${USER_URL}/avatar/update`, {
       method: "PATCH",
       credentials: "include",
       body: avatarFile,
@@ -81,7 +78,7 @@ export const changeAvatar = async (avatar) => {
 
 export const fetchCurrentUser = async () => {
   try {
-    const res = await fetch(USER_URL, {
+    const res = await fetch(`${USER_URL}/me`, {
       credentials: "include",
     });
 
@@ -111,15 +108,58 @@ export const logout = async () => {
   }
 };
 
-export const deleteAvatar = async (token) => {
+export const deleteAvatarByCookie = async () => {
   try {
-    const response = await fetch(`${AVATAR_URL}/update`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: null,
+    const response = await fetch(`${USER_URL}/avatar/delete`, {
+      method: "DELETE",
+      credentials: "include",
     });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const changeUsernameByCookie = async (username) => {
+  try {
+    const response = await fetch(`${USER_URL}/update-name`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newName: username }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const changeEmailByCookie = async (email) => {
+  try {
+    const response = await fetch(`${USER_URL}/update-email`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newEmail: email }),
+    });
+
     const data = await response.json();
 
     if (!response.ok) {
@@ -135,8 +175,9 @@ export const deleteAvatar = async (token) => {
 export const user = {
   auth,
   signup,
+  logout,
   changeAvatar,
   fetchCurrentUser,
-  logout,
-  deleteAvatar,
+  deleteAvatarByCookie,
+  changeUsernameByCookie,
 };
