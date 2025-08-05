@@ -1,12 +1,11 @@
-// const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
-const PREFIX_API = "http://localhost:5000/api";
+const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 const FOLDERS_URL = `${PREFIX_API}/folders`;
 const LISTS_URL = `${PREFIX_API}/lists`;
 
 export const getFolders = async () => {
   try {
     const response = await fetch(`${FOLDERS_URL}/get`, {
-      credentials: "include", // ✅ Envia cookie HttpOnly
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -48,7 +47,7 @@ export const deleteFolder = async (folderId) => {
   try {
     const response = await fetch(`${FOLDERS_URL}/delete/${folderId}`, {
       method: "DELETE",
-      credentials: "include", // ✅ Envia cookie HttpOnly
+      credentials: "include",
     });
 
     const data = await response.json();

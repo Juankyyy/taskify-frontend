@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
-const PREFIX_API = "http://localhost:5000/api";
+const PREFIX_API = "https://taskify-backend-98jt.onrender.com/api";
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
