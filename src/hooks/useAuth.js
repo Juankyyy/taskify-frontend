@@ -41,7 +41,6 @@ export const useAuth = () => {
     }
   };
 
-  // 🧾 Registro de usuario
   const Signup = async (name, email, password) => {
     try {
       setIsLoading(true);

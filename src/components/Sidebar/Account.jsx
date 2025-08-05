@@ -6,23 +6,18 @@ import { useUser } from "../../hooks/useUser";
 
 export const Account = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useUser();
+  const { user, handleLogout } = useUser();
   const avatar = localStorage.getItem("avatar");
 
   const Logout = async () => {
     try {
-      // Lógica de logout del servicio
-      await fetch("http://localhost:5000/api/users/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      await handleLogout();
 
       localStorage.removeItem("avatar");
       localStorage.removeItem("username");
       localStorage.removeItem("selectedList");
       localStorage.removeItem("selectedFolder");
 
-      setUser(null);
       navigate("/auth", { replace: true });
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
