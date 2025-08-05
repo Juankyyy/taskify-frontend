@@ -12,7 +12,7 @@ export const Account = () => {
   const Logout = async () => {
     try {
       // Lógica de logout del servicio
-      await fetch("http://localhost:5000/api/users/logout", {
+      await fetch("https://taskify-backend-98jt.onrender.com/api/users/logout", {
         method: "POST",
         credentials: "include",
       });

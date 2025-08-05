@@ -7,7 +7,7 @@ export const auth = async (email, password) => {
   try {
     const response = await fetch(AUTH_URL, {
       method: "POST",
-      credentials: "include", // 👈 correcto
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
@@ -17,7 +17,6 @@ export const auth = async (email, password) => {
     if (!response.ok) {
       return { ok: false, message: data.message };
     } else {
-      // ✅ El token ya está en la cookie, no necesitas devolverlo
       return {
         ok: true,
         message: data.message,
@@ -38,7 +37,7 @@ export const signup = async (name, email, password) => {
   try {
     const response = await fetch(SIGNUP_URL, {
       method: "POST",
-      credentials: "include", // ✅ Para establecer sesión tras registro
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -81,8 +80,8 @@ export const changeAvatar = async (avatar) => {
 
 const fetchCurrentUser = async () => {
   try {
-    const res = await fetch("http://localhost:5000/api/users/me", {
-      credentials: "include", // 👈 incluye la cookie HTTPOnly
+    const res = await fetch("https://taskify-backend-98jt.onrender.com/api/users/me", {
+      credentials: "include",
     });
 
     if (!res.ok) throw new Error("No autenticado");

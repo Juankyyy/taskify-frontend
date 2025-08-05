@@ -40,7 +40,13 @@ export const completeTask = async (taskId) => {
   }
 };
 
-export const createTask = async (title, description, priority, listId, folderId) => {
+export const createTask = async (
+  title,
+  description,
+  priority,
+  listId,
+  folderId
+) => {
   try {
     const response = await fetch(`${TASKS_URL}/create`, {
       method: "POST",
@@ -169,7 +175,13 @@ export const deleteTask = async (taskId) => {
   }
 };
 
-export const updateTask = async (taskId, title, description, priority, completed) => {
+export const updateTask = async (
+  taskId,
+  title,
+  description,
+  priority,
+  completed
+) => {
   try {
     const response = await fetch(`${TASKS_URL}/update/${taskId}`, {
       method: "PATCH",

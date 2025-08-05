@@ -18,7 +18,7 @@ export const useAuth = () => {
       setError(null);
       setMessage("");
 
-      const res = await auth(email, password); // POST /auth/login
+      const res = await auth(email, password);
 
       if (!res.ok) {
         setError(res.message);
@@ -28,15 +28,15 @@ export const useAuth = () => {
       setMessage(res.message);
 
       // 🧠 Obtener datos del usuario autenticado (desde cookie)
-      const meRes = await fetch("http://localhost:5000/api/users/me", {
-        credentials: "include", // 👈 necesario para cookies HttpOnly
+      const meRes = await fetch("https://taskify-backend-98jt.onrender.com/api/users/me", {
+        credentials: "include",
         cache: "no-store",
       });
 
       if (meRes.ok) {
         const meData = await meRes.json();
-        setUser(meData); // ✅ Actualiza el contexto global
-        localStorage.setItem("username", meData.name); // solo si es necesario
+        setUser(meData);
+        localStorage.setItem("username", meData.name);
         localStorage.setItem("avatar", res.avatar);
       }
 
@@ -59,7 +59,7 @@ export const useAuth = () => {
       setError(null);
       setMessage("");
 
-      const res = await signup(name, email, password); // POST /auth/signup
+      const res = await signup(name, email, password);
 
       if (!res.ok) {
         setError(res.message);
@@ -68,7 +68,6 @@ export const useAuth = () => {
 
       setMessage(res.message);
 
-      // ⏳ Luego de registrar, auto-login
       setTimeout(() => {
         Login(email, password);
       }, 500);
