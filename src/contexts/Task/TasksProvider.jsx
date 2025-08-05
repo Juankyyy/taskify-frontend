@@ -33,6 +33,7 @@ export const TasksProvider = ({ children }) => {
 
   const handleUnauthorized = (err) => {
     if (err?.response?.status === 401) {
+      console.log("arroz 6");
       navigate("/auth");
     }
   };
@@ -40,7 +41,7 @@ export const TasksProvider = ({ children }) => {
   const getTasksByList = async () => {
     try {
       setIsLoading(true);
-      const response = await getTasks(selectedList._id); // ❌ sin token
+      const response = await getTasks(selectedList._id);
 
       if (!response.error) {
         setTasks(response);
@@ -148,12 +149,14 @@ export const TasksProvider = ({ children }) => {
     try {
       setIsLoading(true);
       const response = await emptyTrash();
+
       if (!response.error) {
         notifySuccess("Todas las tareas se han eliminado permanentemente");
         await getTrashTasks();
       } else {
         notifyError(response.message);
       }
+
     } catch (err) {
       handleUnauthorized(err);
       console.error("Error al vaciar la papelera:", err.message);

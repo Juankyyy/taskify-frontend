@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, signup } from "../services/user";
-import { useUser } from "../contexts/User/UserProvider";
+import { useUser } from "../hooks/useUser";
 
 export const useAuth = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { fetchUser } = useUser();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
 
-  // 🔐 Login
   const Login = async (email, password) => {
     try {
       setIsLoading(true);
@@ -27,20 +26,10 @@ export const useAuth = () => {
 
       setMessage(res.message);
 
-      // 🧠 Obtener datos del usuario autenticado (desde cookie)
-      const meRes = await fetch("https://taskify-backend-98jt.onrender.com/api/users/me", {
-        credentials: "include",
-        cache: "no-store",
-      });
+      const meRes = await fetchUser();
+      localStorage.setItem("username", meRes.name);
+      localStorage.setItem("avatar", meRes.avatar);
 
-      if (meRes.ok) {
-        const meData = await meRes.json();
-        setUser(meData);
-        localStorage.setItem("username", meData.name);
-        localStorage.setItem("avatar", res.avatar);
-      }
-
-      // ⏳ Esperar un poco antes de redirigir
       setTimeout(() => {
         navigate("/");
       }, 500);

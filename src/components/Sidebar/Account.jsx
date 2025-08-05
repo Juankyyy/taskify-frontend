@@ -2,17 +2,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogOut, Settings } from "lucide-react";
 import { Dropdown } from "../Dropdown";
 import { DefaultAvatar } from "../DefaultAvatar";
-import { useUser } from "../../contexts/User/UserProvider"; // ⬅️ Hook personalizado
+import { useUser } from "../../hooks/useUser";
 
 export const Account = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useUser(); // ⬅️ Hook para acceder al contexto
+  const { user, setUser } = useUser();
   const avatar = localStorage.getItem("avatar");
 
   const Logout = async () => {
     try {
       // Lógica de logout del servicio
-      await fetch("https://taskify-backend-98jt.onrender.com/api/users/logout", {
+      await fetch("http://localhost:5000/api/users/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -22,8 +22,8 @@ export const Account = () => {
       localStorage.removeItem("selectedList");
       localStorage.removeItem("selectedFolder");
 
-      setUser(null); // Actualiza el contexto global
-      navigate("/auth", { replace: true }); // Redirige al login
+      setUser(null);
+      navigate("/auth", { replace: true });
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
