@@ -12,8 +12,6 @@ import { Avatar } from "../components/Settings/Avatar";
 import { UserInfo } from "../components/Settings/UserInfo";
 
 export const Settings = () => {
-  const username = localStorage.getItem("username");
-
   // const handleChangePassword = () => {
   //   if (password === confirmPassword) {
   //     changePassword(password);
@@ -43,7 +41,7 @@ export const Settings = () => {
           <div className="flex flex-col gap-8 items-center justify-center">
             <Avatar />
 
-            <UserInfo username={username} />
+            <UserInfo />
           </div>
         </article>
 

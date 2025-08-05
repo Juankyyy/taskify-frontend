@@ -6,12 +6,15 @@ import {
   deleteAvatarByCookie,
   fetchCurrentUser,
   logout,
+  changeUsernameByCookie,
+  changeEmailByCookie,
 } from "../../services/user";
 import toast from "react-hot-toast";
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(localStorage.getItem("username"));
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingForm, setIsLoadingForm] = useState(false);
   const location = useLocation();
 
   const notifyError = (message) => toast.error(message);
@@ -76,6 +79,42 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const changeUsername = async (username) => {
+    try {
+      setIsLoadingForm(true);
+      const response = await changeUsernameByCookie(username);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("username", response.name);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setIsLoadingForm(false);
+    }
+  };
+
+  const changeEmail = async (email) => {
+    try {
+      setIsLoadingForm(true);
+      const response = await changeEmailByCookie(email);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+        localStorage.setItem("email", response.email);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setIsLoadingForm(false);
+    }
+  };
+
   useEffect(() => {
     // ⛔ Evitamos llamar a /users/me si estamos en /auth
     if (location.pathname === "/auth") {
@@ -98,7 +137,10 @@ export const UserProvider = ({ children }) => {
     handleLogout,
     handleChangeAvatar,
     DeleteAvatar,
+    changeUsername,
+    changeEmail,
     isLoading,
+    isLoadingForm,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
