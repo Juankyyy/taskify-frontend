@@ -21,9 +21,9 @@ export const Logo = () => {
     <div className="flex gap-1 items-center sm:mb-5 mb-3 justify-between">
       <div
         onClick={clearLists}
-        className="flex items-center gap-1 cursor-pointer"
+        className="flex items-center gap-1.5 cursor-pointer"
       >
-        <img width="20px" height="20px" src="/taskify.png" alt="Taskify Logo" />
+        <img width="20px" height="20px" src="/favicon.svg" alt="Taskify Logo" className="[html[data-theme=dark]_&]:invert-0 invert" />
         <h1 className="sm:text-2xl text-xl font-bold">Taskify</h1>
       </div>
       {!isAuthPage && (
