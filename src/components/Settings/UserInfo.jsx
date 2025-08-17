@@ -1,5 +1,6 @@
-import { Check } from "lucide-react";
+import { AtSign } from "lucide-react";
 import { useFormSettings } from "../../hooks/useFormSettings";
+import { CircleUserRound } from "lucide-react";
 
 export const UserInfo = () => {
   const usernameLocal = localStorage.getItem("username");
@@ -26,47 +27,69 @@ export const UserInfo = () => {
   });
 
   return (
-    <div className="flex gap-3">
-      <form onSubmit={onSubmitUsername} className="flex gap-2 items-center">
-        <input
-          type="text"
-          placeholder="Nombre"
-          className="input input-ghost rounded-lg text-lg border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
-          name="username"
-          value={username}
-          onChange={onInputChangeUsername}
-          required
-        />
-        {username != usernameLocal && (
-          <button type="submit" disabled={isLoadingUsername} className="btn btn-circle btn-sm">
-            {isLoadingUsername ? (
-              <span className="loading loading-spinner loading-sm"></span>
-            ) : (
-              <Check className="w-icon h-icon" />
+    <div className="flex gap-3 mt-4">
+      <form onSubmit={onSubmitUsername} className="flex gap-2">
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-center">
+            <CircleUserRound />
+          </div>
+          <input
+            type="text"
+            placeholder="Nombre"
+            className="input input-ghost text-center rounded-lg text-lg border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
+            name="username"
+            value={username}
+            onChange={onInputChangeUsername}
+            required
+          />
+          <div className="min-h-8">
+            {username != usernameLocal && (
+              <button
+                type="submit"
+                disabled={isLoadingUsername}
+                className="btn btn-sm w-full"
+              >
+                {isLoadingUsername ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  "Guadar"
+                )}
+              </button>
             )}
-          </button>
-        )}
+          </div>
+        </div>
       </form>
 
       <form onSubmit={onSubmitEmail} className="flex gap-2">
-        <input
-          type="text"
-          placeholder="Correo"
-          className="input input-ghost rounded-lg text-lg border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
-          name="email"
-          value={email}
-          onChange={onInputChangeEmail}
-          required
-        />
-        {email != emailLocal && (
-          <button type="submit" disabled={isLoadingEmail} className="btn btn-circle btn-sm">
-            {isLoadingEmail ? (
-              <span className="loading loading-spinner loading-sm"></span>
-            ) : (
-              <Check className="w-icon h-icon" />
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-center">
+            <AtSign />
+          </div>
+          <input
+            type="text"
+            placeholder="Correo"
+            className="input input-ghost text-center rounded-lg text-lg border focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:outline-0"
+            name="email"
+            value={email}
+            onChange={onInputChangeEmail}
+            required
+          />
+          <div className="min-h-8">
+            {email != emailLocal && (
+              <button
+                type="submit"
+                disabled={isLoadingEmail}
+                className="btn btn-sm w-full"
+              >
+                {isLoadingEmail ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  "Guadar"
+                )}
+              </button>
             )}
-          </button>
-        )}
+          </div>
+        </div>
       </form>
     </div>
   );

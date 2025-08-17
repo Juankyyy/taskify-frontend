@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // import toast from "react-hot-toast";
 import { useUser } from "./useUser";
 
@@ -33,10 +33,6 @@ export const useFormSettings = ({ username = null, email = null, type }) => {
       changeEmail(formState.email);
     }
   };
-
-  useEffect(() => {
-    console.log(formState);
-  }, [formState]);
 
   return {
     ...formState,
