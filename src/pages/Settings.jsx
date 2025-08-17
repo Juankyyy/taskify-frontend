@@ -22,7 +22,7 @@ export const Settings = () => {
 
   return (
     <main className="m-5 h-[calc(100dvh-40px)] bg-base-100 rounded-2xl">
-      <nav className="p-3 rounded-2xl flex justify-between items-center">
+      <nav className="p-3 px-6 rounded-2xl flex justify-between items-center">
         <Link to={"/"} className="btn">
           <ArrowLeft />
           Volver

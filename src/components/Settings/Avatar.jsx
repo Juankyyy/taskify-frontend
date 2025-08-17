@@ -56,7 +56,7 @@ export const Avatar = () => {
 
   return (
     <>
-      <div className="avatar relative group cursor-pointer rounded-full">
+      <div className="avatar relative group cursor-pointer rounded-full shadow-xl [html[data-theme=dark]_&]:shadow-white/10">
         <div className="sm:w-10 w-40! rounded-full relative overflow-hidden">
           {avatar != "undefined" ? (
             <img
