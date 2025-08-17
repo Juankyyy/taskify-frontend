@@ -10,6 +10,7 @@ import {
   createFolder,
   createList,
   deleteList,
+  updateListByCookie,
 } from "../../services/folder";
 
 export const FoldersProvider = ({ children }) => {
@@ -48,7 +49,6 @@ export const FoldersProvider = ({ children }) => {
       setLists(allLists);
     } catch (err) {
       if (err.message === "Unauthorized") {
-        console.log("arroz 1");
         navigate("/auth");
       }
       console.error("Error al cargar las carpetas:", err.message);
@@ -76,7 +76,6 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
-        console.log("arroz 2");
         navigate("/auth");
       }
       console.error("Error al eliminar la carpeta:", err.message);
@@ -103,7 +102,6 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
-        console.log("arroz 3");
         navigate("/auth");
       }
       console.error("Error al crear la carpeta:", err.message);
@@ -134,7 +132,6 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
-        console.log("arroz 4");
         navigate("/auth");
       }
       console.error("Error al crear la lista:", err.message);
@@ -163,10 +160,36 @@ export const FoldersProvider = ({ children }) => {
       }
     } catch (err) {
       if (err.message === "Unauthorized") {
-        console.log("arroz 5");
         navigate("/auth");
       }
       console.error("Error al eliminar la lista:", err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateList = async (list) => {
+    try {
+      setIsLoading(true);
+
+      const response = await updateListByCookie(list);
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Lista<strong> {list.title} </strong>actualizada correctamente
+          </span>
+        );
+        setSelectedList(response);
+        sessionStorage.setItem("selectedList", JSON.stringify(response));
+        await getFoldersAndLists();
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
+      console.error("Error al actualizar la lista:", err.message);
     } finally {
       setIsLoading(false);
     }
@@ -219,6 +242,7 @@ export const FoldersProvider = ({ children }) => {
     handleCreateFolder,
     handleCreateList,
     deleteListById,
+    updateList,
     unSelectList,
     closeAllFolders,
     redirectToTasks,

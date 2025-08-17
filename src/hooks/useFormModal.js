@@ -28,6 +28,8 @@ export const useFormModal = (initialForm, createFunction, type) => {
       setFormState(initialForm);
     } else if (type === "task-edit") {
       await createFunction(formState);
+    } else if (type === "list-edit") {
+      await createFunction(formState);
     }
   };
 

@@ -6,6 +6,7 @@ import { Task } from "./Task";
 import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
 import { ModalDelete } from "../../Modals/ModalDelete";
+import { ListInfo } from "../../Modals/ListInfo";
 
 export const Tasks = () => {
   const { getTasksByList, isLoading: isLoadingTasks } = useTasks();
@@ -41,7 +42,12 @@ export const Tasks = () => {
           </ul>
         </div>
         <div className="flex gap-2 items-center">
-          <button className="btn btn-info btn-soft p-1 w-8 h-8 group">
+          <button
+            onClick={() =>
+              document.getElementById("list-info-modal").showModal()
+            }
+            className="btn btn-info btn-soft p-1 w-8 h-8 group"
+          >
             <Pencil className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
           </button>
           <button
@@ -70,6 +76,7 @@ export const Tasks = () => {
       )}
 
       <TaskInfo />
+      <ListInfo />
       <CreateTask />
 
       <ModalDelete
