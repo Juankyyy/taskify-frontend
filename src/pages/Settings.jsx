@@ -16,7 +16,9 @@ export const Settings = () => {
           Volver
         </Link>
         <h1 className="text-xl font-bold">Ajustes</h1>
-        <Theme />
+        <div className="w-[105.47px]">
+          <Theme />
+        </div>
       </nav>
 
       <section className="m-3">
