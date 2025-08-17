@@ -33,7 +33,6 @@ export const TasksProvider = ({ children }) => {
 
   const handleUnauthorized = (err) => {
     if (err?.response?.status === 401) {
-      console.log("arroz 6");
       navigate("/auth");
     }
   };
