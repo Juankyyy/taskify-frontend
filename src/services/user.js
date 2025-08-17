@@ -172,6 +172,29 @@ export const changeEmailByCookie = async (email) => {
   }
 };
 
+export const changePasswordbyCookie = async (currentPassword, newPassword) => {
+  try {
+    const response = await fetch(`${USER_URL}/change-password`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    } else {
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const user = {
   auth,
   signup,
@@ -180,4 +203,5 @@ export const user = {
   fetchCurrentUser,
   deleteAvatarByCookie,
   changeUsernameByCookie,
+  changePasswordbyCookie,
 };

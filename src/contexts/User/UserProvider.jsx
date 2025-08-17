@@ -8,6 +8,7 @@ import {
   logout,
   changeUsernameByCookie,
   changeEmailByCookie,
+  changePasswordbyCookie,
 } from "../../services/user";
 import toast from "react-hot-toast";
 
@@ -115,6 +116,23 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const changePassword = async (currentPassword, newPassword) => {
+    try {
+      setIsLoadingForm(true);
+      const response = await changePasswordbyCookie(currentPassword, newPassword);
+
+      if (!response.error) {
+        notifySuccess(response.message);
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setIsLoadingForm(false);
+    }
+  };
+
   useEffect(() => {
     // ⛔ Evitamos llamar a /users/me si estamos en /auth
     if (location.pathname === "/auth") {
@@ -139,6 +157,7 @@ export const UserProvider = ({ children }) => {
     DeleteAvatar,
     changeUsername,
     changeEmail,
+    changePassword,
     isLoading,
     isLoadingForm,
   };

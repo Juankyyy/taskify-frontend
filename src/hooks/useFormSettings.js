@@ -9,11 +9,18 @@ export const useFormSettings = ({ username = null, email = null, type }) => {
       return { username: username };
     } else if (type === "email") {
       return { email: email };
+    } else if (type === "password") {
+      return { currentPassword: "", newPassword: "" };
     }
     return {};
   });
 
-  const { changeUsername, changeEmail, isLoadingForm } = useUser();
+  const {
+    changeUsername,
+    changeEmail,
+    changePassword,
+    isLoadingForm,
+  } = useUser();
 
   // const notifyError = (message) => toast.error(message);
   // const notifySuccess = (message) => toast.success(message);
@@ -28,9 +35,16 @@ export const useFormSettings = ({ username = null, email = null, type }) => {
 
     if (type === "username") {
       changeUsername(formState.username);
-    }
-    else if (type === "email") {
+    } else if (type === "email") {
       changeEmail(formState.email);
+    } else if (type === "password") {
+      try {
+        changePassword(formState.currentPassword, formState.newPassword);
+        formState.currentPassword = "";
+        formState.newPassword = "";
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
