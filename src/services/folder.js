@@ -120,7 +120,7 @@ export const deleteList = async (listId) => {
   try {
     const response = await fetch(`${LISTS_URL}/delete/${listId}`, {
       method: "DELETE",
-      credentials: "include", // ✅ Envia cookie HttpOnly
+      credentials: "include",
     });
 
     const data = await response.json();
@@ -128,7 +128,55 @@ export const deleteList = async (listId) => {
     if (!response.ok) {
       return { error: true, message: "Error al eliminar la lista" };
     }
-    return data.message
+    return data.message;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const updateListByCookie = async (list) => {
+  try {
+    const response = await fetch(`${LISTS_URL}/update/${list.id}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(list),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    }
+
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const updateFolderByCookie = async (folder) => {
+  try {
+    const response = await fetch(`${FOLDERS_URL}/update/${folder.id}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(folder),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    }
+
+    return data;
   } catch (err) {
     console.error(err);
     throw err;
@@ -141,4 +189,6 @@ export const folder = {
   deleteFolder,
   createFolder,
   deleteList,
+  updateListByCookie,
+  updateFolderByCookie,
 };

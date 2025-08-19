@@ -71,7 +71,6 @@ export const CreateTask = () => {
           <select
             name="priority"
             value={formState.priority}
-            defaultValue="Prioridad"
             onChange={onInputChange}
             required
             className="select w-full transition-all focus:outline-0 focus:border-black [html[data-theme=dark]_&]:focus:border-white focus:rounded-md"

@@ -28,7 +28,7 @@ export const FolderActions = ({ title, folderId }) => {
 
   return (
     <div className="flex justify-center items-center gap-2 z-20 overflow-visible h-min mt-[2px]">
-      <Tooltip title={"Nueva carpeta"}>
+      <Tooltip title={"Nueva lista"}>
         <Plus
           onClick={onCreateClick}
           className="w-7 h-7 p-1 stroke-3 stroke-slate-400 cursor-pointer rounded-full transition-colors hover:bg-green-600 hover:stroke-white hover:animate-pop hover:animate-duration-500"
