@@ -1,5 +1,4 @@
 import { Trash, Plus } from "lucide-react";
-import { Tooltip } from "../Tooltip";
 import { CreateFolderList } from "../Modals/CreateFolderList";
 import { useFolders } from "../../hooks/useFolders";
 
@@ -28,19 +27,19 @@ export const FolderActions = ({ title, folderId }) => {
 
   return (
     <div className="flex justify-center items-center gap-2 z-20 overflow-visible h-min mt-[2px]">
-      <Tooltip title={"Nueva lista"}>
+      <div title="Crear Lista">
         <Plus
           onClick={onCreateClick}
           className="w-7 h-7 p-1 stroke-3 stroke-slate-400 cursor-pointer rounded-full transition-colors hover:bg-green-600 hover:stroke-white hover:animate-pop hover:animate-duration-500"
         />
-      </Tooltip>
+      </div>
 
-      <Tooltip title={"Eliminar carpeta"}>
+      <div title="Eliminar carpeta">
         <Trash
           onClick={onDeleteClick}
           className="w-icon h-7 stroke-3 stroke-slate-400 cursor-pointer hover:animate-tada  hover:stroke-red-600"
         />
-      </Tooltip>
+      </div>
 
       <CreateFolderList
         selectedFolderTitle={modalSelectedFolder.title}
