@@ -10,7 +10,7 @@ export const UserInfo = () => {
     username,
     onInputChange: onInputChangeUsername,
     onSubmit: onSubmitUsername,
-    isLoadingForm: isLoadingUsername,
+    isLoadingUsername,
   } = useFormSettings({
     username: usernameLocal,
     type: "username",
@@ -20,7 +20,7 @@ export const UserInfo = () => {
     email,
     onInputChange: onInputChangeEmail,
     onSubmit: onSubmitEmail,
-    isLoadingForm: isLoadingEmail,
+    isLoadingEmail,
   } = useFormSettings({
     email: emailLocal,
     type: "email",

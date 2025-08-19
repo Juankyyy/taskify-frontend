@@ -15,7 +15,11 @@ import toast from "react-hot-toast";
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(localStorage.getItem("username"));
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingForm, setIsLoadingForm] = useState(false);
+
+  const [isLoadingUsername, setIsLoadingUsername] = useState(false);
+  const [isLoadingEmail, setIsLoadingEmail] = useState(false);
+  const [isLoadingPassword, setIsLoadingPassword] = useState(false);
+
   const location = useLocation();
 
   const notifyError = (message) => toast.error(message);
@@ -82,7 +86,7 @@ export const UserProvider = ({ children }) => {
 
   const changeUsername = async (username) => {
     try {
-      setIsLoadingForm(true);
+      setIsLoadingUsername(true);
       const response = await changeUsernameByCookie(username);
 
       if (!response.error) {
@@ -94,13 +98,13 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       throw new Error(err);
     } finally {
-      setIsLoadingForm(false);
+      setIsLoadingUsername(false);
     }
   };
 
   const changeEmail = async (email) => {
     try {
-      setIsLoadingForm(true);
+      setIsLoadingEmail(true);
       const response = await changeEmailByCookie(email);
 
       if (!response.error) {
@@ -112,14 +116,17 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       throw new Error(err);
     } finally {
-      setIsLoadingForm(false);
+      setIsLoadingEmail(false);
     }
   };
 
   const changePassword = async (currentPassword, newPassword) => {
     try {
-      setIsLoadingForm(true);
-      const response = await changePasswordbyCookie(currentPassword, newPassword);
+      setIsLoadingPassword(true);
+      const response = await changePasswordbyCookie(
+        currentPassword,
+        newPassword
+      );
 
       if (!response.error) {
         notifySuccess(response.message);
@@ -129,7 +136,7 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       throw new Error(err);
     } finally {
-      setIsLoadingForm(false);
+      setIsLoadingPassword(false);
     }
   };
 
@@ -159,7 +166,9 @@ export const UserProvider = ({ children }) => {
     changeEmail,
     changePassword,
     isLoading,
-    isLoadingForm,
+    isLoadingUsername,
+    isLoadingEmail,
+    isLoadingPassword,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

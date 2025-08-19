@@ -2,9 +2,10 @@ import { LockKeyhole, PenLine } from "lucide-react";
 import { useFormSettings } from "../../hooks/useFormSettings";
 
 export const ChangePassword = () => {
-  const { formState, onInputChange, onSubmit, isLoadingForm } = useFormSettings({
-    type: "password",
-  });
+  const { formState, onInputChange, onSubmit, isLoadingPassword } =
+    useFormSettings({
+      type: "password",
+    });
 
   return (
     <article className="flex flex-col gap-3 p-3">
@@ -42,14 +43,12 @@ export const ChangePassword = () => {
         </label>
 
         <button className="btn btn-sm btn-accent">
-          {isLoadingForm ? (
+          {isLoadingPassword ? (
             <span className="loading loading-spinner loading-sm"></span>
           ) : (
-            <>
-              <PenLine className="w-icon h-icon" />
-              Cambiar
-            </>
+            <PenLine className="w-icon h-icon" />
           )}
+          Cambiar
         </button>
       </form>
     </article>
