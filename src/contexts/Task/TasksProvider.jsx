@@ -49,9 +49,7 @@ export const TasksProvider = ({ children }) => {
       }
 
       if (selectedTask) {
-        const updated = response.find(
-          (task) => task._id === selectedTask._id
-        );
+        const updated = response.find((task) => task._id === selectedTask._id);
         return updated;
       }
     } catch (err) {
@@ -155,7 +153,6 @@ export const TasksProvider = ({ children }) => {
       } else {
         notifyError(response.message);
       }
-
     } catch (err) {
       handleUnauthorized(err);
       console.error("Error al vaciar la papelera:", err.message);
@@ -198,6 +195,8 @@ export const TasksProvider = ({ children }) => {
     } catch (err) {
       handleUnauthorized(err);
       notifyError("Error al eliminar la tarea");
+    } finally {
+      document.getElementById("delete-task-modal").close();
     }
   };
 

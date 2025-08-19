@@ -19,6 +19,7 @@ export const Trash = () => {
   const { isLargeScreen } = useLargeScreen();
 
   const [deletedTasks, setDeletedTasks] = useState(originalDeletedTasks);
+  const [selectedTask, setSelectedTask] = useState("");
 
   useEffect(() => {
     getTrashTasks();
@@ -53,6 +54,11 @@ export const Trash = () => {
     }
   };
 
+  const handleModalDelete = (task) => {
+    setSelectedTask(task);
+    document.getElementById("delete-task-modal").showModal();
+  };
+
   return (
     <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
@@ -62,7 +68,9 @@ export const Trash = () => {
             ""
           ) : (
             <button
-              onClick={() => document.getElementById("delete-alltasks-modal").showModal()}
+              onClick={() =>
+                document.getElementById("delete-alltasks-modal").showModal()
+              }
               className="btn btn-error btn-outline btn-sm"
             >
               <Shredder className="w-4 h-4" />
@@ -135,7 +143,7 @@ export const Trash = () => {
                     </div>
 
                     <div
-                      onClick={() => handleDeleteTask(task)}
+                      onClick={() => handleModalDelete(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
                       title="Eliminar tarea"
                     >
@@ -160,6 +168,15 @@ export const Trash = () => {
         isLoading={isLoading}
         type="allTasks"
         modalId="delete-alltasks-modal"
+      />
+
+      <ModalDelete
+        title={selectedTask.title}
+        handleDelete={handleDeleteTask}
+        taskData={selectedTask}
+        isLoading={isLoading}
+        type="task"
+        modalId="delete-task-modal"
       />
     </section>
   );

@@ -4,6 +4,7 @@ export const ModalDelete = ({
   isLoading,
   type,
   modalId,
+  taskData = null,
 }) => {
   const typeLabels = {
     folder: "la carpeta",
@@ -40,16 +41,29 @@ export const ModalDelete = ({
           Esta acción no se puede deshacer.
         </p>
         <div className="flex justify-end">
-          <button
-            onClick={handleDelete}
-            type="button"
-            className="btn btn-error"
-          >
-            {isLoading && (
+          {type === "task" ? (
+            <button
+              onClick={() => handleDelete(taskData)}
+              type="button"
+              className="btn btn-error"
+            >
+              {isLoading && (
                 <span className="loading loading-spinner loading-sm mr-1"></span>
               )}
               Eliminar
-          </button>
+            </button>
+          ) : (
+            <button
+              onClick={handleDelete}
+              type="button"
+              className="btn btn-error"
+            >
+              {isLoading && (
+                <span className="loading loading-spinner loading-sm mr-1"></span>
+              )}
+              Eliminar
+            </button>
+          )}
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
