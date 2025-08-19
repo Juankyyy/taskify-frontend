@@ -11,6 +11,7 @@ import {
   createList,
   deleteList,
   updateListByCookie,
+  updateFolderByCookie,
 } from "../../services/folder";
 
 export const FoldersProvider = ({ children }) => {
@@ -192,6 +193,35 @@ export const FoldersProvider = ({ children }) => {
       console.error("Error al actualizar la lista:", err.message);
     } finally {
       setIsLoading(false);
+      document.getElementById("list-info-modal").close();
+    }
+  };
+
+  const updateFolder = async (folder) => {
+    try {
+      setIsLoading(true);
+
+      const response = await updateFolderByCookie(folder);
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Carpeta<strong> {folder.name} </strong>actualizada correctamente
+          </span>
+        );
+        setSelectedFolder(response);
+        sessionStorage.setItem("selectedFolder", JSON.stringify(response));
+        await getFoldersAndLists();
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      if (err.message === "Unauthorized") {
+        navigate("/auth");
+      }
+      console.error("Error al actualizar la carpeta:", err.message);
+    } finally {
+      setIsLoading(false);
+      document.getElementById("folder-info-modal").close();
     }
   };
 
@@ -243,6 +273,7 @@ export const FoldersProvider = ({ children }) => {
     handleCreateList,
     deleteListById,
     updateList,
+    updateFolder,
     unSelectList,
     closeAllFolders,
     redirectToTasks,

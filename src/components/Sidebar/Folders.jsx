@@ -4,6 +4,7 @@ import { Collapse } from "../Collapse";
 import { ModalDelete } from "../Modals/ModalDelete";
 import { CreateFolderList } from "../Modals/CreateFolderList";
 import { useFolders } from "../../hooks/useFolders";
+import { FolderInfo } from "../Modals/FolderInfo";
 
 export const Folders = () => {
   const {
@@ -107,6 +108,8 @@ export const Folders = () => {
         initialForm={initialForm}
         type="folder"
       />
+
+      <FolderInfo />
     </div>
   );
 };

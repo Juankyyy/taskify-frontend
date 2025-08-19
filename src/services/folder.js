@@ -147,7 +147,30 @@ export const updateListByCookie = async (list) => {
     });
 
     const data = await response.json();
-    console.log(list)
+
+    if (!response.ok) {
+      return { error: true, message: data.message };
+    }
+
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const updateFolderByCookie = async (folder) => {
+  try {
+    const response = await fetch(`${FOLDERS_URL}/update/${folder.id}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(folder),
+    });
+
+    const data = await response.json();
 
     if (!response.ok) {
       return { error: true, message: data.message };
@@ -167,4 +190,5 @@ export const folder = {
   createFolder,
   deleteList,
   updateListByCookie,
+  updateFolderByCookie,
 };
