@@ -1,9 +1,7 @@
-import { Text, BadgeAlert } from "lucide-react";
+import { Folder } from "lucide-react";
 import { useEffect } from "react";
-import { relativeDate } from "../../utils/dates";
 import { useFolders } from "../../hooks/useFolders";
 import { useFormModal } from "../../hooks/useFormModal";
-import { Folder } from "lucide-react";
 
 export const FolderInfo = () => {
   const { modalSelectedFolder, updateFolder, isLoading } = useFolders();
@@ -33,7 +31,7 @@ export const FolderInfo = () => {
     <dialog id="folder-info-modal" className="modal modal-top sm:modal-middle">
       {modalSelectedFolder && (
         <>
-          <form className="modal-box flex flex-col gap-4" onSubmit={onSubmit}>
+          <form className="modal-box md:w-96 flex flex-col gap-4" onSubmit={onSubmit}>
             <h3 className="font-bold text-lg">Editar Carpeta</h3>
             <label className="input w-full transition-all focus-within:outline-0 focus-within:border-black [html[data-theme=dark]_&]:focus-within:border-white focus-within:rounded-md">
               <Folder className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
@@ -50,16 +48,6 @@ export const FolderInfo = () => {
                 onChange={onInputChange}
               />
             </label>
-
-            <div>
-              <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
-                creada {relativeDate(modalSelectedFolder.createdAt)}
-              </p>
-              <p className="text-gray-300 [html[data-theme=light]_&]:text-gray-500">
-                última modificación{" "}
-                {relativeDate(modalSelectedFolder.updatedAt)}
-              </p>
-            </div>
 
             <div className="flex justify-end mt-4">
               <button type="submit" className="btn btn-info">
