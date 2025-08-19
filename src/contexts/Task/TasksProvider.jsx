@@ -161,6 +161,7 @@ export const TasksProvider = ({ children }) => {
       console.error("Error al vaciar la papelera:", err.message);
     } finally {
       setIsLoading(false);
+      document.getElementById("delete-alltasks-modal").close();
     }
   };
 
