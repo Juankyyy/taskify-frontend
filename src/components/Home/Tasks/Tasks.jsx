@@ -42,22 +42,26 @@ export const Tasks = () => {
           </ul>
         </div>
         <div className="flex gap-2 items-center">
-          <button
-            onClick={() =>
-              document.getElementById("list-info-modal").showModal()
-            }
-            className="btn btn-info btn-soft p-1 w-8 h-8 group"
-          >
-            <Pencil className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
-          </button>
-          <button
-            onClick={() =>
-              document.getElementById("delete-list-modal").showModal()
-            }
-            className="btn btn-error btn-soft p-1 w-8 h-8 group"
-          >
-            <Trash className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
-          </button>
+          <div title="Editar lista">
+            <button
+              onClick={() =>
+                document.getElementById("list-info-modal").showModal()
+              }
+              className="btn btn-info btn-soft p-1 w-8 h-8 group"
+            >
+              <Pencil className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
+            </button>
+          </div>
+          <div title="Eliminar lista">
+            <button
+              onClick={() =>
+                document.getElementById("delete-list-modal").showModal()
+              }
+              className="btn btn-error btn-soft p-1 w-8 h-8 group"
+            >
+              <Trash className="stroke-black group-hover:stroke-white [html[data-theme=dark]_&]:stroke-white" />
+            </button>
+          </div>
         </div>
       </div>
 

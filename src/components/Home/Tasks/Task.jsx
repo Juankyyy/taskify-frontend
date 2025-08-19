@@ -118,6 +118,7 @@ export const Task = () => {
               <div
                 onClick={(e) => handleArchiveTask(e, task)}
                 className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
+                title="Enviar a la papelera"
               >
                 <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
               </div>

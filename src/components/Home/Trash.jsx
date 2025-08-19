@@ -4,6 +4,7 @@ import { relativeDate } from "../../utils/dates";
 import { useTasks } from "../../hooks/useTasks";
 import { useState } from "react";
 import { useLargeScreen } from "../../hooks/useLargeScreen";
+import { ModalDelete } from "../Modals/ModalDelete";
 
 export const Trash = () => {
   const {
@@ -18,6 +19,7 @@ export const Trash = () => {
   const { isLargeScreen } = useLargeScreen();
 
   const [deletedTasks, setDeletedTasks] = useState(originalDeletedTasks);
+  const [selectedTask, setSelectedTask] = useState("");
 
   useEffect(() => {
     getTrashTasks();
@@ -52,6 +54,11 @@ export const Trash = () => {
     }
   };
 
+  const handleModalDelete = (task) => {
+    setSelectedTask(task);
+    document.getElementById("delete-task-modal").showModal();
+  };
+
   return (
     <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 overflow-y-auto">
       <div className="flex flex-col mb-8">
@@ -61,7 +68,9 @@ export const Trash = () => {
             ""
           ) : (
             <button
-              onClick={emptyTrashTasks}
+              onClick={() =>
+                document.getElementById("delete-alltasks-modal").showModal()
+              }
               className="btn btn-error btn-outline btn-sm"
             >
               <Shredder className="w-4 h-4" />
@@ -128,13 +137,15 @@ export const Trash = () => {
                     <div
                       onClick={() => handleRestoreTask(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
+                      title="Restaurar tarea"
                     >
                       <ArchiveRestore className="w-icon h-icon group-hover:stroke-green-600" />
                     </div>
 
                     <div
-                      onClick={() => handleDeleteTask(task)}
+                      onClick={() => handleModalDelete(task)}
                       className="flex h-full px-2 justify-center items-center cursor-pointer group"
+                      title="Eliminar tarea"
                     >
                       <Trash2 className="w-icon h-icon cursor-pointer group-hover:stroke-red-600" />
                     </div>
@@ -151,6 +162,22 @@ export const Trash = () => {
           )}
         </div>
       )}
+
+      <ModalDelete
+        handleDelete={emptyTrashTasks}
+        isLoading={isLoading}
+        type="allTasks"
+        modalId="delete-alltasks-modal"
+      />
+
+      <ModalDelete
+        title={selectedTask.title}
+        handleDelete={handleDeleteTask}
+        taskData={selectedTask}
+        isLoading={isLoading}
+        type="task"
+        modalId="delete-task-modal"
+      />
     </section>
   );
 };

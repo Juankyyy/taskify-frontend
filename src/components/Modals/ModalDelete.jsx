@@ -1,14 +1,16 @@
 export const ModalDelete = ({
-  title = "Carpeta",
+  title = null,
   handleDelete,
   isLoading,
   type,
   modalId,
+  taskData = null,
 }) => {
   const typeLabels = {
-    folder: "carpeta",
-    task: "tarea",
-    list: "lista",
+    folder: "la carpeta",
+    task: "la tarea",
+    allTasks: "todas las tareas",
+    list: "la lista",
   };
 
   const typeLabel = typeLabels[type];
@@ -17,7 +19,7 @@ export const ModalDelete = ({
     <dialog id={modalId} className="modal scrollbar-modal">
       <div className="modal-box md:min-w-[550px] md:max-w-2xl">
         <h3 className="font-bold text-lg">
-          ¿Eliminar la {typeLabel}{" "}
+          ¿Eliminar {typeLabel}{" "}
           <span
             className="text-error animate-pulse truncate inline-block align-bottom max-w-[200px]"
             title={title}
@@ -27,7 +29,7 @@ export const ModalDelete = ({
           ?
         </h3>
         <p className="py-4">
-          ¿Estás seguro de que deseas eliminar la {typeLabel}{" "}
+          ¿Estás seguro de que deseas eliminar {typeLabel}{" "}
           <span
             className="font-bold truncate inline-block align-bottom max-w-[200px]"
             title={title}
@@ -39,16 +41,29 @@ export const ModalDelete = ({
           Esta acción no se puede deshacer.
         </p>
         <div className="flex justify-end">
-          <button
-            onClick={handleDelete}
-            type="button"
-            className="btn btn-error"
-          >
-            {isLoading && (
+          {type === "task" ? (
+            <button
+              onClick={() => handleDelete(taskData)}
+              type="button"
+              className="btn btn-error"
+            >
+              {isLoading && (
                 <span className="loading loading-spinner loading-sm mr-1"></span>
               )}
               Eliminar
-          </button>
+            </button>
+          ) : (
+            <button
+              onClick={handleDelete}
+              type="button"
+              className="btn btn-error"
+            >
+              {isLoading && (
+                <span className="loading loading-spinner loading-sm mr-1"></span>
+              )}
+              Eliminar
+            </button>
+          )}
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">

@@ -19,7 +19,9 @@ export const useFormSettings = ({ username = null, email = null, type }) => {
     changeUsername,
     changeEmail,
     changePassword,
-    isLoadingForm,
+    isLoadingUsername,
+    isLoadingEmail,
+    isLoadingPassword,
   } = useUser();
 
   // const notifyError = (message) => toast.error(message);
@@ -53,6 +55,8 @@ export const useFormSettings = ({ username = null, email = null, type }) => {
     formState,
     onInputChange,
     onSubmit,
-    isLoadingForm,
+    isLoadingUsername,
+    isLoadingEmail,
+    isLoadingPassword,
   };
 };

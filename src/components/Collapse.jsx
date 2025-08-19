@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, PencilLine } from "lucide-react";
 import { FolderActions } from "./Sidebar/FolderActions";
-import { Tooltip } from "./Tooltip";
 import { useFolders } from "../hooks/useFolders";
 
 export const Collapse = ({
@@ -41,17 +40,16 @@ export const Collapse = ({
           <div className="flex items-center">
             <ChevronDown className="w-icon h-icon stroke-3 mr-1 transform duration-300 group-has-[:checked]:rotate-180" />
             <div className="flex items-center gap-1">
-              <p className="font-medium truncate max-w-[153px]">{title}</p>
-              {/* <Tooltip title={"Editar carpeta"}> */}
-                <div
-                  onClick={onEditFolderClick}
-                  className="hidden group-hover:flex z-40"
-                >
-                  {" "}
-                  {/* cambiar para hover solo en titulo */}
-                  <PencilLine className="w-4 h-4 opacity-40 hover:opacity-90" />
-                </div>
-              {/* </Tooltip> */}
+              <p className="font-medium truncate max-w-[122px]">{title}</p>
+              <div
+                onClick={onEditFolderClick}
+                className="hidden group-hover:flex z-40"
+                title="Editar carpeta"
+              >
+                {" "}
+                {/* cambiar para hover solo en titulo */}
+                <PencilLine className="w-4 h-4 opacity-40 hover:opacity-90" />
+              </div>
             </div>
           </div>
         </div>

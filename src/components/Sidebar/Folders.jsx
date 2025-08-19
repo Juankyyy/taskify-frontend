@@ -1,5 +1,4 @@
 import { Plus } from "lucide-react";
-import { Tooltip } from "../Tooltip";
 import { Collapse } from "../Collapse";
 import { ModalDelete } from "../Modals/ModalDelete";
 import { CreateFolderList } from "../Modals/CreateFolderList";
@@ -27,14 +26,14 @@ export const Folders = () => {
     <div className="flex flex-col sm:max-h-[640px] max-h-[200px] overflow-y-auto overflow-x-hidden">
       <div className="w-full items-center justify-between sm:mb-5 mb-3 sm:flex hidden">
         <h1 className="text-lg font-bold">Carpetas</h1>
-        <Tooltip title={"Nueva carpeta"}>
+        <div title="Crear carpeta">
           <Plus
             onClick={() =>
               document.getElementById("create-folder-modal").showModal()
             }
             className="w-7 h-7 p-1 bg-sky-400 rounded-full stroke-3 stroke-white cursor-pointer hover:animate-squeeze hover:animate-duration-500"
           />
-        </Tooltip>
+        </div>
       </div>
 
       {isLoading ? (
