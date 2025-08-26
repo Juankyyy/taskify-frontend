@@ -7,6 +7,7 @@ import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
 import { ModalDelete } from "../../Modals/ModalDelete";
 import { ListInfo } from "../../Modals/ListInfo";
+import { TaskMove } from "../../Modals/TaskMove";
 
 export const Tasks = () => {
   const { getTasksByList, isLoading: isLoadingTasks } = useTasks();
@@ -82,6 +83,7 @@ export const Tasks = () => {
       <TaskInfo />
       <ListInfo />
       <CreateTask />
+      <TaskMove />
 
       <ModalDelete
         title={selectedList.title}

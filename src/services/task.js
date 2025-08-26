@@ -209,6 +209,33 @@ export const updateTask = async (
     throw err;
   }
 };
+
+export const moveTaskbyId = async (task, listId) => {
+  try {
+    const response = await fetch(`${TASKS_URL}/move/${task._id}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        newListId: listId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return { error: true, message: "Error al mover la tarea" };
+    } else {
+      return data.message;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 export const task = {
   getTasks,
   completeTask,
@@ -219,4 +246,5 @@ export const task = {
   restoreTask,
   deleteTask,
   updateTask,
+  moveTaskbyId,
 };

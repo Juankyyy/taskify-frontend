@@ -5,8 +5,7 @@ import { useTasks } from "../../hooks/useTasks";
 import { useFormModal } from "../../hooks/useFormModal";
 
 export const TaskInfo = () => {
-  const { selectedTask, updateTaskbyId, isLoading } =
-    useTasks();
+  const { selectedTask, updateTaskbyId, isLoading } = useTasks();
 
   const initialForm = {
     id: "",
@@ -130,9 +129,9 @@ export const TaskInfo = () => {
             <div className="flex justify-end mt-4">
               <button type="submit" className="btn btn-info">
                 {isLoading && (
-                <span className="loading loading-spinner loading-sm mr-1"></span>
-              )}
-              Guardar
+                  <span className="loading loading-spinner loading-sm mr-1"></span>
+                )}
+                Guardar
               </button>
             </div>
           </form>
