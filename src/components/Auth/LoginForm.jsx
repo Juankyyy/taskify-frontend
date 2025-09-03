@@ -46,7 +46,7 @@ export const LoginForm = () => {
         onInputChange={onInputChange}
         error={passwordError}
       />
-
+      
       <ButtonForm>
         {isLoading ? (
           <span className="loading loading-spinner loading-md"></span>

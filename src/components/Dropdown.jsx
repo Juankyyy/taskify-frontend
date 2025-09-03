@@ -2,7 +2,7 @@ import { EllipsisVertical } from "lucide-react";
 
 export const Dropdown = ({ children }) => {
   return (
-    <div className="dropdown sm:dropdown-start dropdown-top dropdown-end">
+    <div className="dropdown sm:dropdown-start dropdown-top dropdown-end z-[999]">
       <div tabIndex={0} role="button">
         <EllipsisVertical className="cursor-pointer w-icon h-icon" />
       </div>

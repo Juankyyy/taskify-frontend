@@ -3,7 +3,7 @@ import { KeyRound } from "lucide-react";
 export const PasswordInput = ({ value, onInputChange, error }) => {
   return (
     <>
-      <label className="floating-label validator w-2xs flex items-center">
+      <label className="animate-pulse-fade-in floating-label validator w-2xs flex items-center">
         <span>Password</span>
         <input
           type="password"

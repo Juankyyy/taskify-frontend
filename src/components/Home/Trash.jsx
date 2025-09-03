@@ -5,6 +5,7 @@ import { useTasks } from "../../hooks/useTasks";
 import { useState } from "react";
 import { useLargeScreen } from "../../hooks/useLargeScreen";
 import { ModalDelete } from "../Modals/ModalDelete";
+import { useDisableAnimation } from "../../hooks/useDisableAnimation";
 
 export const Trash = () => {
   const {
@@ -58,12 +59,16 @@ export const Trash = () => {
     setSelectedTask(task);
     document.getElementById("delete-task-modal").showModal();
   };
+  const containerRef = useDisableAnimation('animate-fade-in');
 
   return (
-    <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 overflow-y-auto">
+    <section 
+      ref={containerRef}
+      className="animate-fade-in bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 overflow-y-auto"
+    >
       <div className="flex flex-col mb-8">
         <div className="flex justify-between items-center">
-          <h1 className="font-bold sm:text-3xl text-xl">Papelera</h1>
+          <h1 className="animate-fade-in-left font-bold sm:text-3xl text-xl">Papelera</h1>
           {deletedTasks.length === 0 ? (
             ""
           ) : (
@@ -71,14 +76,14 @@ export const Trash = () => {
               onClick={() =>
                 document.getElementById("delete-alltasks-modal").showModal()
               }
-              className="btn btn-error btn-outline btn-sm"
+              className="animate-fade-in-left btn btn-error btn-outline btn-sm"
             >
               <Shredder className="w-4 h-4" />
               Vaciar Papelera
             </button>
           )}
         </div>
-        <p className="text-gray-400">Tareas eliminadas</p>
+        <p className="animate-fade-in-left text-gray-400">Tareas eliminadas</p>
       </div>
 
       {isLoading ? (

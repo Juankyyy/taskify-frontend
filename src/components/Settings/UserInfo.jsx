@@ -27,7 +27,7 @@ export const UserInfo = () => {
   });
 
   return (
-    <div className="flex gap-3 mt-4">
+    <div className="animate-fade-in flex gap-3 mt-4">
       <form onSubmit={onSubmitUsername} className="flex gap-2">
         <div className="flex flex-col gap-2">
           <div className="flex justify-center">

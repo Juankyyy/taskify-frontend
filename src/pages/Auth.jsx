@@ -22,7 +22,7 @@ export const Auth = () => {
 
       {formType === "Login" ? <LoginForm /> : <SignupForm />}
 
-      <div className="flex items-center gap-2 my-2">
+      <div className="animate-fade-in flex items-center gap-2 my-2">
         <p>
           {formType === "Login"
             ? "¿No tienes una cuenta?"
@@ -33,7 +33,9 @@ export const Auth = () => {
         </p>
       </div>
       <Toaster />
-      <Theme />
+      <div className="animate-fade-in">
+        <Theme />
+      </div>
     </AuthLayout>
   );
 };

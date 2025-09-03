@@ -84,7 +84,7 @@ export const Task = () => {
   return (
     <div className="flex flex-col sm:gap-3 gap-1 overflow-y-auto sm:max-h-[650px] max-h-4/5 min-h-[210px] sm:pb-6">
       {tasks.map((task) => (
-        <div key={task._id} className="flex justify-center items-center">
+        <div key={task._id} className="animate-fade-in-up flex justify-center items-center">
           <div
             onClick={() => handleTaskInfo(task)}
             className="flex w-full h-12 sm:px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"

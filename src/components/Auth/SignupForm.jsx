@@ -19,7 +19,7 @@ export const SignupForm = () => {
       onSubmit={onSubmit}
       className="flex flex-col gap-4 justify-center items-center"
     >
-      <h1 className="font-medium text-2xl mb-2">Create new account</h1>
+      <h1 className="animate-fade-in font-medium text-2xl mb-2">Create new account</h1>
       <UsernameInput value={name} onInputChange={onInputChange} error={error} />
       <EmailInput value={email} onInputChange={onInputChange} error={error} />
       <PasswordInput

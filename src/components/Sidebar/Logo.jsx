@@ -17,7 +17,7 @@ export const Logo = () => {
   };
 
   return (
-    <div className="flex gap-1 items-center sm:mb-5 mb-3 justify-between">
+    <div className="animate-blurred-fade-in flex gap-1 items-center sm:mb-5 mb-3 justify-between">
       <div
         onClick={clearLists}
         className="flex items-center gap-1.5 cursor-pointer"
