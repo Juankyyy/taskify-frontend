@@ -69,12 +69,16 @@ export const UserProvider = ({ children }) => {
 
       if (res.error) {
         throw new Error("Unauthorized");
-      } else {
-        setUser(res);
-        return res;
       }
+
+      setUser(res);
+      return res;
     } catch (error) {
       if (error.message !== "Unauthorized") {
+        localStorage.removeItem("username");
+        localStorage.removeItem("email");
+        localStorage.removeItem("avatar");
+
         notifyError("Error al verificar sesión");
         console.error("Error al verificar sesión:", error);
       }

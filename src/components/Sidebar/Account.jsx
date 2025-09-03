@@ -15,8 +15,9 @@ export const Account = () => {
 
       localStorage.removeItem("avatar");
       localStorage.removeItem("username");
-      localStorage.removeItem("selectedList");
-      localStorage.removeItem("selectedFolder");
+      localStorage.removeItem("email");
+      sessionStorage.removeItem("selectedList");
+      sessionStorage.removeItem("selectedFolder");
 
       navigate("/auth", { replace: true });
     } catch (error) {
