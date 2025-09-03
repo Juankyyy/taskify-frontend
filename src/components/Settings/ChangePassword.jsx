@@ -9,12 +9,12 @@ export const ChangePassword = () => {
 
   return (
     <article className="flex flex-col gap-3 p-3">
-      <div className="flex gap-2 items-center">
+      <div className="animate-fade-in-right flex gap-2 items-center">
         <LockKeyhole className="w-icon h-icon" />
         <h2 className="text-lg font-bold">Cambiar contraseña</h2>
       </div>
 
-      <form onSubmit={onSubmit} className="flex gap-4 items-center">
+      <form onSubmit={onSubmit} className="animate-fade-in flex gap-4 items-center">
         <label className="input transition-all focus-within:outline-0 focus-within:border-black [html[data-theme=dark]_&]:focus-within:border-white focus-within:rounded-md">
           <input
             required

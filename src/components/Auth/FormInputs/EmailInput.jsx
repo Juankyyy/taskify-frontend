@@ -3,7 +3,7 @@ import { Mail } from "lucide-react";
 export const EmailInput = ({ value, onInputChange, error }) => {
   return (
     <>
-      <label className="floating-label validator w-2xs flex items-center">
+      <label className="animate-pulse-fade-in floating-label validator w-2xs flex items-center">
         <span>Email</span>
         <input
           type="email"

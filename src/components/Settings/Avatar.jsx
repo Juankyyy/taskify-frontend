@@ -56,8 +56,8 @@ export const Avatar = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-3">
-        <div className="avatar relative group cursor-pointer rounded-full shadow-xl [html[data-theme=dark]_&]:shadow-white/10">
+      <div className="animate-fade-in-down flex flex-col items-center justify-center gap-3">
+        <div className="avatar relative group cursor-pointer rounded-full shadow-xl shadow-black/10 [html[data-theme=dark]_&]:shadow-white/5">
           <div className="sm:w-10 w-40! rounded-full relative overflow-hidden">
             {avatar != "undefined" ? (
               <img

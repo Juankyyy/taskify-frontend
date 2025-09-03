@@ -5,6 +5,7 @@ import { useTasks } from "../../../hooks/useTasks";
 import { useFolders } from "../../../hooks/useFolders";
 import { useLargeScreen } from "../../../hooks/useLargeScreen";
 import { CreateTaskButton } from "./CreateTaskButton";
+import { Hand } from "lucide-react";
 
 export const Task = () => {
   const {
@@ -64,14 +65,28 @@ export const Task = () => {
     }
   };
 
+  const handleMoveTask = async (e, task) => {
+    e.stopPropagation();
+
+    updateSelectedTask(task);
+
+    document.getElementById("move-task-modal")?.show();
+  };
+
+  const handleTaskInfo = (task) => {
+    updateSelectedTask(task);
+
+    document.getElementById("task-info-modal")?.showModal();
+  };
+
   if (!selectedList) return null;
 
   return (
     <div className="flex flex-col sm:gap-3 gap-1 overflow-y-auto sm:max-h-[650px] max-h-4/5 min-h-[210px] sm:pb-6">
       {tasks.map((task) => (
-        <div key={task._id} className="flex justify-center items-center">
+        <div key={task._id} className="animate-fade-in-up flex justify-center items-center">
           <div
-            onClick={() => updateSelectedTask(task)}
+            onClick={() => handleTaskInfo(task)}
             className="flex w-full h-12 sm:px-3 items-center justify-between gap-3 hover:bg-base-200/50 transition-bg rounded-lg cursor-pointer"
           >
             <div className="flex items-center gap-1 justify-center group h-full">
@@ -115,12 +130,22 @@ export const Task = () => {
                 ></span>
                 <p className="font-medium">{task.priority}</p>
               </div>
-              <div
-                onClick={(e) => handleArchiveTask(e, task)}
-                className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
-                title="Enviar a la papelera"
-              >
-                <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
+              <div className="flex gap-1 items-center">
+                <div
+                  onClick={(e) => handleArchiveTask(e, task)}
+                  className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-tada group"
+                  title="Enviar a la papelera"
+                >
+                  <Trash2 className="w-icon h-icon group-hover:stroke-red-600" />
+                </div>
+
+                <div
+                  onClick={(e) => handleMoveTask(e, task)}
+                  className="flex h-full px-2 justify-center items-center cursor-pointer hover:animate-impulse-rotation-right group"
+                  title="Mover tarea"
+                >
+                  <Hand className="w-icon h-icon" />
+                </div>
               </div>
             </div>
           </div>

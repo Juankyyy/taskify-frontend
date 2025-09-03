@@ -7,6 +7,8 @@ import { TaskInfo } from "../../Modals/TaskInfo";
 import { CreateTask } from "../../Modals/CreateTask";
 import { ModalDelete } from "../../Modals/ModalDelete";
 import { ListInfo } from "../../Modals/ListInfo";
+import { TaskMove } from "../../Modals/TaskMove";
+import { useDisableAnimation } from "../../../hooks/useDisableAnimation";
 
 export const Tasks = () => {
   const { getTasksByList, isLoading: isLoadingTasks } = useTasks();
@@ -24,12 +26,16 @@ export const Tasks = () => {
     }
   }, [selectedList]);
 
+  const containerRef = useDisableAnimation("animate-fade-in");
   if (!selectedList) return null;
 
   return (
-    <section className="bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 h-full">
+    <section
+      ref={containerRef}
+      className="animate-fade-in bg-base-200/50 sm:p-5 p-4 pt-2 sm:rounded-xl rounded-b-xl w-full flex-1 h-full"
+    >
       <div className="flex justify-between items-center">
-        <div className="breadcrumbs text-sm text-gray-300 [html[data-theme=light]_&]:text-gray-500">
+        <div className="animate-fade-in-right breadcrumbs text-sm text-gray-300 [html[data-theme=light]_&]:text-gray-500">
           <ul>
             <li className="gap-1">
               <Folder className="w-icon h-icon stroke-gray-300 [html[data-theme=light]_&]:stroke-gray-500 cursor-default!" />
@@ -41,7 +47,7 @@ export const Tasks = () => {
             </li>
           </ul>
         </div>
-        <div className="flex gap-2 items-center">
+        <div className="animate-fade-in-left flex gap-2 items-center">
           <div title="Editar lista">
             <button
               onClick={() =>
@@ -66,7 +72,7 @@ export const Tasks = () => {
       </div>
 
       <div className="flex flex-col sm:mb-8 mb-1">
-        <h1 className="font-bold sm:text-3xl text-xl">Tareas</h1>
+        <h1 className="animate-fade-in-left font-bold sm:text-3xl text-xl">Tareas</h1>
         <p className="text-gray-400">{selectedList.description}</p>
       </div>
 
@@ -82,6 +88,7 @@ export const Tasks = () => {
       <TaskInfo />
       <ListInfo />
       <CreateTask />
+      <TaskMove />
 
       <ModalDelete
         title={selectedList.title}

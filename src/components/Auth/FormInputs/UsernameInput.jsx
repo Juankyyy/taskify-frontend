@@ -4,7 +4,7 @@ export const UsernameInput = ({ value, onInputChange, error }) => {
 
   return (
     <>
-      <label className="floating-label validator w-2xs flex items-center">
+      <label className="animate-pulse-fade-in floating-label validator w-2xs flex items-center">
 
         <span>Username</span>
         <input

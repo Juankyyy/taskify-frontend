@@ -13,6 +13,7 @@ import {
   restoreTask,
   deleteTask,
   updateTask,
+  moveTaskbyId,
 } from "../../services/task";
 
 export const TasksProvider = ({ children }) => {
@@ -229,9 +230,33 @@ export const TasksProvider = ({ children }) => {
     }
   };
 
+  const moveTask = async (task, listId) => {
+    try {
+      setIsLoading(true);
+
+      const response = await moveTaskbyId(task, listId);
+
+      if (!response.error) {
+        notifySuccess(
+          <span>
+            Tarea<strong> {task.title} </strong> movida correctamente
+          </span>
+        );
+        await getTasksByList();
+      } else {
+        notifyError(response.message);
+      }
+    } catch (err) {
+      handleUnauthorized(err);
+      console.error("Error al mover la tarea:", err.message);
+    } finally {
+      setIsLoading(false);
+      document.getElementById("move-task-modal")?.close();
+    }
+  };
+
   const updateSelectedTask = (task) => {
     setSelectedTask(task);
-    document.getElementById("task-info-modal")?.showModal();
   };
 
   const value = {
@@ -249,6 +274,7 @@ export const TasksProvider = ({ children }) => {
     restoreTaskbyId,
     deleteTaskbyId,
     updateTaskbyId,
+    moveTask,
   };
 
   return (

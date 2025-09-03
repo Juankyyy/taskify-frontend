@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 
 export const CreateTaskButton = () => {
   return (
-    <div className="flex justify-center">
+    <div className="animate-fade-in flex justify-center">
       <div
         onClick={() => document.getElementById("create-task-modal").showModal()}
         className="group hover:shadow-lg cursor-pointer tranform hover:scale-105 transition-all border-2 hover:border-transparent border-dashed border-blue-300 hover:bg-sky-300 rounded-lg flex gap-2 items-center justify-center sm:w-2/4 w-2/3  sm:h-14 h-10 [html[data-theme=dark]_&]:hover:bg-sky-400"

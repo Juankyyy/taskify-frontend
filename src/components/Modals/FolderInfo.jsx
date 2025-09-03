@@ -37,7 +37,7 @@ export const FolderInfo = () => {
               <Folder className="w-icon h-icon stroke-slate-600 [html[data-theme=dark]_&]:stroke-slate-300" />
               <input
                 name="name"
-                value={formState.name}
+                value={formState.name || ""}
                 required
                 minLength="3"
                 maxLength="30"

@@ -32,6 +32,9 @@ export const useFormModal = (initialForm, createFunction, type) => {
       await createFunction(formState);
     } else if (type === "folder-edit") {
       await createFunction(formState);
+    } else if (type === "move-task") {
+      await createFunction(formState.task, formState.newListId);
+      setFormState(initialForm);
     }
   };
 

@@ -10,7 +10,7 @@ export const Greetings = () => {
   const [quote, setQuote] = useState(() => randomQuotes().quote);
 
   return (
-    <section className="bg-base-200/50 p-5 rounded-xl w-full sm:block hidden">
+    <section className="animate-slide-in-top bg-base-200/50 p-5 rounded-xl w-full sm:block hidden">
       <h1 className="font-bold text-3xl">
         {dateName}, {username ? username : "Unknown User"}!
       </h1>
