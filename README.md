@@ -1,61 +1,58 @@
-# Taskify Frontend ✅ &middot; [![GitHub last commit](https://img.shields.io/github/last-commit/Juankyyy/taskify-frontend?label=Last%20Commit&color=FFFF00)](https://github.com/Juankyyy/taskify-frontend/commits/main/)
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./public/taskify-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./public/taskify-light.png">
+  <img width=500 alt="Taskify Logo">
+</picture>
+</p>
 
-**Taskify** es una plataforma web To-Do en la que los usuarios pueden crear y gestionar tareas, las tareas que se han completado y su progreso.
+<p align="center">
+  <a href="https://taskifyyy.vercel.app/auth"> | 🌐 Sitio web |</a>
+</p>
 
-<!-- Puedes visitar el sitio web de Taskify [aquí](taskify.vercel.app). -->
+<p align="center">
+  <a href="https://github.com/Juankyyy/taskify-frontend/commits/main/">
+    <img src="https://img.shields.io/github/last-commit/Juankyyy/taskify-frontend?label=Last%20Commit&color=FFFF00">
+  </a>
+  <a href="https://github.com/Juankyyy/taskify-frontend/commits/main/">
+    <img src="https://img.shields.io/github/commit-activity/t/juankyyy/taskify-frontend?label=All%20time%20commits&color=FFFF00">
+  </a>
+</p>
+
+## ¿Qué es Taskify?
+
+**Taskify** es una aplicación web moderna de gestión de tareas que permite a los usuarios organizar su productividad de manera intuitiva y eficiente.
 
 ## 📝 Descripción
 
-Este proyecto es una aplicación web construida con React y Tailwind CSS. El objetivo es crear una interfaz de usuario atractiva y fácil de usar para gestionar tareas y progreso.
+La aplicación permite a los usuarios crear carpetas organizadas, gestionar listas de tareas, marcar tareas como completadas y mantener un control detallado sobre ellas.
 
-El proyecto está diseñado para ser fácil de usar y personalizar para diferentes tipos de usuarios. Puedes personalizar el diseño, agregar nuevas funcionalidades y mejorar la experiencia del usuario.  
+### ✨ Características principales:
+
+- 📁 **Organización por carpetas** - Estructura jerárquica para organizar proyectos
+- 📋 **Listas de tareas personalizables** - Crea y gestiona múltiples listas
+- ✅ **Sistema de completado** - Marca tareas como completadas con seguimiento visual
+- 🗑️ **Papelera inteligente** - Recupera tareas eliminadas accidentalmente
+- 🎨 **Interfaz moderna** - Diseño limpio y responsive con soporte para modo oscuro
+- 🔐 **Autenticación segura** - Sistema de login con JWT para proteger tus datos
+
+La aplicación está diseñada pensando en la experiencia del usuario, ofreciendo transiciones suaves, notificaciones informativas y una navegación intuitiva que hace que gestionar tareas sea una experiencia agradable.
 
 ## 🛠️ Tecnologías
 
 Este proyecto utiliza las siguientes tecnologías:
 
-- ⚛️ **React**: Biblioteca JavaScript para interfaces de usuario interactivas.
-- 🎨 **Tailwind CSS**: Framework CSS utilitario para diseños personalizados.
-- 🧩 **DaisyUI**: Componentes para Tailwind CSS que simplifican el desarrollo UI.
-- ⚡ **Vite**: Entorno de desarrollo rápido y herramienta de compilación.
-- 🔍 **ESLint**: Analizador de código para detectar errores y mejorar calidad.
-- 🔣 **Lucide Icons**: Conjunto de iconos SVG simples y consistentes.
-- 🧭 **React Router**: Manejo de navegación y rutas en aplicaciones React.
-- 📦 **PNPM**: Gestor de paquetes rápido y eficiente en espacio.
-- 🚀 **Vercel**: Plataforma para despliegue web con integración continua.
-- ✨ **@midudev/tailwind-animations**: Animaciones personalizadas para Tailwind.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![DaisyUI](https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-## 📦 Instalación
-
-<!-- > 😎 Ya no es necesario realizar estos pasos para usar **Taskify** <br> -->
-
-Para instalar el proyecto, sigue estos pasos:
-
-1. Clonar el repositorio:
-
-```bash
-git clone https://github.com/Juankyyy/taskify-frontend.git
-```
-
-2. Instalar las dependencias:
-
-```bash
-pnpm install
-```
-
-## 🚀 Uso
-
-> 🚧 Este proyecto está en desarrollo y todavía no está listo para ser utilizado <br>
-
-Para usar el proyecto, sigue estos pasos:
-
-1. Iniciar el servidor de desarrollo:
-
-```bash
-pnpm run dev
-```
-
-2. Abrir el navegador y navegar a `http://localhost:5173`
+- 🔣 **Lucide Icons** - Conjunto de iconos SVG
+- 🍞 **React Hot Toast** - Notificaciones toast
+- ✨ **@midudev/tailwind-animations** - Animaciones Tailwind
 
 ## 👨‍💻 Autores
 
