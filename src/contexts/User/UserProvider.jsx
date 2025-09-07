@@ -79,7 +79,7 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("email");
         localStorage.removeItem("avatar");
 
-        notifyError("Error al verificar sesión");
+        // notifyError("Error al verificar sesión");
         console.error("Error al verificar sesión:", error);
       }
       setUser(null);
